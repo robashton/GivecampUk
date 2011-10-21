@@ -11,6 +11,11 @@ exports.init = function(app) {
     res.json({ success: true}, {}, 200);  
   });
 
+  app.get('/logout', function(req, res){
+    security.signOutUser(req, res);
+    res.json({ success: true}, {}, 200);  
+  });
+
   app.get('/currentuser', security.validateUser, function(req, res) {
     res.json({ username: 'Emma'}, {}, 200);
   });

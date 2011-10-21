@@ -14,5 +14,10 @@ exports.validateUser = function(req, res, next) {
 exports.signInUser = function(req, res, username, password) {
    var cookies = new Cookies( req, res );
    cookies.set( "username", username, { httpOnly: false } );
- cookies.set( "password", password, { httpOnly: false } );
+};
+
+
+exports.signOutUser = function(req, res) {
+   var cookies = new Cookies( req, res );
+   cookies.set( "username", null, { httpOnly: false } );
 };
