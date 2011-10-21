@@ -7,26 +7,26 @@
         <div class="clearfix">
             <label for="registerUser">Username</label>
             <div class="input">
-            <input type="text" id="registerUser" name="registerUser" />
+            <input type="text" id="registerUser" name="registerUser" data-bind="value: registerForm.username" />
             </div>
           </div>
 
         <div class="clearfix">
             <label for="registerName">Display name</label>
             <div class="input">
-            <input type="text" id="registerName" name="registerName" />
+            <input type="text" id="registerName" name="registerName" data-bind="value: registerForm.displayName" />
             </div>
           </div>
 
         <div class="clearfix">
             <label for="registerPass">Password</label>
             <div class="input">
-            <input type="password" id="registerPass" name="registerPass" />
+            <input type="password" id="registerPass" name="registerPass" data-bind="value: registerForm.password" />
             </div>
           </div>
 
         <div class="actions">
-            <input type="submit" class="btn primary" value="Register">
+            <input type="submit" class="btn primary" value="Register" data-bind="click: registerForm.submit">
         </div>
     </form>
 </div>
@@ -39,14 +39,14 @@
         <div class="clearfix">
             <label for="loginUser">Username</label>
             <div class="input">
-            <input type="text" id="loginUser" name="loginUser" />
+            <input type="text" id="loginUser" name="loginUser" data-bind="value: loginForm.username" />
             </div>
           </div>
 
         <div class="clearfix">
             <label for="loginPass">Password</label>
             <div class="input">
-            <input type="password" id="loginPass" name="loginPass" />
+            <input type="password" id="loginPass" name="loginPass" data-bind="value: loginForm.password" />
             </div>
           </div>
 
@@ -54,7 +54,7 @@
 
 
         <div class="actions">
-            <input type="submit" class="btn primary" value="Login">
+            <input type="submit" class="btn primary" value="Login" data-bind="click: loginForm.submit">
           </div>
     </form>
 </div>
