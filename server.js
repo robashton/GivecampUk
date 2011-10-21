@@ -26,7 +26,9 @@ function validateUser(req, res) {
   return true;
 };
 
-app.get('/', express.static(__dirname + '/site'));
+app.configure(function(){
+  app.use(express.static(__dirname + '/site'));
+});
 
 app.get('/login', function(req, res){
    var cookies = new Cookies( req, res );
