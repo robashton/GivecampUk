@@ -4,7 +4,9 @@ var security = require('./security');
 
 exports.init = function(app) {
 
-  app.get('/', express.static(__dirname + '/site'));
+  app.configure(function(){
+    app.use(express.static(__dirname + '/site'));
+  });
 
   app.get('/login/:username/:password', function(req, res){
     security.signInUser(req, res, req.params.username, req.params.password);
