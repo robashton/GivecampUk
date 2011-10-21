@@ -16,7 +16,7 @@ server = http.createServer(function(req, res){
 			   	  res.writeHead(200, "Content-Type: text/plain");
 			      res.write("Services will be found here");
 			      
-            db.x(function (doc) {
+            db.get_document("creationix", function (doc) {
               // Now you have the document or error if there was trouble
               res.write(doc)
               res.end();	
