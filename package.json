@@ -3,6 +3,7 @@
     "version": "0.0.1",
     "dependencies": {
       "express": "2.4.7",
-      "couch-client": ""
+      "couch-client": "",
+      "cookies": ""
     }
 }
