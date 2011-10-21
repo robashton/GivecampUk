@@ -5,6 +5,9 @@ paperboy = require('paperboy');
 db = require('./db');
 
 ROOT = path.dirname(__filename) + "/site";
+ENV = process.argv[2]
+console.log(process.argv)
+
 
 server = http.createServer(function(req, res){ 
 	  paperboy

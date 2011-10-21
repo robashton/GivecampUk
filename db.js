@@ -1,6 +1,9 @@
+config = require('./config')
+
 exports.get_document = function (id, callback) {
+  var url = config('db')
   var CouchClient = require('couch-client');
-  var db = CouchClient("http://localhost:5984/youngmindsdb");
+  var db = CouchClient(url);
   
   db.save({_id: id, name: "Tim Caswell", age: 28}, function ( err, doc) {
     // You know know if there was an error and have an updated version
