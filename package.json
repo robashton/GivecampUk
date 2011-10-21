@@ -2,7 +2,7 @@
     "name": "GiveCampUk",
     "version": "0.0.1",
     "dependencies": {
-      "paperboy": "0.0.2",
+      "express": "2.4.7",
       "couch-client": ""
     }
 }
