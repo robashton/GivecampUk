@@ -5,11 +5,15 @@ var security = require('./security');
 exports.init = function(app) {
 
   app.configure(function(){
+      app.use(express.bodyParser());
+  });
+
+  app.configure(function(){
     app.use(express.static(__dirname + '/site'));
   });
 
-  app.get('/login/:username/:password', function(req, res){
-    security.signInUser(req, res, req.params.username, req.params.password);
+  app.get('/login', function(req, res){
+    security.signInUser(req, res, req.body.username, req.body.password);
     res.json({ success: true}, {}, 200);  
   });
 
@@ -27,6 +31,8 @@ exports.init = function(app) {
         res.send('hello world: ' + doc);
       });
   });
+
+
 
   
 
