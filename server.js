@@ -10,9 +10,16 @@ server = http.createServer(function(req, res){
 	  .deliver(ROOT, req, res)
 	  .addHeader('Cache-Control', 'no-cache')
 	  .otherwise(function(){
-			  res.writeHead(404, "Content-Type: text/plain");
-			  res.write("Not found and all that");
-			  res.end();		
+    
+        if(req.url.indexOf("/services") == 0) {
+			   	  res.writeHead(200, "Content-Type: text/plain");
+			      res.write("Services will be found here");
+			      res.end();	
+		    } else {
+			    res.writeHead(404, "Content-Type: text/plain");
+			    res.write("Not found and all that");
+			    res.end();
+        }
 	  });
 
 });
