@@ -8,7 +8,7 @@ exports.init = function(app) {
     app.use(express.static(__dirname + '/site'));
   });
 
-  app.get('/login/:username/:password', function(req, res){
+  app.post('/login/:username/:password', function(req, res){
     security.signInUser(req, res, req.params.username, req.params.password);
     res.json({ success: true}, {}, 200);  
   });
