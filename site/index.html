@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" type="text/css" href="css/reset.css" />
-        <link rel="stylesheet" type="text/css" href="css/960_12_col.css" />
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="css/site.css" />
 
         <script type="text/javascript" src="js/jquery.js"></script>
         <script type="text/javascript" src="js/jquery.tmpl.js"></script>
@@ -15,14 +15,21 @@
 
     </head>
     <body>
-        <div class="container_12">
-            <div class="grid_12">
-                HEADER HERE
-            </div>
-            <div data-bind="template: viewModel.currentView">
 
-
+        <div class="topbar">
+          <div class="topbar-inner">
+            <div class="container">
+              <a class="brand" href="#">Young Minds Q&A</a>
+              <ul class="nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li class=""><a href="#">Questions</a></li>
+                <li class=""><a href="#">Ask a question</a></li>
+                <li class=""><a href="#">Logout</a></li>
+              </ul>
             </div>
+          </div>
         </div>
+
+        <div class="container" data-bind="template: viewModel.currentView"></div>
     </body>
 </html>
