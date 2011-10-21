@@ -5,16 +5,27 @@ paperboy = require('paperboy');
 db = require('./db');
 
 ROOT = path.dirname(__filename) + "/site";
-ENV = process.argv[2]
-console.log(process.argv)
 
+DB_CONFIG_FILE = "config/db.json"
+
+if(process.argv.length == 3)
+  ENV = process.argv[(4 - 2)] // WTF.
+else
+  ENV = "development"
+  
+path.exists(DB_CONFIG_FILE, function (exists) {
+  if(!exists) {
+    console.error("DB file is missing. Please set config file at: " + DB_CONFIG_FILE)
+    process.exit(1)
+  }
+});
 
 server = http.createServer(function(req, res){ 
 	  paperboy
 	  .deliver(ROOT, req, res)
 	  .addHeader('Cache-Control', 'no-cache')
 	  .otherwise(function(){
-    
+	    
         if(req.url.indexOf("/services") == 0) {
 			   	  res.writeHead(200, "Content-Type: text/plain");
 			      res.write("Services will be found here");
@@ -24,7 +35,6 @@ server = http.createServer(function(req, res){
               res.write(doc)
               res.end();	
             });
-			      
 			     
 		    } else {
 			    res.writeHead(404, "Content-Type: text/plain");

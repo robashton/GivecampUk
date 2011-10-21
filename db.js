@@ -1,7 +1,7 @@
 config = require('./config')
 
 exports.get_document = function (id, callback) {
-  var url = config('db')
+  var url = config(DB_CONFIG_FILE)
   var CouchClient = require('couch-client');
   var db = CouchClient(url);
   
