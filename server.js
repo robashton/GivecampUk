@@ -2,6 +2,7 @@ http = require('http'),
 path = require('path'),
 fs = require('fs');
 paperboy = require('paperboy');
+db = require('./db');
 
 ROOT = path.dirname(__filename) + "/site";
 
@@ -15,18 +16,9 @@ server = http.createServer(function(req, res){
 			   	  res.writeHead(200, "Content-Type: text/plain");
 			      res.write("Services will be found here");
 			      
-			      var CouchClient = require('couch-client');
-            var db = CouchClient("http://localhost:5984/youngmindsdb");
-			      
-            db.save({_id: "creationix", name: "Tim Caswell", age: 28}, function ( err, doc) {
-              // You know know if there was an error and have an updated version
-              // of the document (with `_id` and `_rev`).
-            });
-
-
-            db.get("creationix", function (err, doc) {
+            db.x(function (doc) {
               // Now you have the document or error if there was trouble
-              res.write(JSON.stringify(doc))
+              res.write(doc)
               res.end();	
             });
 			      
