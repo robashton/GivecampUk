@@ -3,22 +3,14 @@ path = require('path'),
 fs = require('fs');
 paperboy = require('paperboy');
 db = require('./db');
+startup = require('./startup')
 
 ROOT = path.dirname(__filename) + "/site";
 
 DB_CONFIG_FILE = "config/db.json"
 
-if(process.argv.length == 3)
-  ENV = process.argv[(4 - 2)] // WTF.
-else
-  ENV = "development"
-  
-path.exists(DB_CONFIG_FILE, function (exists) {
-  if(!exists) {
-    console.error("DB file is missing. Please set config file at: " + DB_CONFIG_FILE)
-    process.exit(1)
-  }
-});
+ENV = startup.get_env()
+startup.check_config_exists(DB_CONFIG_FILE)
 
 server = http.createServer(function(req, res){ 
 	  paperboy
