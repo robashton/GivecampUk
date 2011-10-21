@@ -2,7 +2,7 @@
     "name": "GiveCampUk",
     "version": "0.0.1",
     "dependencies": {
-      "mongodb": "0.9.6-22",
-      "paperboy": "0.0.2"
+      "paperboy": "0.0.2",
+      "couch-client": ""
     }
 }
