@@ -60,7 +60,6 @@ function createTags() {
 var views = [
     {
            "_id": "_design/answers",
-           "_rev": "1-88fcc9fc42f1a3da7e6b4f8fe2bf6a77",
            "language": "javascript",
            "views": {
                "by_questionid": {
@@ -70,7 +69,6 @@ var views = [
       },
       {
          "_id": "_design/users",
-         "_rev": "1-e3759fe60738e4307a3d878732cf2005",
          "language": "javascript",
          "views": {
              "by_email": {
@@ -83,17 +81,15 @@ var views = [
       },
       {
        "_id": "_design/questions",
-       "_rev": "1-a2f4cfdc23ca678ae37879b20fda997b",
        "language": "javascript",
        "views": {
            "by_tag": {
                "map": "function(doc) {\n  if(doc.type === \"question\")\n  \temit(doc.tag.tagName, doc);\n}"
            }
        }
-},
+      },
         {
          "_id": "_design/Answers",
-         "_rev": "1-93ce9a729c6f3a7b99b1710b8b1f8639",
          "language": "javascript",
          "views": {
              "by_rank": {
@@ -104,7 +100,6 @@ var views = [
 
     {
        "_id": "_design/tags",
-       "_rev": "7-c85f616d55bc748cc56ab218f28c6960",
        "language": "javascript",
        "views": {
            "by_popularity": {
