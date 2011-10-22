@@ -1,13 +1,13 @@
 var loginModel = {
 
     registerForm: {
-        username: ko.observable(''),
+        email: ko.observable(''),
         displayName: ko.observable(''),
         password: ko.observable(''),
 
         submit: function(event){
             var form = this().registerForm;
-            $.post('register', {email: form.username,name: form.displayName, password: form.password }).success(function(data){
+            $.post('register', {email: form.email,name: form.displayName, password: form.password }).success(function(data){
                if(data.success) {
 
                }
@@ -16,7 +16,7 @@ var loginModel = {
     },
 
     loginForm: {
-        username: ko.observable(''),
+        email: ko.observable(''),
         password: ko.observable(''),
 
         submit: function(event){
@@ -24,16 +24,16 @@ var loginModel = {
             var form = this().loginForm;
 
             viewModel.authenticated(true);
-            viewModel.username('user');
+            viewModel.email('user');
             viewModel.displayName('Joe Bloggs');
             viewModel.doOnAuth();
 
-            $.post('login', { email: form.username(), password: form.password() }).success(function(data){
+            $.post('login', { email: form.email(), password: form.password() }).success(function(data){
                 if(data.success) {
                     $.get('currentuser').success(function(data) {
                         //TODO: set cookie
                         viewModel.authenticated(true);
-                        viewModel.username(data.username);
+                        viewModel.email(data.email);
                     });
                 }
             });
@@ -42,5 +42,5 @@ var loginModel = {
 };
 
 loginModel.loginForm.valid = ko.dependentObservable(function(){
-        return this.loginForm.username().length > 0 && this.loginForm.password().length > 0;
+        return this.loginForm.email().length > 0 && this.loginForm.password().length > 0;
 }, loginModel);
