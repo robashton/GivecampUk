@@ -95,50 +95,31 @@ res.send('help');
   }); 
 
   app.get('/question/:id', function(req, res) {
+    var questionId = req.params.id;
+    var question, answers;
 
-    
+    db.get(questionId, function(err, doc) {
+      if(err) {    
+        res.json({error: err});      
+      }
+      else {
+          question = doc;
+          dbapi.get_question_answers(questionId, function(err, doc) {
+            if(err) {
+                res.json({error: err});    
+            }
+            else {
+              answers = doc;
+              res.json({
+                question: question,
+                answers: answers
+              });
+            }
+          });       
+      }
+    });
 
-    var result = {
-      question: {
-        id: 'id',
-        title: 'some title',
-        author: 'some user',
-        description: 'some description',
-        tag: 'some tag',
-        date: 'some date'
-      },
-      correctAnswer: {
-          id: 'answer 1',
-          author: 'some user',
-          rank: 56,
-          body: 'do it proper',
-          date: ''
-      },
-      answers: [
-        { 
-          id: 'answer 1',
-          author: 'some user',
-          rank: 56,
-          body: 'do it proper',
-          date: ''
-        },
-        { 
-          id: 'answer 2',
-          author: 'some user',
-          rank: 56,
-          body: 'do it proper',
-          date: ''
-        },
-        { 
-          id: 'answer 3',
-          author: 'some user',
-          rank: 56,
-          body: 'do it proper',
-          date: ''
-        },
-      ]
-    };
-    res.json(result);
+
   });
 
   app.get('/service', security.validateUser, function(req, res){

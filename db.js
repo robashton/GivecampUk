@@ -27,7 +27,13 @@ exports.get_user = function (email, callback) {
       console.log(doc)
       callback(doc)
   });
-}
+};
+
+exports.get_question_answers = function(questionId, callback) {
+    db.view('/youngmindsdb/_design/answers/_view/by_questionid', {key: questionId}, function(err, doc) {
+      callback(err, doc)
+  });
+};
 
 exports.create_user = function () {
   encryption.hash("password", function(hash){
