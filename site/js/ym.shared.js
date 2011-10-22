@@ -30,7 +30,7 @@ $(function(){
       },
       "/ask": function() {
           viewModel.currentView('question');
-      },
+      },    
       "/logout": function() {
         viewModel.authenticated(false);
         viewModel.username(null);
