@@ -155,7 +155,7 @@ exports.init = function(app) {
   });
 
   app.post('/register', function(req, res){
-    dbapi.create_user(req.body.email,req.body.name,req.body.password)
+    dbapi.create_user(req.body.email,req.body.name,req.body.password);
     res.json({ success: true}, {}, 200);  
   });
 
