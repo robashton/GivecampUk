@@ -17,17 +17,12 @@ exports.init = function(app) {
   });
 
   app.post('/login', function(req, res){
-    console.log(req.body.username)
     security.signInUser(req, res, req.body.username, req.body.password, function(result,session_id) {
-      console.log("result: " +result);
-      console.log("session: " +session_id);
       if(!result){
           res.json({ success: false}, {}, 401); 
         }
         else
         { 
-          //var cookies = new Cookies( req, res );
-          //cookies.set( "username", email, { httpOnly: false } );
           res.json({success: true, session: session_id},{},200);
         }
     });
