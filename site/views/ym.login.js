@@ -9,8 +9,9 @@ var loginModel = {
             var form = this().registerForm;
             $.post('register', {email: form.email,name: form.displayName, password: form.password }).success(function(data){
                if(data.success) {
-
-               }
+                  viewModel.authenticated(true);
+                  viewModel.doOnAuth();
+              }
             });
         }
     },
