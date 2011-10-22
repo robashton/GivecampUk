@@ -29,6 +29,12 @@ exports.init = function(app) {
     
   });
 
+  app.get('/get_questions_by_rank',function(req,res){
+    dbapi.get_questions_by_rank(function(err, doc){
+      res.send(err,doc);
+    })  
+  });
+
   app.get('/get_questions_by_tag/:tag?', function(req, res) {
       if(!req.params.tag)
           dbapi.get_questions(function(err, doc) {
