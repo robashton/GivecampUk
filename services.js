@@ -162,7 +162,7 @@ exports.init = function(app) {
       else
         res.json({ 
           error: null,
-          tags: doc.Tags
+          tags: doc.tags
         });
     });    
   }); 
