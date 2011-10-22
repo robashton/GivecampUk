@@ -7,11 +7,10 @@ var loginModel = {
         registrationError: ko.observable(''),
 
         submit: function(event){
-            var form = this().registerForm;
+            var form = loginModel.registerForm;
             $.post('register', {email: form.email,name: form.displayName, password: form.password }).success(function(data){
                if(data.success) {
-                  viewModel.authenticated(true);
-                  viewModel.doOnAuth();
+                  window.location = 'index.html';
               }else{
                   loginModel.registerForm.registrationError(data.error);
               }
@@ -25,13 +24,11 @@ var loginModel = {
 
         submit: function(event){
 
-            var form = this().loginForm;
+            var form = loginModel.loginForm;
 
             $.post('login', { email: form.email(), password: form.password() }).success(function(data){
                 if(data.success) {
-                  viewModel.authenticated(true);
-                  viewModel.displayName(data.name);
-                  viewModel.doOnAuth();
+                  window.location = 'index.html';
                 }
             });
         }

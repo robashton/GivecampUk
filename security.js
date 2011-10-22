@@ -33,7 +33,7 @@ var cookies = new Cookies( req, res , keys);
 exports.signInUser = function(req, res, email, password, callback) {
   
    db.get_user(email, function(err,doc){
-     if(doc.error == undefined && doc.rows.length > 0){
+     if(err == undefined && doc.rows.length > 0){
        encryption.compare(password, doc.rows[0].value.password, function(result) {
         
 console.log(email);
