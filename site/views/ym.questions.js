@@ -7,6 +7,12 @@ questionsModel.tagSortFunction =  function(a, b) {
     return a.value.count > b.value.count ? -1 : 1;  
 };
 
+questionsModel.updateSearch = function(key) {
+     $.get('get_questions_by_tag/' + key).success(function(data) {
+        questionsModel.questions(data.doc.rows);
+    });
+};
+
 
 questionsModel.sortedTags = ko.dependentObservable(function() {
   return questionsModel.tags.slice().sort(questionsModel.tagSortFunction);
@@ -15,11 +21,7 @@ questionsModel.sortedTags = ko.dependentObservable(function() {
 questionsModel.init = function() {
 
     $.get('get_questions_by_tag/').success(function(data) {
-
-        if(!data.error) {
-            questionsModel.questions(data.doc.rows);
-        }
-
+        questionsModel.questions(data.doc.rows);
     });
 
     $.get('get_popular_tags').success(function(data) {
