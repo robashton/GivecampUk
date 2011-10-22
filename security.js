@@ -12,6 +12,12 @@ exports.validateUser = function(req, res, next) {
   else next();
 };
 
+exports.currentUser = function(req, res) {
+  var cookies = new Cookies( req, res );
+  var username = cookies.get( "username" );
+  return username;
+};
+
 exports.signInUser = function(req, res, email, password, callback) {
   
    db.get_user(email, function(doc){
