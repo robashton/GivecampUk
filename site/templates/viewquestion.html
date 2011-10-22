@@ -6,7 +6,7 @@
                  <div class="question">
                     <h2><a href="#"><span data-bind="text: viewQuestionModel.title"></span></a></h2>
                     <p data-bind="text: viewQuestionModel.description"></p>
-                    <p>2 days ago</p>
+                    <p class="prettydate" data-bind="attr: { title: viewQuestionModel.date }"></p>
                 </div>
                 <div class="answers">
                   <div data-bind='template: { name: "answertemplate", foreach: viewQuestionModel.answers }'> </div>
