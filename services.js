@@ -5,15 +5,7 @@ var security = require('./security');
 var url = config(DB_CONFIG_FILE)
 var CouchClient = require('couch-client');
 var db = CouchClient(url);
-
-
-function generateGuid() {
-  var S4 = function() {
-     return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
-  };
-  return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
-}
-
+var utils = require('./utils');
 
 exports.init = function(app) {
 
@@ -76,7 +68,7 @@ exports.init = function(app) {
 
       db.save(
       {
-        _id: generateGuid(),
+        _id: utils.generateGuid(),
         type:"question",
         user:userid, 
         date:new Date(),
