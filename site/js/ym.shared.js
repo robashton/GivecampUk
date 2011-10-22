@@ -4,7 +4,7 @@ var views = {
     questions: questionsModel,
     viewquestion: viewQuestionModel,
     tags: tagadminModel,
-    admin: adminModel
+    admin: adminModel,
     tagadmin: tagadminModel,
     admin:adminModel,
     viewquestion: viewQuestionModel
