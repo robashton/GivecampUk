@@ -79,15 +79,19 @@ var views = [
          }
          }
       },
-      {
-       "_id": "_design/questions",
-       "language": "javascript",
-       "views": {
-           "by_tag": {
-               "map": "function(doc) {\n  if(doc.type === \"question\")\n  \temit(doc.tag.tagName, doc);\n}"
+        {
+           "_id": "_design/questions",
+           "language": "javascript",
+           "views": {
+               "by_tag": {
+                   "map": "function(doc) {\n  if(doc.type === \"question\")\n     emit(doc.tag.tagName, { _id: doc._id + \"_count\",  question: doc });\n}"
+               },
+               "by_answercount": {
+                   "map": "function(doc) {\n  if( doc.type !== 'answer' ) return;\n  emit(doc.questionId, 1);\n}",
+                   "reduce": "function (key, values, rereduce) {\n    return sum(values)\n}"
+               }
            }
-       }
-      },
+        },
         {
          "_id": "_design/Answers",
          "language": "javascript",
