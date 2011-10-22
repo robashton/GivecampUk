@@ -37,7 +37,7 @@ exports.init = function(app) {
 
   app.get('/get_all_users',function(req,res){
     dbapi.get_all_users(function(err, doc){
-      res.json(err,doc);
+       res.json({ err: err, doc: doc});
     })  
   });
 
