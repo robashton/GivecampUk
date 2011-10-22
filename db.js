@@ -34,6 +34,12 @@ exports.get_question_answers = function(questionId, callback) {
   });
 };
 
+exports.get_questions_by_tag = function(questionTag, callback) {
+    db.view('/youngmindsdb/_design/questions/_view/by_tag', {key: questionTag}, function(err, doc) {
+      callback(doc)
+  });
+};
+
 exports.create_session = function (id,name, callback) {
     var guid =  utils.generateGuid();
     db.save({session: guid, name: name, type: "session"}, function ( err, doc) {
