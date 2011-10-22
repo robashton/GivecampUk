@@ -1,5 +1,6 @@
 <tr>
   <td data-bind="text: value.name"></td>
   <td data-bind="text: value.email"></td>
-  <td><button >edit</button></td>
+  <td><input type="checkbox"  name="isElevated"  data-bind="checked: togglePermission" /> </td>
+  <td><button class="small" data-bind="click: remove">Remove</button></td>
 </tr>

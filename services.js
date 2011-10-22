@@ -83,6 +83,23 @@ exports.init = function(app) {
     });  
   });
 
+
+
+  app.post('/remove_user', function(req, res){
+
+    db.get(req.body.userId, function(err, doc) {
+      if(err) 
+         res.json({error: err});
+      else
+      {
+        db.delete(doc, function(err, doc){
+          res.json({ err: err, doc: doc});
+        });
+      }
+    });  
+  });
+
+
   app.post('/demote_user', function(req, res){
 
     db.get(req.body.userId, function(err, doc) {
@@ -92,7 +109,7 @@ exports.init = function(app) {
       {
         doc.isElevated = false;
         db.save(doc, function(err, doc){
-          res.json(err, doc);
+          res.json({ err: err, doc: doc});
         });
       }
     });  
