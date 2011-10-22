@@ -112,7 +112,18 @@ var QA = function (couchdb) {
                 }
             }
         }, function (err, doc) { });
+db.save({
+   "_id": "_design/users",
+   "_rev": "1-e3759fe60738e4307a3d878732cf2005",
+   "language": "javascript",
+   "views": {
+       "by_email": {
+           "map": "function(doc) {\n  if(doc.type == \"user\")\n     emit(doc.email, doc);\n}"
+       }
+   }
+}),function(err,doc) {});
     }
+
 }
 
 app.listen(8081);
