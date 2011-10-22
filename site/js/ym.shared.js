@@ -1,14 +1,20 @@
 var views = {
-    login: loginModel
+    login: loginModel,
+    question: questionModel
 };
 
 var viewModel = {
     user: ko.observable(),
-    currentView: ko.observable('login')
+    currentView: ko.observable('question')
 };
 
 viewModel.currentViewModel = ko.dependentObservable(function(){
     return views[viewModel.currentView()];
+});
+
+viewModel.currentViewModel.subscribe(function() {
+    if(viewModel.currentViewModel().init)
+        viewModel.currentViewModel().init();
 });
 
 $(function(){

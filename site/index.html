@@ -10,6 +10,7 @@
         <script type="text/javascript" src="js/koExternalTemplateEngine.js"></script>
         
         <script type="text/javascript" src="views/ym.login.js"></script>
+        <script type="text/javascript" src="views/ym.question.js"></script>
         <script type="text/javascript" src="js/ym.shared.js"></script>
 
 
@@ -21,9 +22,9 @@
             <div class="container">
               <a class="brand" href="#">Young Minds Q&A</a>
               <ul class="nav">
-                <li class="active"><a href="#">Home</a></li>
+                <li class="active"><a href="#" data-bind="click: function() { viewModel.currentView('login'); }">Home</a></li>
                 <li class=""><a href="#">Questions</a></li>
-                <li class=""><a href="#">Ask a question</a></li>
+                <li class=""><a href="#" data-bind="click: function() {viewModel.currentView('question'); }">Ask a question</a></li>
                 <li class=""><a href="#">Logout</a></li>
               </ul>
             </div>

@@ -7,26 +7,26 @@
         <div class="clearfix">
             <label for="registerUser">Username</label>
             <div class="input">
-            <input type="text" id="registerUser" name="registerUser" data-bind="value: registerForm.username" />
+            <input type="text" id="registerUser" name="registerUser" data-bind="value: loginModel.registerForm.username" />
             </div>
           </div>
 
         <div class="clearfix">
             <label for="registerName">Display name</label>
             <div class="input">
-            <input type="text" id="registerName" name="registerName" data-bind="value: registerForm.displayName" />
+            <input type="text" id="registerName" name="registerName" data-bind="value: loginModel.registerForm.displayName" />
             </div>
           </div>
 
         <div class="clearfix">
             <label for="registerPass">Password</label>
             <div class="input">
-            <input type="password" id="registerPass" name="registerPass" data-bind="value: registerForm.password" />
+            <input type="password" id="registerPass" name="registerPass" data-bind="value: loginModel.registerForm.password" />
             </div>
           </div>
 
         <div class="actions">
-            <input type="submit" class="btn primary" value="Register" data-bind="click: registerForm.submit">
+            <input type="submit" class="btn primary" value="Register" data-bind="click: loginModel.registerForm.submit">
         </div>
     </form>
 </div>
@@ -39,19 +39,19 @@
         <div class="clearfix">
             <label for="loginUser">Username</label>
             <div class="input">
-            <input type="text" id="loginUser" name="loginUser" data-bind="value: loginForm.username, valueUpdate: 'afterkeydown'" />
+            <input type="text" id="loginUser" name="loginUser" data-bind="value: loginModel.loginForm.username, valueUpdate: 'afterkeydown'" />
             </div>
           </div>
 
         <div class="clearfix">
             <label for="loginPass">Password</label>
             <div class="input">
-            <input type="password" id="loginPass" name="loginPass" data-bind="value: loginForm.password, valueUpdate: 'afterkeydown'" />
+            <input type="password" id="loginPass" name="loginPass" data-bind="value: loginModel.loginForm.password, valueUpdate: 'afterkeydown'" />
             </div>
           </div>
 
         <div class="actions" style="margin-top: 64px;"> 
-            <input type="submit" class="btn primary" value="Login" data-bind="click: loginForm.submit, enable: loginForm.valid">
+            <input type="submit" class="btn primary" value="Login" data-bind="click: loginModel.loginForm.submit, enable: loginModel.loginForm.valid">
 </div>
     </form>
 </div>
