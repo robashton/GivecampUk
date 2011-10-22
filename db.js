@@ -52,13 +52,6 @@ exports.get_questions_by_rank = function(callback){
   })
 };
 
-exports.create_session = function (id,email, callback) {
-    var guid =  utils.generateGuid();
-    db.save({session: guid, email: email.toLowerCase(), type: "session"}, function ( err, doc) {
-      callback(guid);
-    });
-  }
-
 exports.create_user = function (email,name, password) {
   encryption.hash(password, function(hash){
     

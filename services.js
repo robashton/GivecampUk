@@ -23,7 +23,7 @@ exports.init = function(app) {
         }
         else
         { 
-          res.json({success: true, session: session_id, name: name},{},200);
+          res.json({success: true},{},200);
         }
     });
     
