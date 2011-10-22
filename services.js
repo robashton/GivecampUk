@@ -34,11 +34,71 @@ exports.init = function(app) {
   });
 
   app.post('/answer', function(req, res){
-    console.log(req.body.loginUser)
-    dbapi.save_answer(req.body.question_id, req.body.answer_test); 
-res.send('help');
+    db.save_answer(req.body.question_id, req.body.answer_text, req.body.rank, function(doc){
+      res.send(doc);
+      }); 
+  });
+
+  app.post('/increment_answer_rank', function(req, res){
+
+    db.get(req.body.answerId, function(err, doc) {
+      if(err) 
+         res.json({error: err});
+      else
+      {
+        doc.rank++;
+        db.save(doc, function(err, doc){
+          res.send(err, doc);
+        });
+      }
+    });  
+  });
+
+  app.post('/decrement_answer_rank', function(req, res){
+
+    db.get(req.body.answerId, function(err, doc) {
+      if(err) 
+         res.json({error: err});
+      else
+      {
+        doc.rank--;
+        db.save(doc, function(err, doc){
+          res.send(err, doc);
+        });
+      }
+    });  
+  });
+
+  app.post('/set_accepted_answer', function(req, res){
+
+    db.get(req.body.answerId, function(err, doc) {
+      if(err) 
+         res.json({error: err});
+      else
+      {
+        doc.isAcceptedAnswer = true;
+        db.save(doc, function(err, doc){
+          res.send(err, doc);
+        });
+      }
+    });  
   });
   
+  app.post('/reset_accepted_answer', function(req, res){
+
+    db.get(req.body.answerId, function(err, doc) {
+      if(err) 
+         res.json({error: err});
+      else
+      {
+        doc.isAcceptedAnswer = false;
+        db.save(doc, function(err, doc){
+          res.send(err, doc);
+        });
+      }
+    });  
+  });
+
   app.get('/register', function(req, res){
     dbapi.create_user()
     res.json({ success: true}, {}, 200);  
