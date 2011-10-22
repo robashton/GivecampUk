@@ -50,7 +50,7 @@ exports.init = function(app) {
   });
 
   app.get('/currentuser', security.validateUser, function(req, res) {
-    res.json({ username: 'Emma'}, {}, 200);
+    res.json({ username: security.currentUser() }, {}, 200);
   });
 
   app.get('/createquestion', function(req, res) {
@@ -70,7 +70,7 @@ exports.init = function(app) {
         title: "There must be a title",
         description: "There must be a description",
         tag: "There must be a selected tag"
-      }) return;
+      })) return;
 
       var userid = security.currentUser();     
 
