@@ -28,14 +28,14 @@ var loginModel = {
             viewModel.displayName('Joe Bloggs');
             viewModel.doOnAuth();
 
-//            $.post('login', { username: form.username(), password: form.password() }).success(function(data){
-//                if(data.success) {
-//                    $.get('currentuser').success(function(data) {
-//                        viewModel.authenticated(true);
-//                        viewModel.username(data.username);
-//                    });
-//                }
-//            });
+            $.post('login', { email: form.username(), password: form.password() }).success(function(data){
+                if(data.success) {
+                    $.get('currentuser').success(function(data) {
+                        viewModel.authenticated(true);
+                        viewModel.username(data.username);
+                    });
+                }
+            });
         }
     }
 };
