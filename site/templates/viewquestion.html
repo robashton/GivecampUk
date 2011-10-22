@@ -4,22 +4,23 @@
         <div class="span12 ymcontent">
             <div style="padding: 5px;">
                  <div class="question">
-                    <h2><a href="#"><span data-bind="text: viewQuestionModel.title"></span></a></h2>
+                    <div style="border-bottom: 1px solid #404040; margin-bottom: 20px">
+                      <h1><a href="#"><span data-bind="text: viewQuestionModel.title"></span></a></h1>
+                    </div>
                     <p data-bind="text: viewQuestionModel.description"></p>
                     <p class="prettydate" data-bind="attr: { title: viewQuestionModel.date }"></p>
                 </div>
+                <hr/>
                 <div class="answers">
-                  <div data-bind='template: { name: "answertemplate", foreach: viewQuestionModel.answers }'> </div>
+                  <h3>Responses</h3>
+                  <table id="answers" class="zebra-striped">
+                    <tbody data-bind='template: { name: "answertemplate", foreach: viewQuestionModel.answers}'></tbody>
+                  </table>
                 </div>
             </div>
 
             <div id="newanswer">
-              <form method="/" action="post">
-
-                <div class="clearfix" style="padding: 20px;">
-                    <h2>Add an response</h2>
-                </div>
-
+              <form method="/" action="post" class="form-stacked">
                 <div class="clearfix">
                     <label for="questionResponse">Response</label>
 
