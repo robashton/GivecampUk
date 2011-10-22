@@ -10,13 +10,13 @@ Pages
 
     - UI on top of all of this. 
 
-    - Service endpoint - GET
+    DONE - Service endpoint - GET
       - createquestion : authenticated
         - List of possible tags along with description
             - TagName
             - TagDescription
 
-    - Service endpoint - POST
+    DONE - Service endpoint - POST
       - createquestion  : authenticated
         - Title
         - Content
@@ -24,6 +24,7 @@ Pages
     
   - List of questions by time
       - List of tags to filter with
+
   - View a question page
     - Add an answer
     - Mark an answer as the accepted answer
