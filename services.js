@@ -53,6 +53,21 @@ exports.init = function(app) {
       }
     });  
   });
+
+  app.post('/decrement_answer_rank', function(req, res){
+
+    db.get(req.body.answerId, function(err, doc) {
+      if(err) 
+         res.json({error: err});
+      else
+      {
+        doc.rank--;
+        db.save(doc, function(err, doc){
+          res.send(err, doc);
+        });
+      }
+    });  
+  });
   
   app.get('/register', function(req, res){
     dbapi.create_user()
