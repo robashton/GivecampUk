@@ -7,12 +7,14 @@ var tagadminModel = {
         });
     },
   tagList: ko.observableArray(),
+
   remove: function(event) {
-    var id = $(event.currentTarget).parent().siblings().first().text();      
-    this().tagList().remove(function(s){
-        s.Name === id;
-    });
-   
+        var id = $(event.currentTarget).parent().siblings().first().text(); 
+        $.post('removeTag', {
+            idtoremove: id
+        }).success(function(data) {
+           $.routes('set', '/tagadmin'); 
+        })
   },
 Update: {
         tagName: ko.observable(''),
