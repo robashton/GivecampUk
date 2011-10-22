@@ -18,13 +18,15 @@ Update: {
         tagName: ko.observable(''),
         description: ko.observable(''),
         add: function(event) {
-        var update = this().Update;
-        this().tagList().push({tagName: update.tagName, description: update.description });
-        $.post('updateTags', {
-            tagList: this().tagList()
-        }).success(function(data) {
-           $.routes('set', '/tagadmin'); 
-        })
+            if($('#newTag').valid() ){
+                var update = this().Update;
+                this().tagList().push({tagName: update.tagName, description: update.description });
+                $.post('updateTags', {
+                    tagList: this().tagList()
+                }).success(function(data) {
+                   $.routes('set', '/tagadmin');
+                })
+            }
         }
     }
 };
