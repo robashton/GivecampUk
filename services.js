@@ -33,6 +33,17 @@ exports.init = function(app) {
     
   });
 
+  app.get('/get_questions_by_tag/:tag', function(req, res) {
+        if(req.params.tag === null)
+        { 
+            res.json({error: "Tag cannot be null" });   
+        }
+        else
+          dbapi.get_questions_by_tag(req.params.tag, function(err, doc) {
+            res.send(err, doc);
+          });
+  });
+
   app.post('/answer', function(req, res){
     dbapi.save_answer(req.body.question_id, req.body.answer_text, req.body.rank, function(doc){
       res.send(doc);

@@ -65,6 +65,16 @@ var views = [
                  "map": "function(doc) {\n  if(doc.type == \"user\")\n     emit(doc.email, doc);\n}"
              }
          }
-      }
+      },
+      {
+       "_id": "_design/questions",
+       "_rev": "1-a2f4cfdc23ca678ae37879b20fda997b",
+       "language": "javascript",
+       "views": {
+           "by_tag": {
+               "map": "function(doc) {\n  if(doc.type === \"question\")\n  \temit(doc.tag, doc);\n}"
+           }
+       }
+    }
 
 ];
