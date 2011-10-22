@@ -14,7 +14,6 @@ exports.save_answer = function(question_id, answer_text, rank, callback) {
       userId: "adsda",//security.currentUser(), 
       answer: answer_text, 
       rank: rank,
-      deleted: 0,
       date:new Date()
       }, function(err, doc) {
         // TODO: error handling
