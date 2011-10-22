@@ -54,6 +54,7 @@ $(function(){
         viewModel.currentView('useradmin');
       },
       "/logout": function() {
+        $.get('logout');
         viewModel.authenticated(false);
         viewModel.email(null);
         viewModel.currentView('login');
