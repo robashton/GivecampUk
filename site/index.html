@@ -5,6 +5,8 @@
         <link rel="stylesheet" type="text/css" href="css/site.css" />
 
         <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="js/jquery.address.js"></script>
+        <script type="text/javascript" src="js/jquery.routes.js"></script>
         <script type="text/javascript" src="js/jquery.tmpl.js"></script>
         <script type="text/javascript" src="js/knockout.js"></script>
         <script type="text/javascript" src="js/koExternalTemplateEngine.js"></script>
@@ -23,9 +25,9 @@
             <div class="container">
               <a class="brand" href="#">Young Minds Q&A</a>
               <ul class="nav">
-                <li class="" data-bind="visible: viewModel.authenticated, click: function() {viewModel.currentView('questions'); }, css: { active: viewModel.currentView() == 'questions' }"><a href="#">Questions</a></li>
-                <li class="" data-bind="visible: viewModel.authenticated, click: function() {viewModel.currentView('question'); }, css: { active: viewModel.currentView() == 'question' }"><a href="#">Ask a question</a></li>
-                <li class="" data-bind="visible: viewModel.authenticated, click: viewModel.logout"><a href="#">Logout</a></li>
+                <li class="" data-bind="visible: viewModel.authenticated, css: { active: viewModel.currentView() == 'questions' }"><a href="#/">Questions</a></li>
+                <li class="" data-bind="visible: viewModel.authenticated, css: { active: viewModel.currentView() == 'question' }"><a href="#/ask">Ask a question</a></li>
+                <li class="" data-bind="visible: viewModel.authenticated"><a href="#/logout">Logout</a></li>
               </ul>
             </div>
           </div>
