@@ -115,6 +115,23 @@ exports.init = function(app) {
     });  
   });
 
+
+
+  app.post('/remove_user', function(req, res){
+
+    db.get(req.body.userId, function(err, doc) {
+      if(err) 
+         res.json({error: err});
+      else
+      {
+        db.delete(doc, function(err, doc){
+          res.json({ err: err, doc: doc});
+        });
+      }
+    });  
+  });
+
+
   app.post('/demote_user', function(req, res){
 
     db.get(req.body.userId, function(err, doc) {
@@ -124,12 +141,30 @@ exports.init = function(app) {
       {
         doc.isElevated = false;
         db.save(doc, function(err, doc){
-          res.json(err, doc);
+          res.json({ err: err, doc: doc});
         });
       }
     });  
   });
-
+  app.post('/removeTag', function(req, res){
+       db.get("tagList", function(err, doc) {
+        if(err) 
+           res.json({error: err});
+        else
+          {
+             for (i in doc.tags) {
+                  var value = doc.tags[i].tagName;
+                  if(value === req.body.idtoremove)
+                  {
+                    doc.tags.splice(i, 1);
+                  }
+                }          
+          db.save(doc, function(err, doc){
+              res.json(err, doc);
+        });
+          }
+      });    
+    });
   app.post('/increment_answer_rank', function(req, res){
 
     db.get(req.body.answerId, function(err, doc) {
@@ -328,7 +363,7 @@ exports.init = function(app) {
 });
 
 expect = function(req, res, keys) {
-  for(i in keys) {
+ for (i in keys) {
     var value = req.body[i];
     if(!value) { 
       res.json({ error: keys[i]});

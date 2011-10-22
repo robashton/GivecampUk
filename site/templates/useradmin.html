@@ -3,9 +3,10 @@
 
         <div class="span4 ymcontent">
             <div style="padding: 5px;">
-                <h2>Menu</h2>
+                <h2>Admin Menu</h2>
     <ul>
-                <li class="" data-bind="visible: viewModel.authenticated, click: function() {viewModel.currentView('useradmin'); }, css: { active: viewModel.currentView() == 'useradmin' }"><a href="#/useradmin">Edit Users</a></li>
+                               <li class="" data-bind="visible: viewModel.authenticated, click: function() {viewModel.currentView('useradmin'); }, css: { active: viewModel.currentView() == 'useradmin' }"><a href="#/useradmin">User Admin</a></li>
+                <li class="" data-bind="visible: viewModel.authenticated, click: function() {viewModel.currentView('tagadmin'); }, css: { active: viewModel.currentView() == 'tagadmin' }"><a href="#/tagadmin">Edit Tags</a></li>
 
               </ul>
            </div>
@@ -13,13 +14,13 @@
 
         <div class="span12 ymcontent">
             <div style="padding: 5px;">
-                <h2>Admin</h2>
+                <h2>User Admin</h2>
 
                 <table>
 <thead>
                 <th>Name</th>
                 <th>Description</th>
-                <th></th>
+                <th>Is Elevated</th>
                 </thead>
                 <tbody data-bind="template: { name: 'userRow', foreach: useradminModel.users }">
                 <tr>

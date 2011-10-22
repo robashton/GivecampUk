@@ -7,12 +7,14 @@ var tagadminModel = {
         });
     },
   tagList: ko.observableArray(),
+
   remove: function(event) {
-    var id = $(event.currentTarget).parent().siblings().first().text();      
-    this().tagList().remove(function(s){
-        s.Name === id;
-    });
-   
+        var id = $(event.currentTarget).parent().siblings().first().text(); 
+        $.post('removeTag', {
+            idtoremove: id
+        }).success(function(data) {
+           $.routes('set', '/tagadmin'); 
+        })
   },
 Update: {
         tagName: ko.observable(''),
@@ -30,7 +32,3 @@ Update: {
         }
     }
 };
-/*
-tagadminModel.valid = ko.dependentObservable(function(){
-        return this.Update.tagName().length > 0 && this.Update.description().length > 0;
-}, questionModel);*/

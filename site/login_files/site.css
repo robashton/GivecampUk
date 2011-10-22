@@ -1,0 +1,17 @@
+html, body {
+    background-color: #FBBA00;
+}
+
+body {
+    padding-top: 40px;
+}
+
+.ymcontent {
+    background-color: #fff;
+    border-radius: 7px;
+}
+
+.masthead {
+    background-color: #fff;
+    margin-bottom: 40px;
+}
