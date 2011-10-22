@@ -4,6 +4,7 @@ var loginModel = {
         email: ko.observable(''),
         displayName: ko.observable(''),
         password: ko.observable(''),
+        registrationError: ko.observable(''),
 
         submit: function(event){
             var form = this().registerForm;
@@ -11,6 +12,8 @@ var loginModel = {
                if(data.success) {
                   viewModel.authenticated(true);
                   viewModel.doOnAuth();
+              }else{
+                  loginModel.registerForm.registrationError(data.error);
               }
             });
         }
