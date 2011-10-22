@@ -15,6 +15,8 @@
         <div class="span4 ymcontent">
             <div style="padding: 5px;">
                 <h2>Tags</h2>
+
+                <ul id="tags" data-bind="template: { name: 'tagitem', foreach: questionsModel.sortedTags}"></ul>
             </div>
         </div>
 

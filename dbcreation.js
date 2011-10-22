@@ -87,20 +87,31 @@ var views = [
        "language": "javascript",
        "views": {
            "by_tag": {
-               "map": "function(doc) {\n  if(doc.type === \"question\")\n  \temit(doc.tag, doc);\n}"
+               "map": "function(doc) {\n  if(doc.type === \"question\")\n  \temit(doc.tag.tagName, doc);\n}"
            }
        }
 },
         {
-   "_id": "_design/Answers",
-   "_rev": "1-93ce9a729c6f3a7b99b1710b8b1f8639",
-   "language": "javascript",
-   "views": {
-       "by_rank": {
-           "map": "function(doc) {\n  emit(doc.rank, doc);\n}"
-       }
-   }
+         "_id": "_design/Answers",
+         "_rev": "1-93ce9a729c6f3a7b99b1710b8b1f8639",
+         "language": "javascript",
+         "views": {
+             "by_rank": {
+                 "map": "function(doc) {\n  emit(doc.rank, doc);\n}"
+             }
+         }
+    },
 
+    {
+       "_id": "_design/tags",
+       "_rev": "7-c85f616d55bc748cc56ab218f28c6960",
+       "language": "javascript",
+       "views": {
+           "by_popularity": {
+               "map": "function(doc) {\n  if(doc.type === 'question' && doc.tag.tagName) {\n\temit(doc.tag.tagName, {\n\t\ttagDescription: doc.tag.description,\n\t\tcount: 1\n\t});\n  }\n  else if(doc._id == 'tagList') {\n\tfor(var x = 0; x < doc.tags.length; x++)\n        {\n \t\temit(doc.tags[x].tagName, {\n\t\t\ttagDescription: doc.tags[x].description,\n\t\t\tcount: 1\n\t\t});\n        }\n  }\n}",
+               "reduce": "function (key, values, rereduce) {\n\t\tvar total = 0;\n\t\tfor(var x = 0; x < values.length; x++){\n\t\t\ttotal += values[x].count;\n\t\t}\n\t\treturn {\n\t\t\ttagDescription: values[0].tagDescription,\n\t\t\tcount: total\n\t\t}\n}\t"
+           }
+       }
     }
 
 ];
