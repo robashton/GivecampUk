@@ -90,6 +90,50 @@ res.send('help');
        });    
   }); 
 
+  app.get('/question/:id', function(req, res) {
+    var result = {
+      question: {
+        id: 'id',
+        title: 'some title',
+        author: 'some user',
+        description: 'some description',
+        tag: 'some tag',
+        date: 'some date'
+      },
+      correctAnswer: {
+          id: 'answer 1',
+          author: 'some user',
+          rank: 56,
+          body: 'do it proper',
+          date: ''
+      },
+      answers: [
+        { 
+          id: 'answer 1',
+          author: 'some user',
+          rank: 56,
+          body: 'do it proper',
+          date: ''
+        },
+        { 
+          id: 'answer 2',
+          author: 'some user',
+          rank: 56,
+          body: 'do it proper',
+          date: ''
+        },
+        { 
+          id: 'answer 3',
+          author: 'some user',
+          rank: 56,
+          body: 'do it proper',
+          date: ''
+        },
+      ]
+    };
+    res.json(result);
+  });
+
   app.get('/service', security.validateUser, function(req, res){
       db.get_document("creationix", function (doc) {
         res.send('hello world: ' + doc);
