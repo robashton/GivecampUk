@@ -65,6 +65,7 @@ $(function(){
             };
             viewModel.currentView('login');
             $.get('currentuser').success(function(){
+                viewModel.authenticated(true);
                 viewModel.doOnAuth();
             });
         }
