@@ -5,6 +5,7 @@
             <div style="padding: 5px;">
                 <h2>Menu</h2>
     <ul>
+                <li class="" data-bind="visible: viewModel.authenticated, click: function() {viewModel.currentView('useradmin'); }, css: { active: viewModel.currentView() == 'useradmin' }"><a href="#/useradmin">User Admin</a></li>
                 <li class="" data-bind="visible: viewModel.authenticated, click: function() {viewModel.currentView('tagadmin'); }, css: { active: viewModel.currentView() == 'tagadmin' }"><a href="#/tagadmin">Edit Tags</a></li>
 
               </ul>
