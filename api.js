@@ -14,25 +14,33 @@ var express = require('express');
 var app = express.createServer();
 
 app.get('/login', function(req, res){
-  var CouchClient = require('couch-client');
+    var CouchClient = require('couch-client');
     var qa = new QA(CouchClient('http://localhost:5984/youngmindsdb'));
-    qa.createQuestion("qone",1,"Whats my name","Whats my name......",[{tagName:"Tag1"},{tagName:"Tag2"},{tagName:"Tag3"}]);
-    console.log("test");
-    qa.createAnswer("athree",1,2,"this is my answer");
+    var questionId = generateGuid();
+
+
+    qa.createQuestion(questionId,1,"Whats my name","Whats my name......",[{tagName:"Tag1"},{tagName:"Tag2"},{tagName:"Tag3"}]);
+    for(i=0;i<5;i++)    
+      qa.createAnswer(generateGuid(),questionId,1,"this is my answer");
     res.json({ success: true}, {}, 200);  
-   res.json({ success: true}, {}, 200);  
 });
 
-
-  
+ function generateGuid() {
+    var S4 = function() {
+       return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+    };
+    return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
+    }
 
 
 var QA = function(couchdb) {
   db = couchdb;
+
   this.createQuestion = function(id, _userId, _title, _description,_tags) {
     db.save(
     {
       _id: id,
+      type:"question",
       user:_userId, 
       date:new Date(),
       deleted:0,
@@ -48,6 +56,7 @@ var QA = function(couchdb) {
     db.save(
     {
      _id: id,
+     type:"answer",
      questionId : _questionId,
      userId : _userId,
      answer : _answer,
@@ -58,10 +67,6 @@ var QA = function(couchdb) {
     console.log("here2");
   }
 }
-
-
-
-//require('./services').init(app);
 app.listen(8081);
 
 console.log("Listening on port 8081");
