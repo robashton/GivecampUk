@@ -3,6 +3,7 @@ var security = require('./security');
 
 var url = config(DB_CONFIG_FILE);
 var utils = require('./utils');
+var encryption = require('./encryption');
 
 var url = config(DB_CONFIG_FILE)
 var CouchClient = require('couch-client');
@@ -26,6 +27,7 @@ function createDatabase(){
 
 function createData() {
   createTags();
+  createUsers();
 };
 
 function createViews() {
@@ -35,6 +37,16 @@ function createViews() {
       
     });
   }
+};
+
+function createUsers() {
+    encryption.hash("password", function(hash){
+
+    db.save({_id: "test", name: "Tim Caswell", age: 28, email: "Tim.Caswell@gmail.com", password: hash, type: "user", isElevated: false}, function ( err, doc) {
+      // You know know if there was an error and have an updated version
+      // of the document (with `_id` and `_rev`).
+    });
+  })
 };
 
 function createTags() {
@@ -65,6 +77,16 @@ var views = [
                  "map": "function(doc) {\n  if(doc.type == \"user\")\n     emit(doc.email, doc);\n}"
              }
          }
-      }
+      },
+      {
+       "_id": "_design/questions",
+       "_rev": "1-a2f4cfdc23ca678ae37879b20fda997b",
+       "language": "javascript",
+       "views": {
+           "by_tag": {
+               "map": "function(doc) {\n  if(doc.type === \"question\")\n  \temit(doc.tag, doc);\n}"
+           }
+       }
+    }
 
 ];

@@ -18,8 +18,9 @@ viewModel.currentViewModel = ko.dependentObservable(function(){
 });
 
 viewModel.currentViewModel.subscribe(function() {
-    if(viewModel.currentViewModel() && viewModel.currentViewModel().init)
+    if(viewModel.currentViewModel() && viewModel.currentViewModel().init){
         viewModel.currentViewModel().init();
+    }
 });
 
 $(function(){

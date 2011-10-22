@@ -25,9 +25,12 @@ exports.currentUser = function(req, res) {
 exports.signInUser = function(req, res, email, password, callback) {
   
    db.get_user(email, function(doc){
-     if(doc.rows > 0){
+     
+     if(doc.rows.length > 0){
        encryption.compare(password, doc.rows[0].value.password, function(result) {
-          callback(result)
+       db.create_session(doc.rows[0].value._id,doc.rows[0].value.name,function(guid){
+          callback(result,guid);
+       });
        }); 
      }
   });
