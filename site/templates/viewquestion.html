@@ -12,6 +12,32 @@
                   <div data-bind='template: { name: "answertemplate", foreach: viewQuestionModel.answers }'> </div>
                 </div>
             </div>
+
+            <div id="newanswer">
+              <form method="/" action="post">
+
+                <div class="clearfix" style="padding: 20px;">
+                    <h2>Add an response</h2>
+                </div>
+
+                <div class="clearfix">
+                    <label for="questionResponse">Response</label>
+
+                    <div class="input">
+                        <textarea id="questionResponse" name="questionResponse" class="xxlarge" rows="10"
+                               data-bind="value: viewQuestionModel.newAnswerForm.answer, valueUpdate: 'afterkeydown'" />
+
+                    </div>
+                </div>
+
+            <div class="actions">
+
+                <input type="submit" class="btn primary" value="Submit"
+                       data-bind="click: viewQuestionModel.newAnswerForm.submit">
+
+            </div>                
+
+            </div>
         </div>
 
         <div class="span4 ymcontent">

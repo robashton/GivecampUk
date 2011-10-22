@@ -7,13 +7,13 @@ var url = config(DB_CONFIG_FILE)
 var CouchClient = require('couch-client');
 var db = CouchClient(url);
 
-exports.save_answer = function(question_id, answer_text, rank, callback) {
+exports.save_answer = function(question_id, answer_text, callback) {
   db.save({_id:utils.generateGuid(),
       type:"answer", 
       questionId: question_id, 
       userId: "adsda",//security.currentUser(), 
       answer: answer_text, 
-      rank: rank,
+      rank: 0,
       date:new Date()
       }, function(err, doc) {
         // TODO: error handling
@@ -44,6 +44,12 @@ exports.get_questions = function(callback) {
     db.view('/youngmindsdb/_design/questions/_view/by_tag', function(err, doc) {
       callback(doc)
   });
+};
+
+exports.get_questions_by_rank = function(callback){
+  db.view('/youngmindsdb/_design/Answers/_view/by_rank',function(err,doc){
+    callback(doc);  
+  })
 };
 
 exports.create_session = function (id,name, callback) {

@@ -29,6 +29,12 @@ exports.init = function(app) {
     
   });
 
+  app.get('/get_questions_by_rank',function(req,res){
+    dbapi.get_questions_by_rank(function(err, doc){
+      res.send(err,doc);
+    })  
+  });
+
   app.get('/get_questions_by_tag/:tag?', function(req, res) {
       if(!req.params.tag)
           dbapi.get_questions(function(err, doc) {
@@ -47,7 +53,7 @@ exports.init = function(app) {
     }))
       return;
     
-    dbapi.save_answer(req.body.question_id, req.body.answer_text, req.body.rank, function(doc){
+    dbapi.save_answer(req.body.question_id, req.body.answer_text, function(doc){
       res.send(doc);
       }); 
   });
