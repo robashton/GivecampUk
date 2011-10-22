@@ -10,7 +10,7 @@ var views = {
 var viewModel = {
     authenticated: ko.observable(false),
     doOnAuth: null,
-    username: ko.observable(),
+    email: ko.observable(),
     displayName: ko.observable(),
     currentView: ko.observable('login')
 };
@@ -47,7 +47,7 @@ $(function(){
       },
       "/logout": function() {
         viewModel.authenticated(false);
-        viewModel.username(null);
+        viewModel.email(null);
         viewModel.currentView('login');
         $.routes("set","/");
       }
