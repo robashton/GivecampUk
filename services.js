@@ -2,9 +2,7 @@ var express = require('express');
 db = require('./db');
 var security = require('./security');
 
-var url = config(DB_CONFIG_FILE)
-var CouchClient = require('couch-client');
-var db = CouchClient(url);
+var url = config(DB_CONFIG_FILE);
 var utils = require('./utils');
 
 exports.init = function(app) {
@@ -29,6 +27,12 @@ exports.init = function(app) {
         }
     });
     
+  });
+
+  app.post('/answer', function(req, res){
+    console.log(req.body.loginUser)
+    db.save_answer(req.body.question_id, req.body.answer_test); 
+res.send('help');
   });
   
   app.get('/register', function(req, res){
@@ -134,7 +138,8 @@ exports.init = function(app) {
       db.get_document("creationix", function (doc) {
         res.send('hello world: ' + doc);
       })
-  });
+
+});
 
   expect = function(req, res, keys) {
     for(i in keys) {
