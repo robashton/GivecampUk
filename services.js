@@ -29,11 +29,11 @@ exports.init = function(app) {
     
   });
 
-  app.get('/get_questions_by_tag/:tag', function(req, res) {
-        if(req.params.tag === null)
-        { 
-            res.json({error: "Tag cannot be null" });   
-        }
+  app.get('/get_questions_by_tag/:tag?', function(req, res) {
+      if(!req.params.tag)
+          dbapi.get_questions(function(err, doc) {
+            res.send(err, doc);
+          });
         else
           dbapi.get_questions_by_tag(req.params.tag, function(err, doc) {
             res.send(err, doc);
