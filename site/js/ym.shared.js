@@ -63,7 +63,11 @@ $(function(){
             viewModel.doOnAuth = function(){
                 callback(params);
             };
-          viewModel.currentView('login');
+            viewModel.currentView('login');
+            $.get('currentuser').success(function(){
+                viewModel.authenticated(true);
+                viewModel.doOnAuth();
+            });
         }
     };
 

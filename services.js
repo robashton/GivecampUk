@@ -25,8 +25,7 @@ exports.init = function(app) {
         { 
           res.json({success: true, session: session_id, name: name},{},200);
         }
-    });
-    
+    });    
   });
 
   app.get('/get_questions_by_rank',function(req,res){
@@ -37,8 +36,14 @@ exports.init = function(app) {
 
   app.get('/get_popular_tags', function(req, res) {
       dbapi.get_popular_tags(function(err, docs) {
-        res.json({err: err, docs: docs});
+        res.json({err: err, rows: docs.rows});
       });
+  });
+
+  app.get('/get_all_users',function(req,res){
+    dbapi.get_all_users(function(err, doc){
+      res.json(err,doc);
+    });
   });
 
   app.get('/get_questions_by_tag/:tag?', function(req, res) {
@@ -56,8 +61,7 @@ exports.init = function(app) {
     if(!expect(req, res, {
       question_id: "There must be a question id!",
       answer_text: "There must be answer text"
-    }))
-      return;
+    })) return;
     
     dbapi.save_answer(req.body.question_id, req.body.answer_text, function(doc){
         res.json(doc);
@@ -268,14 +272,15 @@ exports.init = function(app) {
       })
 });
 
-  expect = function(req, res, keys) {
-    for(i in keys) {
-      var value = req.body[i];
-      if(!value) { 
-        res.json({ error: keys[i]});
-        return false;
-      }
+expect = function(req, res, keys) {
+  for(i in keys) {
+    var value = req.body[i];
+    if(!value) { 
+      res.json({ error: keys[i]});
+      return false;
     }
-    return true;
   }
-};
+  return true;
+}
+
+}

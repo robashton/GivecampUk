@@ -1,6 +1,9 @@
 var questionModel = {
 
     init: function() {
+        questionModel.title('');
+        questionModel.description('');
+        questionModel.tag(null);
         $.get('createquestion', function(data) {
             if (!data.error) {
                 questionModel.tagList(data.tags);
@@ -14,18 +17,16 @@ var questionModel = {
     tagList: ko.observableArray([]),
 
     submit : function() {
-        if($("#askQuestion").valid()){
-             $.post('createquestion', {
-                title: this().title(),
-                description: this().description(),
-                tag: this().tag()
-            }).success(function(data) {
-                $.routes('set', '/question/' + data.doc._id);
-            })
-        }
+        $.post('createquestion', {
+            title: this().title(),
+            description: this().description(),
+            tag: this().tag()
+        }).success(function(data) {
+            $.routes('set', '/question/' + data.doc._id);
+        })
     }
 };
 
 questionModel.valid = ko.dependentObservable(function(){
-        return $('#askQuestion').valid();
+        return this.title().length > 0 && this.description().length > 0;
 }, questionModel);

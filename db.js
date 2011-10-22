@@ -35,10 +35,9 @@ exports.get_question_answers = function(questionId, callback) {
 };
 
 exports.get_popular_tags = function(callback) {
-    db.view('/youngmindsdb/_design/tags/_view/by_popularity', 
-        {
-           
-        }, callback);
+    db.view('/youngmindsdb/_design/tags/_view/by_popularity?group=true', function(err,doc){
+      callback(err,doc);    
+    });
 };
 
 exports.get_questions_by_tag = function(questionTag, callback) {
@@ -58,7 +57,11 @@ exports.get_questions_by_rank = function(callback){
     callback(err, doc);  
   })
 };
-
+exports.get_all_users = function(callback){
+  db.view('/youngmindsdb/_design/users/_view/getAllUsers',function(err,doc){
+    callback(err, doc);  
+  })
+};
 exports.create_session = function (id,email, callback) {
     var guid =  utils.generateGuid();
     db.save({session: guid, email: email.toLowerCase(), type: "session"}, function ( err, doc) {

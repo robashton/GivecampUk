@@ -7,15 +7,21 @@ var tagadminModel = {
         });
     },
   tagList: ko.observableArray(),
-  
   remove: function(event) {
     var id = $(event.currentTarget).parent().siblings().first().text();      
     alert(id);
    
-  }
+  },
+Update: {
+        tagName: ko.observable(''),
+        description: ko.observable(''),
+        add: function(event) {
+          
+          alert(this.Update.tagName);
+        }
+    }
 };
-
 /*
-loginModel.loginForm.valid = ko.dependentObservable(function(){
-        return this.loginForm.email().length > 0 && this.loginForm.password().length > 0;
-}, loginModel);*/
+tagadminModel.valid = ko.dependentObservable(function(){
+        return this.Update.tagName().length > 0 && this.Update.description().length > 0;
+}, questionModel);*/
