@@ -1,7 +1,8 @@
 var views = {
     login: loginModel,
     question: questionModel,
-    questions: questionsModel
+    questions: questionsModel,
+    viewquestion: viewQuestionsModel
 };
 
 var viewModel = {
