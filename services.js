@@ -17,7 +17,7 @@ exports.init = function(app) {
   });
 
   app.post('/login', function(req, res){
-    security.signInUser(req, res, req.body.username, req.body.password, function(result,session_id) {
+    security.signInUser(req, res, req.body.email, req.body.password, function(result,session_id) {
       if(!result){
           res.json({ success: false}, {}, 401); 
         }
@@ -149,7 +149,7 @@ exports.init = function(app) {
   });
 
   app.get('/register', function(req, res){
-    dbapi.create_user()
+    dbapi.create_user(req.body.username,req.body.password)
     res.json({ success: true}, {}, 200);  
   });
 
