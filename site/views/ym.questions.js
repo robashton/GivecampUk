@@ -13,6 +13,11 @@ questionsModel.updateSearch = function(key) {
     });
 };
 
+questionsModel.getAnswerCount = function(item) {
+  if(!item || !item.count) return 0;
+  return item.count;
+};
+
 
 questionsModel.sortedTags = ko.dependentObservable(function() {
   return questionsModel.tags.slice().sort(questionsModel.tagSortFunction);

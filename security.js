@@ -7,7 +7,7 @@ var keys = new KeyGrip([ "This should not be in here", "and this" ])
 
 
 exports.validateUser = function(req, res, next) {
-var cookies = new Cookies( req, res , keys);
+  var cookies = new Cookies( req, res , keys);
   var session_cookie = cookies.get( "ymindsid" );
 
   if(!session_cookie) {
@@ -15,31 +15,33 @@ var cookies = new Cookies( req, res , keys);
   }
   else{
     //TODO: session db validation
-    console.log(session_cookie);
     next();
   }
 };
 
 exports.currentUser = function(req, res) {
-var cookies = new Cookies( req, res , keys);
-  try {
-  var username = cookies.get("ymindsid");
-  return username;
-  } catch (ex) {
-    return null;  
+  var cookies = new Cookies( req, res , keys);
+  var session_cookie = cookies.get( "ymindsid" );
+
+  if(!session_cookie) {
+   return null
+  }
+  else{
+    return session_cookie
   }
 };
 
 exports.signInUser = function(req, res, email, password, callback) {
   
    db.get_user(email, function(err,doc){
-     if(doc.error == undefined && doc.rows.length > 0){
+     if(err === null && doc.rows.length > 0){
        encryption.compare(password, doc.rows[0].value.password, function(result) {
-        
-console.log(email);
-      var cookies = new Cookies( req, res , keys);
-       cookies.set("ymindsid", email, { signed: true } );
-       callback(true);
+          if(result) {
+            var cookies = new Cookies( req, res , keys);
+            cookies.set("ymindsid", email, { signed: true } );
+            callback(true);
+          }
+        else{ callback(false); }
        }); 
      }
      else { callback(false); }
