@@ -29,7 +29,6 @@ var loginModel = {
 
             $.post('login', { email: form.email(), password: form.password() }).success(function(data){
                 if(data.success) {
-                  $.cookie('ymindsid', data.session);
                   viewModel.authenticated(true);
                   viewModel.displayName(data.name);
                   viewModel.doOnAuth();
