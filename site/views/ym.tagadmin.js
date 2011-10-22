@@ -21,7 +21,7 @@ Update: {
         }
     }
 };
-
+/*
 tagadminModel.valid = ko.dependentObservable(function(){
         return this.Update.tagName().length > 0 && this.Update.description().length > 0;
-}, questionModel);
+}, questionModel);*/

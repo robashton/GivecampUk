@@ -24,21 +24,17 @@
                 <tbody data-bind="template: { name: 'tagRow', foreach: tagadminModel.tagList }">
                 <tr>
                   <td> <div class="input">
-                        <textarea id="tagName" name="tagName" class="xlarge" rows="2" data-bind="value: tagadminModel.Update.tagName, valueUpdate: 'afterkeydown'" />
+                        <textarea id="tagName" name="tagName" class="xlarge" rows="2" data-bind="value: tagadminModel.Update.tagName" />
 
                     </div></td>
                   <td><div class="input">
-                        <textarea id="description" name="description" class="xlarge" rows="2" data-bind="value: tagadminModel.Update.description, valueUpdate: 'afterkeydown'"/>
+                        <textarea id="description" name="description" class="xlarge" rows="2" data-bind="value: tagadminModel.Update.description"/>
 
                     </div></td>
-                  <td><button data-bind="click: tagadminModel.Update.add">Add New Tag</button></td>
-                </tr>
-
-</tbody>
- 
+                  <td><button class="small" data-bind="click: tagadminModel.Update.add">Add New Tag</button></td>
+                </tr></tbody>
                 </table>
-
-                   
+      
             </div>
         </div>
 
