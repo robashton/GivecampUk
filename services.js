@@ -167,8 +167,14 @@ exports.init = function(app) {
   });
 
   app.post('/register', function(req, res){
-    dbapi.create_user(req.body.email,req.body.name,req.body.password);
-    res.json({ success: true}, {}, 200);  
+    dbapi.get_user(req.body.email, function(err, userDoc){
+      if(userDoc.error == undefined && userDoc.rows.length > 0){
+         res.json({ success: false, error: 'Email address ' + req.body.email + ' already registered.'}, {}, 400);  
+      }else{
+         dbapi.create_user(req.body.email,req.body.name,req.body.password);
+         res.json({ success: true}, {}, 200);  
+      }
+    });
   });
 
   app.get('/logout', function(req, res){
