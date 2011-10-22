@@ -7,18 +7,23 @@ var url = config(DB_CONFIG_FILE)
 var CouchClient = require('couch-client');
 var db = CouchClient(url);
 
-exports.save_answer = function(question_id, answer_text, callback) {
-  db.save({_id:utils.generateGuid(),
-      type:"answer", 
-      questionId: question_id, 
-      userId: "adsda",//security.currentUser(), 
-      answer: answer_text, 
-      rank: 0,
-      date:new Date()
-      }, function(err, doc) {
-        // TODO: error handling
-        callback(doc);
-      });
+exports.save_answer = function(req, res, question_id, answer_text, callback) {
+  var userid = security.currentUser(req, res);  
+  
+  security.usersDisplayName(userid, function(displayname){
+    db.save({_id:utils.generateGuid(),
+        type:"answer", 
+        questionId: question_id, 
+        userId: userid,
+        displayname: displayname, 
+        answer: answer_text, 
+        rank: 0,
+        date:new Date()
+        }, function(err, doc) {
+          // TODO: error handling
+          callback(doc);
+        });
+    })
 }
 
 exports.update_answer_count_for_question = function(questionId) {

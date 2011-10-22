@@ -64,7 +64,7 @@ exports.init = function(app) {
       answer_text: "There must be answer text"
     })) return;
     
-    dbapi.save_answer(req.body.question_id, req.body.answer_text, function(doc){
+    dbapi.save_answer(req, res, req.body.question_id, req.body.answer_text, function(doc){
         res.json(doc);
       }); 
 
