@@ -4,40 +4,56 @@
         <div class="span4 ymcontent">
             <div style="padding: 5px;">
                 <h2>Menu</h2>
-    <ul>
-                <li class="" data-bind="visible: viewModel.authenticated, click: function() {viewModel.currentView('tagadmin'); }, css: { active: viewModel.currentView() == 'tagadmin' }"><a href="#/tagadmin">Edit Tags</a></li>
+                <ul>
+                    <li class=""
+                        data-bind="visible: viewModel.authenticated, click: function() {viewModel.currentView('tagadmin'); }, css: { active: viewModel.currentView() == 'tagadmin' }">
+                        <a href="#/tagadmin">Edit Tags</a></li>
 
-              </ul>
-           </div>
+                </ul>
+            </div>
         </div>
-
         <div class="span12 ymcontent">
             <div style="padding: 5px;">
                 <h2>Admin</h2>
+
 
                 <table>
 <thead>
                 <th>Name</th>
                 <th>Description</th>
                 <th>Action</th>
-                </thead>
-                <tbody data-bind="template: { name: 'tagRow', foreach: tagadminModel.tagList }">
-                <tr>
-                  <td> <div class="input">
-                        <textarea id="tagName" name="tagName" class="xlarge" rows="2" data-bind="value: tagadminModel.Update.tagName" />
-
-                    </div></td>
-                  <td><div class="input">
-                        <textarea id="description" name="description" class="xlarge" rows="2" data-bind="value: tagadminModel.Update.description"/>
-
-                    </div></td>
-                  <td><button class="small" data-bind="click: tagadminModel.Update.add">Add New Tag</button></td>
-                </tr></tbody>
+                    <thead>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th></th>
+                    </thead>
+                    <tbody data-bind="template: { name: 'tagRow', foreach: tagadminModel.tagList }">
+                    </tbody>
                 </table>
-      
+
+                <form id="newTag">
+                    <h3>Add new tag</h3>
+                    <div class="clearfix">
+                        <label for="tagName">Name</label>
+
+                        <div class="input">
+                            <input type="text" id="tagName" name="tagName" class="xlarge required"
+                                      data-bind="value: tagadminModel.Update.tagName"/>
+                        </div>
+                    </div>
+
+                    <div class="clearfix">
+                        <label for="description">Description</label>
+
+                        <div class="input">
+                            <textarea id="description" name="description" class="xlarge required" rows="2"
+                                      data-bind="value: tagadminModel.Update.description"/>
+                        </div>
+                    </div>
+                    <button class="btn primary" data-bind="click: tagadminModel.Update.add">Add New Tag</button>
+                </form>
             </div>
         </div>
-
     </div>
 </div>
 

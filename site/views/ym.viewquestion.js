@@ -10,14 +10,16 @@ var viewQuestionModel = {
         answer: ko.observable(''),
   
         submit: function(event){
-            var form = viewQuestionModel.newAnswerForm;
-            $.post('answer', {
-              question_id: viewQuestionModel.id,
-              answer_text: form.answer()
-            }).success(function(data) {
-                form.answer('');
-                viewQuestionModel.answers.push({ value: data });              
-            });
+            if($('#newAnswerForm').valid()){
+                var form = viewQuestionModel.newAnswerForm;
+                $.post('answer', {
+                  question_id: viewQuestionModel.id,
+                  answer_text: form.answer()
+                }).success(function(data) {
+                    form.answer('');
+                    viewQuestionModel.answers.push({ value: data });
+                });
+            }
         }
       },
       

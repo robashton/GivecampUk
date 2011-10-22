@@ -20,17 +20,15 @@ Update: {
         tagName: ko.observable(''),
         description: ko.observable(''),
         add: function(event) {
-        var update = this().Update;
-        this().tagList().push({tagName: update.tagName, description: update.description });
-        $.post('updateTags', {
-            tagList: this().tagList()
-        }).success(function(data) {
-           $.routes('set', '/tagadmin'); 
-        })
+            if($('#newTag').valid() ){
+                var update = this().Update;
+                this().tagList().push({tagName: update.tagName, description: update.description });
+                $.post('updateTags', {
+                    tagList: this().tagList()
+                }).success(function(data) {
+                   $.routes('set', '/tagadmin');
+                })
+            }
         }
     }
 };
-/*
-tagadminModel.valid = ko.dependentObservable(function(){
-        return this.Update.tagName().length > 0 && this.Update.description().length > 0;
-}, questionModel);*/
