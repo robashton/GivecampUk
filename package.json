@@ -4,6 +4,7 @@
     "dependencies": {
       "express": "2.4.7",
       "couch-client": "",
-      "cookies": ""
+      "cookies": "",
+      "bcrypt": ""
     }
 }
