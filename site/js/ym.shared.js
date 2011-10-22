@@ -77,6 +77,14 @@ $(function(){
         }
     };
 
+    jQuery.validator.setDefaults({
+        errorPlacement: function(error, element) {
+            error.insertAfter(element);
+            error.addClass('help-inline');
+        },
+        errorElement: 'span'
+    });
+
     ko.ExternaljQueryTemplateEngine.prototype = new ko.templateEngine();
     ko.externaljQueryTemplateEngine = new ko.ExternaljQueryTemplateEngine();
     ko.externaljQueryTemplateEngine.templateUrl = 'templates';
