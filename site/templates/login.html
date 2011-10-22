@@ -1,93 +1,94 @@
 <header class="jumbotron masthead" id="overview">
-      <div class="inner">
+    <div class="inner">
         <div class="container" style="text-align: center;">
-            <img src="css/logo-youngminds.gif" />
-        </div><!-- /container -->
-      </div>
-    </header>
-
+            <img src="css/logo-youngminds.gif"/>
+        </div>
+        <!-- /container -->
+    </div>
+</header>
 
 
 <div class="container">
 
 
-<div class="row">
+    <div class="row">
 
-    <div class="span8 ymcontent">
-        <div class="clearfix" style="padding: 20px;">
-        <h2>Are you new here?</h2>
+        <div class="span8 ymcontent">
+            <div class="clearfix" style="padding: 20px;">
+                <h2>Are you new here?</h2>
+            </div>
+
+            <form>
+
+                <div class="clearfix">
+                    <label for="registerUser">Email</label>
+
+                    <div class="input">
+                        <input type="text" id="registerUser" name="registerUser"
+                               data-bind="value: loginModel.registerForm.email"/>
+                    </div>
+                </div>
+
+                <div class="clearfix">
+                    <label for="registerName">Display name</label>
+
+                    <div class="input">
+                        <input type="text" id="registerName" name="registerName"
+                               data-bind="value: loginModel.registerForm.displayName"/>
+                    </div>
+                </div>
+                <div class="clearfix">
+                    <label for="registerPass">Password</label>
+
+                    <div class="input">
+                        <input type="password" id="registerPass" name="registerPass"
+                               data-bind="value: loginModel.registerForm.password"/>
+                    </div>
+                </div>
+                <div class="alert-message warning"
+                     data-bind="visible: loginModel.registerForm.registrationError().length > 0">
+                    <p class="error" data-bind="text: loginModel.registerForm.registrationError()"></p>
+                </div>
+                <div class="actions">
+                    <input type="submit" class="btn primary" value="Register"
+                           data-bind="click: loginModel.registerForm.submit">
+
+                </div>
+            </form>
+        </div>
+        <div class="span8 ymcontent">
+            <div class="clearfix" style="padding: 20px;">
+                <h2>Welcome back...</h2>
+            </div>
+
+            <form>
+
+
+                <div class="clearfix">
+                    <label for="loginUser">Email</label>
+
+                    <div class="input">
+                        <input type="text" id="loginUser" name="loginUser"
+                               data-bind="value: loginModel.loginForm.email, valueUpdate: 'afterkeydown'"/>
+                    </div>
+                </div>
+
+                <div class="clearfix">
+                    <label for="loginPass">Password</label>
+
+                    <div class="input">
+                        <input type="password" id="loginPass" name="loginPass"
+                               data-bind="value: loginModel.loginForm.password, valueUpdate: 'afterkeydown'"/>
+
+                    </div>
+                </div>
+
+                <div class="actions" style="margin-top: 64px;">
+                    <input type="submit" class="btn primary" value="Login"
+                           data-bind="click: loginModel.loginForm.submit, enable: loginModel.loginForm.valid"/>
+                </div>
+            </form>
         </div>
 
-        <form>
-
-            <div class="clearfix">
-                <label for="registerUser">Email</label>
-
-                <div class="input">
-                    <input type="text" id="registerUser" name="registerUser"
-                           data-bind="value: loginModel.registerForm.email"/>
-                </div>
-            </div>
-
-            <div class="clearfix">
-                <label for="registerName">Display name</label>
-
-                <div class="input">
-                    <input type="text" id="registerName" name="registerName"
-                           data-bind="value: loginModel.registerForm.displayName"/>
-                </div>
-            </div>
-            <div class="clearfix">
-                <label for="registerPass">Password</label>
-
-                <div class="input">
-                    <input type="password" id="registerPass" name="registerPass"
-                           data-bind="value: loginModel.registerForm.password"/>
-                </div>
-            </div>
-            <div class="alert-message warning" data-bind="visible: loginModel.registerForm.registrationError().length > 0">
-               <p class="error" data-bind="text: loginModel.registerForm.registrationError()"></p>
-            </div>
-            <div class="actions">
-                <input type="submit" class="btn primary" value="Register"
-                       data-bind="click: loginModel.registerForm.submit">
-
-            </div>
-        </form>
     </div>
-    <div class="span8 ymcontent">
-        <div class="clearfix" style="padding: 20px;">
-            <h2>Welcome back...</h2>
-        </div>
-
-        <form>
-
-
-            <div class="clearfix">
-                <label for="loginUser">Email</label>
-
-                <div class="input">
-                    <input type="text" id="loginUser" name="loginUser"
-                           data-bind="value: loginModel.loginForm.email, valueUpdate: 'afterkeydown'"/>
-                </div>
-            </div>
-
-            <div class="clearfix">
-                <label for="loginPass">Password</label>
-
-                <div class="input">
-                    <input type="password" id="loginPass" name="loginPass"
-                           data-bind="value: loginModel.loginForm.password, valueUpdate: 'afterkeydown'"/>
-
-                </div>
-            </div>
-
-            <div class="actions" style="margin-top: 64px;">
-                <input type="submit" class="btn primary" value="Login"
-                       data-bind="click: loginModel.loginForm.submit, enable: loginModel.loginForm.valid"/>
-            </div>
-        </form>
-    </div>
-
 </div>
-        </div>

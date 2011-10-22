@@ -10,7 +10,7 @@ var loginModel = {
             var form = loginModel.registerForm;
             $.post('register', {email: form.email,name: form.displayName, password: form.password }).success(function(data){
                if(data.success) {
-                  window.location = 'index.html';
+                  window.location = 'app.html';
               }else{
                   loginModel.registerForm.registrationError(data.error);
               }
@@ -28,7 +28,7 @@ var loginModel = {
 
             $.post('login', { email: form.email(), password: form.password() }).success(function(data){
                 if(data.success) {
-                  window.location = 'index.html';
+                  window.location = 'app.html';
                 }
             });
         }
