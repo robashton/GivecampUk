@@ -31,6 +31,7 @@ var loginModel = {
             $.post('login', { email: form.username(), password: form.password() }).success(function(data){
                 if(data.success) {
                     $.get('currentuser').success(function(data) {
+                        //TODO: set cookie
                         viewModel.authenticated(true);
                         viewModel.username(data.username);
                     });
