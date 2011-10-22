@@ -14,15 +14,13 @@ var questionModel = {
     tagList: ko.observableArray([]),
 
     submit : function() {
-        if($("#askQuestion").valid()){
-             $.post('createquestion', {
-                title: this().title(),
-                description: this().description(),
-                tag: this().tag()
-            }).success(function(data) {
-                $.routes('set', '/question/' + data.doc._id);
-            })
-        }
+        $.post('createquestion', {
+            title: this().title(),
+            description: this().description(),
+            tag: this().tag()
+        }).success(function(data) {
+            $.routes('set', '/question/' + data.doc._id);
+        })
     }
 };
 
