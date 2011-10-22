@@ -61,7 +61,7 @@ var QA = function (couchdb) {
         deleted: 0,
         title: _title,
         description: _description,
-        tags: _tags
+        tags: _tags,
     }, function (err, doc) { });
     }
 
@@ -75,7 +75,11 @@ var QA = function (couchdb) {
         answer: _answer,
         rank: 0,
         deleted: 0,
-        date: new Date()
+        date: new Date(),
+        isAnswer:false,
+        markedAsAnswerOn:null,
+        markedAsAnswerBy:null,
+        votes:0
     }, function (err, doc) { });
     }
 
