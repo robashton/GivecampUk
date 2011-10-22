@@ -2,7 +2,7 @@ var views = {
     login: loginModel,
     question: questionModel,
     questions: questionsModel,
-    viewquestion: viewQuestionModel
+    viewquestion: viewQuestionModel,
     tags: tagadminModel,
     admin: adminModel
 };
