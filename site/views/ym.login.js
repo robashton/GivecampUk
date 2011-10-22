@@ -8,9 +8,12 @@ var loginModel = {
 
         submit: function(event){
             var form = loginModel.registerForm;
-            $.post('register', {email: form.email,name: form.displayName, password: form.password }).success(function(data){
+            $.post('register', {email: form.email() ,name: form.displayName(), password: form.password() }).success(function(data){
                if(data.success) {
-                  window.location = 'index.html';
+                  //window.location = 'index.html';
+                  setTimeout(function(){
+                     loginModel.doLogin(form.email(), form.password());
+                  }, 1500);
               }else{
                   loginModel.registerForm.registrationError(data.error);
               }
@@ -23,15 +26,17 @@ var loginModel = {
         password: ko.observable(''),
 
         submit: function(event){
-
             var form = loginModel.loginForm;
-
-            $.post('login', { email: form.email(), password: form.password() }).success(function(data){
-                if(data.success) {
-                  window.location = 'index.html';
-                }
-            });
+            loginModel.doLogin(form.email(), form.password());
         }
+    },
+
+    doLogin: function(emailAddress, password){
+        $.post('login', { email: emailAddress, password: password }).success(function(data){
+            if(data.success) {
+              window.location = 'index.html';
+            }
+        });
     }
 };
 
