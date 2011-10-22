@@ -11,8 +11,8 @@
         
         <script type="text/javascript" src="views/ym.login.js"></script>
         <script type="text/javascript" src="views/ym.question.js"></script>
+        <script type="text/javascript" src="views/ym.questions.js"></script>
         <script type="text/javascript" src="js/ym.shared.js"></script>
-
 
     </head>
     <body>
@@ -22,10 +22,10 @@
             <div class="container">
               <a class="brand" href="#">Young Minds Q&A</a>
               <ul class="nav">
-                <li class="active"><a href="#" data-bind="click: function() { viewModel.currentView('login'); }">Home</a></li>
-                <li class=""><a href="#">Questions</a></li>
-                <li class=""><a href="#" data-bind="click: function() {viewModel.currentView('question'); }">Ask a question</a></li>
-                <li class=""><a href="#">Logout</a></li>
+                <li class="active" data-bind="click: function() { viewModel.currentView('login'); }"><a href="#">Home</a></li>
+                <li class="" data-bind="visible: viewModel.authenticated"><a href="#">Questions</a></li>
+                <li class="" data-bind="visible: viewModel.authenticated, click: function() {viewModel.currentView('question'); }"><a href="#">Ask a question</a></li>
+                <li class="" data-bind="visible: viewModel.authenticated"><a href="#">Logout</a></li>
               </ul>
             </div>
           </div>
