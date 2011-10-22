@@ -6,8 +6,12 @@ var loginModel = {
         password: ko.observable(''),
 
         submit: function(event){
-            alert('Hi ' + this().registerForm.username());
-            
+            var form = this().registerForm;
+            $.post('register', {username: form.username, password: form.password }).success(function(data){
+               if(data.success) {
+
+               }
+            });
         }
     },
 
@@ -19,11 +23,20 @@ var loginModel = {
 
             var form = this().loginForm;
 
-            $.post('login', { username: form.username(), password: form.password() }).success(function(data){
-                if(data.success) {
-                    alert('Yeah!');
-                }
-            });
+            viewModel.authenticated(true);
+            viewModel.username('user');
+            viewModel.displayName('Joe Bloggs');
+            viewModel.currentView('questions');
+
+
+//            $.post('login', { username: form.username(), password: form.password() }).success(function(data){
+//                if(data.success) {
+//                    $.get('currentuser').success(function(data) {
+//                        viewModel.authenticated(true);
+//                        viewModel.username(data.username);
+//                    });
+//                }
+//            });
         }
     }
 };
