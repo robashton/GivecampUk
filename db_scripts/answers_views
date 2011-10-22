@@ -7,4 +7,4 @@
            "map": "function(doc) {\n    var d = new Date(doc.date);\n    if (doc.type && doc.type == \"answer\" &&  \n\t(!doc.deleted || doc.deleted==0)) \n\t{\n        \temit(\n\t\t\t[\n\t\t\t\tdoc.questionId, \n\t\t\t\td.getFullYear(), \n\t\t\t\td.getMonth()+1, \n\t\t\t\td.getDate(), \n\t\t\t\td.getHours(), \n\t\t\t\td.getMinutes(), \n\t\t\t\tdoc._id\n\t\t\t]\n\t\t\t,doc);\n        }\n}"
        }
    }
-}
+} 
