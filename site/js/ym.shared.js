@@ -1,7 +1,10 @@
 var views = {
     login: loginModel,
     question: questionModel,
-    questions: questionsModel
+    questions: questionsModel,
+    viewquestion: viewQuestionModel
+    tags: tagadminModel,
+    admin: adminModel
 };
 
 var viewModel = {
@@ -30,7 +33,19 @@ $(function(){
       },
       "/ask": function() {
           viewModel.currentView('question');
+<<<<<<< HEAD
       },
+      "/question/:id": function(params) {
+          var id = params.id;
+          viewQuestionModel.id(id);
+          viewModel.currentView('viewquestion');
+      },
+=======
+      },    
+      "/admin": function() {
+          viewModel.currentView('admin');
+      }, 
+>>>>>>> 476eea03e86e675afa7970c7b8ec50aca630e84d
       "/logout": function() {
         viewModel.authenticated(false);
         viewModel.username(null);
