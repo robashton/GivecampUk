@@ -41,6 +41,12 @@ exports.init = function(app) {
   });
 
   app.post('/answer', function(req, res){
+    if(!expect(req, res, {
+      question_id: "There must be a question id!",
+      answer_text: "There must be answer text"
+    }))
+      return;
+    
     dbapi.save_answer(req.body.question_id, req.body.answer_text, req.body.rank, function(doc){
       res.send(doc);
       }); 
