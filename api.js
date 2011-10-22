@@ -13,7 +13,7 @@ var express = require('express');
 
 var app = express.createServer();
 
-app.get('/login', function(req, res){
+app.get('/api', function(req, res){
     var CouchClient = require('couch-client');
     var qa = new QA(CouchClient('http://localhost:5984/youngmindsdb'));
     var questionId = generateGuid();
@@ -52,7 +52,6 @@ var QA = function(couchdb) {
 
   this.createAnswer = function(id, _questionId, _userId,_answer)
   {
-    console.log("Here1");
     db.save(
     {
      _id: id,
@@ -64,7 +63,6 @@ var QA = function(couchdb) {
      deleted:0,
      date:new Date()
     }, function (err, doc) {});
-    console.log("here2");
   }
 }
 app.listen(8081);

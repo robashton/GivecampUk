@@ -13,3 +13,12 @@
    }
 }
 
+
+
+/*
+Call for count of answers by question
+http://localhost:5984/youngmindsdb/_design/answers/_view/countByQuestion?group=true&key=[%22fdf8ab4f-42aa-585d-b3c0-eb9886bd186b%22]
+
+Call for answers by question
+http://localhost:5984/youngmindsdb/_design/answers/_view/byQuestion?startkey=[%2284b3558b-90de-7b4f-551f-9f46e3ba6122%22]&endkey=[%2284b3558b-90de-7b4f-551f-9f46e3ba6122%22,%20{}]
+*/
