@@ -86,7 +86,17 @@ var views = [
            "by_tag": {
                "map": "function(doc) {\n  if(doc.type === \"question\")\n  \temit(doc.tag, doc);\n}"
            }
-       }
+       },
+        {
+         "_id": "_design/Answers",
+         "_rev": "1-93ce9a729c6f3a7b99b1710b8b1f8639",
+         "language": "javascript",
+         "views": {
+             "by_rank": {
+                 "map": "function(doc) {\n  emit(doc.rank, doc);\n}"
+             }
+         }
+}
     }
 
 ];
