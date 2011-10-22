@@ -10,7 +10,10 @@ ENV = startup.get_env()
 startup.check_config_exists(DB_CONFIG_FILE)
 
 var express = require('express');
+<<<<<<< HEAD
 
+=======
+>>>>>>> a5a00d8ae701ea83ed5b09ad19d0c98406d06209
 var app = express.createServer();
 require('./services').init(app);
 app.listen(8081);
