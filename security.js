@@ -35,5 +35,5 @@ exports.signInUser = function(req, res, email, password, callback) {
 
 exports.signOutUser = function(req, res) {
    var cookies = new Cookies( req, res );
-   cookies.set( "username", null, { httpOnly: false } );
+   cookies.set( "ymindsid", null, { httpOnly: false } );
 };
