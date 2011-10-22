@@ -75,7 +75,10 @@ var views = [
          "views": {
              "by_email": {
                  "map": "function(doc) {\n  if(doc.type == \"user\")\n     emit(doc.email, doc);\n}"
-             }
+             },
+         "getAllUsers": {
+             "map": "function(doc) {\n  if(doc.type === \"user\")\n  \temit(doc._id, doc);\n}"
+         }
          }
       },
       {
