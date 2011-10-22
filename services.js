@@ -44,6 +44,10 @@ exports.init = function(app) {
       db.get_document("creationix", function (doc) {
         res.send('hello world: ' + doc);
       })
+
+  app.post('/answer', function(req, res){
+      db.save_answer(req.body.question_id, req.body.answer_test, req.body.user_id);  
   });
+});
 
 };

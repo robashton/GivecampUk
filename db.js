@@ -23,3 +23,17 @@ exports.create_user = function () {
     });
   })
 };
+
+exports.save_answer = function(question_id, answer_text) {
+  db.save({_id:getGuid(),
+      type:"answer", 
+      questionId: question_id, 
+      userId: security.getUser(), 
+      answer: answer_text, 
+      rank:0,
+      deleted:0,
+      date:new Date()
+      }, function(err, doc) {
+        // TODO: error handling
+      });
+};
