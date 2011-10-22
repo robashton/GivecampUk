@@ -8,9 +8,7 @@
                 <li class="" data-bind="visible: viewModel.authenticated, click: function() {viewModel.currentView('tagadmin'); }, css: { active: viewModel.currentView() == 'tagadmin' }"><a href="#/tagadmin">Edit Tags</a></li>
 
               </ul>
-                
-
-            </div>
+           </div>
         </div>
 
         <div class="span12 ymcontent">
@@ -23,13 +21,24 @@
                 <th>Description</th>
                 <th></th>
                 </thead>
-<tbody data-bind="template: { name: 'tagRow', foreach: tagadminModel.tagList }"></tbody>
+                <tbody data-bind="template: { name: 'tagRow', foreach: tagadminModel.tagList }">
+                <tr>
+                  <td> <div class="input">
+                        <textarea id="tagName" name="tagName" class="xlarge" rows="2" data-bind="value: tagadminModel.Update.tagName, valueUpdate: 'afterkeydown'" />
+
+                    </div></td>
+                  <td><div class="input">
+                        <textarea id="description" name="description" class="xlarge" rows="2" data-bind="value: tagadminModel.Update.description, valueUpdate: 'afterkeydown'"/>
+
+                    </div></td>
+                  <td><button data-bind="click: tagadminModel.Update.add">Add New Tag</button></td>
+                </tr>
+
+</tbody>
+ 
                 </table>
 
-                        <div class="input">
-                            <select id="questionTag" name="questionTag"
-                                   data-bind="options: tagadminModel.tagList, optionsText: 'tagName', value: tagadminModel.tag"/>
-                    </div> 
+                   
             </div>
         </div>
 

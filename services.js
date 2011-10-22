@@ -35,6 +35,12 @@ exports.init = function(app) {
     })  
   });
 
+  app.get('/get_all_users',function(req,res){
+    dbapi.get_all_users(function(err, doc){
+      res.json(err,doc);
+    })  
+  });
+
   app.get('/get_questions_by_tag/:tag?', function(req, res) {
       if(!req.params.tag)
         dbapi.get_questions(function(err, doc) {
