@@ -10,13 +10,13 @@ Pages
 
     - UI on top of all of this. 
 
-    - Service endpoint - get
+    - Service endpoint - GET
       - createquestion : authenticated
         - List of possible tags along with description
             - TagName
             - TagDescription
 
-    - Service endpoint - post
+    - Service endpoint - POST
       - createquestion  : authenticated
         - Title
         - Content
