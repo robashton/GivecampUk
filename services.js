@@ -2,9 +2,7 @@ var express = require('express');
 db = require('./db');
 var security = require('./security');
 
-var url = config(DB_CONFIG_FILE)
-var CouchClient = require('couch-client');
-var db = CouchClient(url);
+var url = config(DB_CONFIG_FILE);
 var utils = require('./utils');
 
 exports.init = function(app) {
@@ -29,6 +27,12 @@ exports.init = function(app) {
         }
     });
     
+  });
+
+  app.post('/answer', function(req, res){
+    console.log(req.body.loginUser)
+    db.save_answer(req.body.question_id, req.body.answer_test); 
+res.send('help');
   });
   
   app.get('/register', function(req, res){
@@ -58,7 +62,8 @@ exports.init = function(app) {
   }); 
 
   app.post('/createquestion', function(req, res) {
-      if(!expect({
+    
+      if(!expect(req, res, {
         title: "There must be a title",
         description: "There must be a description",
         tag: "There must be a selected tag"
@@ -73,33 +78,77 @@ exports.init = function(app) {
         user:userid, 
         date:new Date(),
         deleted:0,
-        title: req.params.title, 
-        description: req.params.description,
-        tag: req.params.tag
+        title: req.body.title, 
+        description: req.body.description,
+        tag: req.body.tag
         }, 
        function ( err, doc) {
           res.json({
             err: err,
             doc: doc
           });
-       });      
+       });    
   }); 
+
+  app.get('/question/:id', function(req, res) {
+    var result = {
+      question: {
+        id: 'id',
+        title: 'some title',
+        author: 'some user',
+        description: 'some description',
+        tag: 'some tag',
+        date: 'some date'
+      },
+      correctAnswer: {
+          id: 'answer 1',
+          author: 'some user',
+          rank: 56,
+          body: 'do it proper',
+          date: ''
+      },
+      answers: [
+        { 
+          id: 'answer 1',
+          author: 'some user',
+          rank: 56,
+          body: 'do it proper',
+          date: ''
+        },
+        { 
+          id: 'answer 2',
+          author: 'some user',
+          rank: 56,
+          body: 'do it proper',
+          date: ''
+        },
+        { 
+          id: 'answer 3',
+          author: 'some user',
+          rank: 56,
+          body: 'do it proper',
+          date: ''
+        },
+      ]
+    };
+    res.json(result);
+  });
 
   app.get('/service', security.validateUser, function(req, res){
       db.get_document("creationix", function (doc) {
         res.send('hello world: ' + doc);
       })
-  });
+
+});
 
   expect = function(req, res, keys) {
     for(i in keys) {
-      var value = req.params[i];
+      var value = req.body[i];
       if(!value) { 
         res.json({ error: keys[i]});
         return false;
       }
-      return true;
-
     }
+    return true;
   }
 };
