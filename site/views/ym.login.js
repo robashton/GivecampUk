@@ -30,11 +30,9 @@ var loginModel = {
 
             $.post('login', { email: form.email(), password: form.password() }).success(function(data){
                 if(data.success) {
-                    $.get('currentuser').success(function(data) {
-                        //TODO: set cookie
-                        viewModel.authenticated(true);
-                        viewModel.email(data.email);
-                    });
+                  $.cookie('ymindsid', data.session);
+                  viewModel.authenticated(true);
+                  //viewModel.username(data.username);
                 }
             });
         }
