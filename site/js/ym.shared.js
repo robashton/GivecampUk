@@ -26,6 +26,6 @@ $(function(){
 
 
     
-    ko.applyBindings(viewModel);
+    ko.applyBindings(viewModel.currentViewModel);
 });
 

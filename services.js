@@ -4,10 +4,13 @@ var security = require('./security');
 
 exports.init = function(app) {
 
-  app.get('/', express.static(__dirname + '/site'));
+  app.configure(function(){
+    app.use(express.static(__dirname + '/site'));
+      app.use(express.bodyParser());
+  });
 
-  app.get('/login/:username/:password', function(req, res){
-    security.signInUser(req, res, req.params.username, req.params.password);
+  app.post('/login', function(req, res){
+    security.signInUser(req, res, req.body.username, req.body.password);
   });
 
   app.get('/logout', function(req, res){
@@ -24,5 +27,9 @@ exports.init = function(app) {
         res.send('hello world: ' + doc);
       })
   });
+
+
+
+  
 
 };
