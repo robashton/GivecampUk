@@ -69,7 +69,6 @@ var QA = function(couchdb) {
      userId : _userId,
      answer : _answer,
      rank:0,
-     deleted:0,
      date:new Date(),
      isAcceptedAnswer: false
     }, function (err, doc) {});

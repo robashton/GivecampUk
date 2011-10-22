@@ -34,7 +34,7 @@ exports.init = function(app) {
   });
 
   app.post('/answer', function(req, res){
-    db.save_answer(req.body.question_id, req.body.answer_text, req.body.rank, function(doc){
+    dbapi.save_answer(req.body.question_id, req.body.answer_text, req.body.rank, function(doc){
       res.send(doc);
       }); 
   });
@@ -97,6 +97,18 @@ exports.init = function(app) {
         });
       }
     });  
+  });
+
+  app.post('/delete_answer', function(req, res){
+
+    // TODO: test that the curret user has elevated permissions
+    var currentUserIsElevated = true;
+    if(currentUserIsElevated)
+    {
+        db.remove(req.body.answerId, function(err, doc){
+          res.send(err, doc);        
+        });
+    }
   });
 
   app.get('/register', function(req, res){
