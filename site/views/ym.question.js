@@ -25,5 +25,5 @@ var questionModel = {
 };
 
 questionModel.valid = ko.dependentObservable(function(){
-        return $('#askQuestion').valid();
+        return this.title().length > 0 && this.description().length > 0;
 }, questionModel);
