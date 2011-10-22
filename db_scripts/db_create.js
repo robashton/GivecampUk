@@ -1,8 +1,8 @@
-var createTags = false;
-var createDummyQuestion = false;
-var createDummyAnswers = false;
+var createTags = true;
+var createDummyQuestion = true;
+var createDummyAnswers = true;
 var createQuestionViews = true;
-var createAnswerViews = false;
+var createAnswerViews = true;
 
 http = require('http'),
 path = require('path'),
@@ -97,7 +97,7 @@ var QA = function (couchdb) {
 
     this.CreateQuestionViews = function () {
         db.save({
-            _id: "_design/questionstwo",
+            _id: "_design/questions",
             language: "javascript",
             views: {
                 homepage: {
