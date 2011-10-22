@@ -1,9 +1,25 @@
 config = require('./config')
 encryption = require('./encryption');
+utils = require('./utils');
+security = require('./security');
 
 var url = config(DB_CONFIG_FILE)
 var CouchClient = require('couch-client');
 var db = CouchClient(url);
+
+exports.save_answer = function(question_id, answer_text) {
+  db.save({_id:utils.generateGuid(),
+      type:"answer", 
+      questionId: question_id, 
+      userId: "adsda",//security.currentUser(), 
+      answer: answer_text, 
+      rank:0,
+      deleted:0,
+      date:new Date()
+      }, function(err, doc) {
+        // TODO: error handling
+      });
+}
 
 exports.get_user = function (email, callback) {
   db.view('/youngmindsdb/_design/users/_view/by_email', {key: email}, function(err, doc) {
@@ -22,18 +38,4 @@ exports.create_user = function () {
       // of the document (with `_id` and `_rev`).
     });
   })
-};
-
-exports.save_answer = function(question_id, answer_text) {
-  db.save({_id:getGuid(),
-      type:"answer", 
-      questionId: question_id, 
-      userId: security.getUser(), 
-      answer: answer_text, 
-      rank:0,
-      deleted:0,
-      date:new Date()
-      }, function(err, doc) {
-        // TODO: error handling
-      });
 };
