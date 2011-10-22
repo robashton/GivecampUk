@@ -24,7 +24,7 @@ exports.save_answer = function(question_id, answer_text, rank, callback) {
 exports.get_user = function (email, callback) {
   db.view('/youngmindsdb/_design/users/_view/by_email', {key: email}, function(err, doc) {
       // Now you have the document(s) or error if there was trouble
-      callback(doc)
+      callback(err,doc)
   });
 };
 
@@ -41,7 +41,7 @@ exports.get_questions_by_tag = function(questionTag, callback) {
 };
 
 exports.get_questions = function(callback) {
-    db.view('/youngmindsdb/_design/questions/_view/by_tag', {key: ""}, function(err, doc) {
+    db.view('/youngmindsdb/_design/questions/_view/by_tag', function(err, doc) {
       callback(doc)
   });
 };
