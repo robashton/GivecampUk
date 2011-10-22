@@ -148,8 +148,8 @@ exports.init = function(app) {
     }
   });
 
-  app.get('/register', function(req, res){
-    dbapi.create_user(req.body.username,req.body.password)
+  app.post('/register', function(req, res){
+    dbapi.create_user(req.body.email,req.body.name,req.body.password)
     res.json({ success: true}, {}, 200);  
   });
 

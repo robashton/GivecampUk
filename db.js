@@ -47,10 +47,10 @@ exports.create_session = function (id,name, callback) {
     });
   }
 
-exports.create_user = function (email, password) {
+exports.create_user = function (email,name, password) {
   encryption.hash("password", function(hash){
     
-    db.save({email: email, password: hash, type: "user", isElevated: false}, function ( err, doc) {
+    db.save({email: email, name:name, password: hash, type: "user", isElevated: false}, function ( err, doc) {
       // You know know if there was an error and have an updated version
       // of the document (with `_id` and `_rev`).
     });
