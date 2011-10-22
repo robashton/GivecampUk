@@ -30,6 +30,7 @@ exports.signInUser = function(req, res, email, password, callback) {
        });
        }); 
      }
+     else { callback(false,undefined,undefined); }
    });
 };
 
