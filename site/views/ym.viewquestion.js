@@ -14,9 +14,7 @@ var viewQuestionModel = {
               question_id: viewQuestionModel.id,
               answer_text: form.answer()
             }).success(function(data) {
-               if(data.success) {
-                  // Add answer to collection      
-               }
+                viewQuestionModel.answers.push({ value: data });              
             });
         }
       },

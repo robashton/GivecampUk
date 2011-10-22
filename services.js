@@ -36,19 +36,19 @@ exports.init = function(app) {
 
   app.get('/get_questions_by_rank',function(req,res){
     dbapi.get_questions_by_rank(function(err, doc){
-      res.send(err,doc);
+      res.json(err,doc);
     })  
   });
 
   app.get('/get_questions_by_tag/:tag?', function(req, res) {
       if(!req.params.tag)
-          dbapi.get_questions(function(err, doc) {
-            res.send(err, doc);
-          });
-        else
-          dbapi.get_questions_by_tag(req.params.tag, function(err, doc) {
-            res.send(err, doc);
-          });
+        dbapi.get_questions(function(err, doc) {
+          res.json({ err: err, doc: doc});
+        });
+      else
+        dbapi.get_questions_by_tag(req.params.tag, function(err, doc) {
+          res.json({ err: err, doc: doc});
+        });
   });
 
   app.post('/answer', function(req, res){
@@ -59,7 +59,7 @@ exports.init = function(app) {
       return;
     
     dbapi.save_answer(req.body.question_id, req.body.answer_text, function(doc){
-      res.send(doc);
+        res.json(doc);
       }); 
   });
 
@@ -72,7 +72,7 @@ exports.init = function(app) {
       {
         doc.isElevated = true;
         db.save(doc, function(err, doc){
-          res.send(err, doc);
+          res.json({ err: err, doc: doc});
         });
       }
     });  
@@ -87,7 +87,7 @@ exports.init = function(app) {
       {
         doc.isElevated = false;
         db.save(doc, function(err, doc){
-          res.send(err, doc);
+          res.json(err, doc);
         });
       }
     });  
@@ -102,7 +102,7 @@ exports.init = function(app) {
       {
         doc.rank++;
         db.save(doc, function(err, doc){
-          res.send(err, doc);
+          res.json({ err: err, doc: doc});
         });
       }
     });  
@@ -117,7 +117,7 @@ exports.init = function(app) {
       {
         doc.rank--;
         db.save(doc, function(err, doc){
-          res.send(err, doc);
+          res.send({ err: err, doc: doc});
         });
       }
     });  
@@ -147,7 +147,7 @@ exports.init = function(app) {
       {
         doc.isAcceptedAnswer = false;
         db.save(doc, function(err, doc){
-          res.send(err, doc);
+          res.send({ err: err, doc: doc});
         });
       }
     });  
@@ -160,7 +160,7 @@ exports.init = function(app) {
     if(currentUserIsElevated)
     {
         db.remove(req.body.answerId, function(err, doc){
-          res.send(err, doc);        
+          res.send({ err: err, doc: doc});        
         });
     }
   });
@@ -263,7 +263,6 @@ exports.init = function(app) {
       db.get("creationix", function (doc) {
         res.send('hello world: ' + doc);
       })
-
 });
 
   expect = function(req, res, keys) {
