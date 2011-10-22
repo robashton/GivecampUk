@@ -8,11 +8,8 @@
                     <p data-bind="text: viewQuestionModel.description"></p>
                     <p>2 days ago</p>
                 </div>
-
                 <div class="answers">
-                  <div class="answer">
-                    
-                  </div>
+                  <div data-bind='template: { name: "answertemplate", foreach: viewQuestionModel.answers }'> </div>
                 </div>
             </div>
         </div>
@@ -22,6 +19,5 @@
                 <h2>Tags</h2>
             </div>
         </div>
-
     </div>
 </div>
