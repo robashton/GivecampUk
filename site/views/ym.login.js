@@ -23,16 +23,12 @@ var loginModel = {
 
             var form = this().loginForm;
 
-            viewModel.authenticated(true);
-            viewModel.email('user');
-            viewModel.displayName('Joe Bloggs');
-            viewModel.doOnAuth();
-
             $.post('login', { email: form.email(), password: form.password() }).success(function(data){
                 if(data.success) {
                   $.cookie('ymindsid', data.session);
                   viewModel.authenticated(true);
-                  //viewModel.username(data.username);
+                  viewModel.displayName(data.name);
+                  viewModel.doOnAuth();
                 }
             });
         }
@@ -40,5 +36,6 @@ var loginModel = {
 };
 
 loginModel.loginForm.valid = ko.dependentObservable(function(){
-        return this.loginForm.email().length > 0 && this.loginForm.password().length > 0;
+ return true;        
+//return this.loginForm.email().length > 0 && this.loginForm.password().length > 0;
 }, loginModel);

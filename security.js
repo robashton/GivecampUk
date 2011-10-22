@@ -27,11 +27,11 @@ exports.signInUser = function(req, res, email, password, callback) {
    db.get_user(email, function(err,doc){
      if(doc.error == undefined && doc.rows.length > 0){
        encryption.compare(password, doc.rows[0].value.password, function(result) {
-       db.create_session(doc.rows[0].value._id,doc.rows[0].value.name,function(guid){
+       db.create_session(doc.rows[0].value._id,doc.rows[0].value.email,function(guid){
           if(err == undefined){
-            callback(result,guid);
+            callback(result,guid,doc.rows[0].value.name);
           } else {
-            callback(false,undefined);
+            callback(false,undefined,undefined);
           }
        });
        }); 
