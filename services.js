@@ -205,6 +205,23 @@ exports.init = function(app) {
         });
     });    
   }); 
+
+  app.post('/updateTags', function(req, res) {
+
+      db.save(
+      {
+        _id: "tagList",
+        type:"tags",
+        tags:req.body.tagList
+        }, 
+       function ( err, doc) {
+          res.json({
+            err: err,
+            doc: doc
+          });
+       });    
+  });  
+
   app.post('/createquestion', function(req, res) {
     
       if(!expect(req, res, {
