@@ -2,6 +2,10 @@ var express = require('express');
 db = require('./db');
 var security = require('./security');
 
+var url = config(DB_CONFIG_FILE)
+var CouchClient = require('couch-client');
+var db = CouchClient(url);
+
 exports.init = function(app) {
 
   app.configure(function(){
@@ -22,14 +26,16 @@ exports.init = function(app) {
     res.json({ username: 'Emma'}, {}, 200);
   });
 
-  app.get('/service', security.validateUser, function(req, res){
-      db.get_document("creationix", function (doc) {
-        res.send('hello world: ' + doc);
-      })
-  });
-
-
-
-  
+  app.get('/createquestion', function(req, res) {
+    db.get("tagList", function(err, doc) {
+      if(err) 
+         res.json({error: err});
+      else
+        res.json({ 
+          error: null,
+          tags: doc.Tags
+        });
+    });    
+  }); 
 
 };
