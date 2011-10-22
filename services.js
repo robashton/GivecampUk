@@ -9,12 +9,30 @@ var db = CouchClient(url);
 exports.init = function(app) {
 
   app.configure(function(){
+    app.use(express.bodyParser());
     app.use(express.static(__dirname + '/site'));
-      app.use(express.bodyParser());
   });
 
   app.post('/login', function(req, res){
-    security.signInUser(req, res, req.body.username, req.body.password);
+    console.log(req.body.loginUser)
+    security.signInUser(req, res, "Tim.Caswell@gmail.com", req.body.loginPass, function(result) {
+      console.log(result)
+      if(!result){
+          res.json({ success: false}, {}, 401); 
+        }
+        else
+        { 
+          var cookies = new Cookies( req, res );
+          cookies.set( "username", email, { httpOnly: false } );
+          res.json({success: true},{},200);
+        }
+    });
+    
+  });
+  
+  app.get('/register', function(req, res){
+    db.create_user()
+    res.json({ success: true}, {}, 200);  
   });
 
   app.get('/logout', function(req, res){
@@ -38,4 +56,32 @@ exports.init = function(app) {
     });    
   }); 
 
+  app.post('/createquestion', function(req, res) {
+      if(!expect({
+        title: "There must be a title",
+        description: "There must be a description",
+        tag: "There must be a selected tag"
+      }) return;
+
+      var userid = security.currentUser();      
+      
+  }); 
+
+  app.get('/service', security.validateUser, function(req, res){
+      db.get_document("creationix", function (doc) {
+        res.send('hello world: ' + doc);
+      })
+  });
+
+  expect = function(req, res, keys) {
+    for(i in keys) {
+      var value = req.params[i];
+      if(!value) { 
+        res.json({ error: keys[i]});
+        return false;
+      }
+      return true;
+
+    }
+  }
 };
