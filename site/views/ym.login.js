@@ -26,8 +26,7 @@ var loginModel = {
             viewModel.authenticated(true);
             viewModel.username('user');
             viewModel.displayName('Joe Bloggs');
-            viewModel.currentView('questions');
-
+            viewModel.doOnAuth();
 
 //            $.post('login', { username: form.username(), password: form.password() }).success(function(data){
 //                if(data.success) {

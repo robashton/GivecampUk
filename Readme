@@ -28,11 +28,11 @@ Pages
     - Add an answer                                     - DONE
     - Mark an answer as the accepted answer             - DONE
     - Vote up/vote down                                 - DONE
-    - Delete/modify an answer                           - NOTHING
+    - Delete/modify an answer                           - DONE
     - Show ALL the answers on the page                  - DONE
         - Ordered by vote count                         - Client side
         - Show top answer at the top                    - Client side
-  - Managing tags page
+  - Managing tags page                
     - Manage lists
   - Manage users
     - Promotion/moderation

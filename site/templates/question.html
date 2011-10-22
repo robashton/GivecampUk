@@ -1,9 +1,42 @@
 <div class="container">
     <div class="row">
+        <div class="span8 ymcontent">
+            <form method="/login" action="post">
+                <div class="clearfix" style="padding: 20px;">
+                    <h2>Ask a question</h2>
+                </div>
 
-        <div class="span8">
-            <h2>Ask a question</h2>
+                <div class="clearfix">
+                    <label for="questionTitle">Title</label>
+
+                    <div class="input">
+                        <input type="text" id="questionTitle" name="questionTitle"
+                               data-bind="value: questionModel.title, valueUpdate: 'afterkeydown'"/>
+                    </div>
+                </div>
+
+                <div class="clearfix">
+                    <label for="questionDescription">Question</label>
+
+                    <div class="input">
+                        <textarea id="questionDescription" name="questionDescription" class="xxlarge"
+                               data-bind="value: questionModel.description, valueUpdate: 'afterkeydown'" />
+
+                    </div>
+                </div>
+
+                <div class="input">
+                        <select id="questionTag" name="questionTag"
+                               data-bind="options: questionModel.tagList, optionsText: 'tagName', value: tag" />
+                </div>
+
+                <div class="actions" style="margin-top: 64px;">
+                    <input type="submit" class="btn primary" value="Submit"
+                           data-bind="click: questionModel.submit, enable: questionModel.valid"/>
+                </div>
+            </form>
         </div>
+
     </div>
 </div>
 
