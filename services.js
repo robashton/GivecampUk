@@ -99,6 +99,16 @@ exports.init = function(app) {
     });  
   });
 
+  app.post('/delete_answer', function(req, res){
+
+    // TODO: test that the curret user has elevated permissions
+    var currentUserIsElevated = true;
+    if(currentUserIsElevated)
+    {
+        db.remove(req.body.answerId);
+    }
+  });
+
   app.get('/register', function(req, res){
     dbapi.create_user()
     res.json({ success: true}, {}, 200);  
