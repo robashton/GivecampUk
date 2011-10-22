@@ -33,13 +33,15 @@ var cookies = new Cookies( req, res , keys);
 exports.signInUser = function(req, res, email, password, callback) {
   
    db.get_user(email, function(err,doc){
-     if(doc.error == undefined && doc.rows.length > 0){
-       encryption.compare(password, doc.rows[0].value.password, function(result) {
-        
-console.log(email);
-      var cookies = new Cookies( req, res , keys);
-       cookies.set("ymindsid", email, { signed: true } );
-       callback(true);
+     if(err === null && doc.rows.length > 0){
+console.log(password + " : "+ doc.rows[0].value.password);
+       encryption.compare(password, doc.rows[0].value.password, doc.rows[0].value.salt, function(result) {
+          if(result) {
+            var cookies = new Cookies( req, res , keys);
+            cookies.set("ymindsid", email, { signed: true } );
+            callback(true);
+          }
+        else{ callback(false); }
        }); 
      }
      else { callback(false); }

@@ -71,9 +71,9 @@ exports.create_session = function (id,email, callback) {
   }
 
 exports.create_user = function (email,name, password) {
-  encryption.hash(password, function(hash){
+  encryption.hash(password, function(hash, salt){
     
-    db.save({email: email.toLowerCase(), name:name, password: hash, type: "user", isElevated: false}, function ( err, doc) {
+    db.save({email: email.toLowerCase(), name:name, password: hash, type: "user", isElevated: false, salt:salt}, function ( err, doc) {
       // You know know if there was an error and have an updated version
       // of the document (with `_id` and `_rev`).
     });
