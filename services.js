@@ -16,38 +16,6 @@ exports.init = function(app) {
     app.use(express.static(__dirname + '/site'));
   });
 
-  app.get("*", function(req, res,next){
-
-// get user
-// if user is not authenticated
-// check where they ar    e
-// they are allowed only here
-
-  var user = security.currentUser();
-
-  console.log('USER IS : ' + user);
-  
-  if(user===null){
-   if( (req.url.toLowerCase().indexOf('/login')==0) ||
-          (req.url.toLowerCase().indexOf('/register')==0)){
-        console.log(req.url + '> login.html');
-       next();
-      }
-      else{
-        console.log(req.url + ' > ' + req.url);
-        res.redirect('/login.html');
-      } 
-
-  }
-  else{
-    next();
-  }
-
-
-   
-
-  });
-
   app.post('/login', function(req, res){
     security.signInUser(req, res, req.body.email, req.body.password, function(result,session_id,name) {
       if(!result){
@@ -260,9 +228,7 @@ exports.init = function(app) {
   });
 
   app.get('/createquestion', function(req, res) {
-    console.log('test')
     db.get("tagList", function(err, doc) {
-      console.log(doc)
       if(err) 
          res.json({error: err});
       else

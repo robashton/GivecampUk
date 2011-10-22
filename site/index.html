@@ -1,34 +1,45 @@
 <!DOCTYPE html>
-<!-- saved from url=(0022)http://localhost:8081/ -->
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" type="text/css" href="./login_files/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="./login_files/site.css">
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="css/site.css" />
 
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="js/jquery.prettydate.js"></script>
+        <script type="text/javascript" src="js/jquery.address.js"></script>
+        <script type="text/javascript" src="js/jquery.routes.js"></script>
+        <script type="text/javascript" src="js/jquery.tmpl.js"></script>
+        <script type="text/javascript" src="js/jquery.cookie.js"></script>
+        <script type="text/javascript" src="js/jquery.validate.js"></script>
+        <script type="text/javascript" src="js/knockout.js"></script>
+        <script type="text/javascript" src="js/koExternalTemplateEngine.js"></script>
+        <script type="text/javascript" src="views/ym.login.js"></script>
+        <script type="text/javascript" src="views/ym.question.js"></script>
+        <script type="text/javascript" src="views/ym.questions.js"></script>
+        <script type="text/javascript" src="views/ym.viewquestion.js"></script>
+        <script type="text/javascript" src="views/ym.admin.js"></script>
+        <script type="text/javascript" src="views/ym.tagadmin.js"></script>
+        <script type="text/javascript" src="views/ym.useradmin.js"></script>
+        <script type="text/javascript" src="js/ym.shared.js"></script>
 
     </head>
     <body>
 
+        <div class="topbar" data-bind="visible: viewModel.authenticated">
           <div class="topbar-inner">
+            <div class="container">
+              <a class="brand" href="#">Young Minds Q&A</a>
+              <ul class="nav">
+                <li class="" data-bind="visible: viewModel.authenticated, css: { active: viewModel.currentView() == 'questions' }"><a href="#/">Questions</a></li>
+                <li class="" data-bind="visible: viewModel.authenticated, css: { active: viewModel.currentView() == 'question' }"><a href="#/ask">Ask a question</a></li>
+                <li class="" data-bind="visible: viewModel.authenticated, css: { active: viewModel.currentView() == 'admin' }"><a href="#/admin">Admin</a></li>
+                <li class="" data-bind="visible: viewModel.authenticated"><a href="#/logout">Logout</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
 
-        <form action="/login" method="post">
+        <div data-bind="template: viewModel.currentView"></div>
 
-<input type="text" id="email" name="email" />
-           <input type="password" id="password" name="password" />
-
-             <input type="submit" class="btn primary" value="Login" />
-            
-        </form>
-
-
-   <form action="/register" method="post">
-
-<input type="text" id="email" name="email" />
-<input type="text" id="name" name="name" />
-           <input type="password" id="password" name="password" />
-
-             <input type="submit" class="btn primary" value="Login" />
-            
-        </form>
-
-
-    </body></html>
+    </body>
+</html>
