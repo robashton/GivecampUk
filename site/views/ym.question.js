@@ -14,16 +14,18 @@ var questionModel = {
     tagList: ko.observableArray([]),
 
     submit : function() {
-        $.post('createquestion', {
-            title: this().title(),
-            description: this().description(),
-            tag: this().tag()
-        }).success(function(data) {
-            $.routes('set', '/question/' + data.doc._id);
-        })
+        if($("#askQuestion").valid()){
+             $.post('createquestion', {
+                title: this().title(),
+                description: this().description(),
+                tag: this().tag()
+            }).success(function(data) {
+                $.routes('set', '/question/' + data.doc._id);
+            })
+        }
     }
 };
 
 questionModel.valid = ko.dependentObservable(function(){
-        return this.title().length > 0 && this.description().length > 0;
+        return $('#askQuestion').valid();
 }, questionModel);
