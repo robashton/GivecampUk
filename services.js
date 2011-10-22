@@ -227,7 +227,7 @@ exports.init = function(app) {
   app.get('/currentuser', security.validateUser, function(req, res) {
     res.json({ username: security.currentUser(req, res) }, {}, 200);
   });
-
+  
   app.get('/createquestion', function(req, res) {
     db.get("tagList", function(err, doc) {
       if(err) 
@@ -276,28 +276,31 @@ exports.init = function(app) {
         tag: "There must be a selected tag"
       })) return;
 
-      var userid = security.currentUser();  
+      var userid = security.currentUser(req, res);  
+      
+      security.usersDisplayName(userid, function(displayname ){
+          db.save(
+          {
+            _id: utils.generateGuid(),
+            type:"question",
+            user:userid, 
+            displayname: displayname,
+            date:new Date(),
+            deleted:0,
+            title: req.body.title, 
+            description: req.body.description,
+            tag: req.body.tag
+            }, 
+           function ( err, doc) {
 
-      db.save(
-      {
-        _id: utils.generateGuid(),
-        type:"question",
-        user:userid, 
-        date:new Date(),
-        deleted:0,
-        title: req.body.title, 
-        description: req.body.description,
-        tag: req.body.tag
-        }, 
-       function ( err, doc) {
+              dbapi.update_answer_count_for_question(doc._id); 
 
-          dbapi.update_answer_count_for_question(doc._id); 
-
-          res.json({
-            err: err,
-            doc: doc
-          });
-       });    
+              res.json({
+                err: err,
+                doc: doc
+              });
+           });
+      })
   }); 
 
   app.get('/question/:id', function(req, res) {

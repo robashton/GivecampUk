@@ -19,6 +19,12 @@ exports.validateUser = function(req, res, next) {
   }
 };
 
+exports.usersDisplayName = function(email, callback) {
+  db.get_user(email, function(err, doc) {
+      callback(doc.rows[0]['value'].name);
+  });
+}
+
 exports.currentUser = function(req, res) {
   var cookies = new Cookies( req, res , keys);
   var session_cookie = cookies.get( "ymindsid" );
