@@ -7,13 +7,13 @@ var url = config(DB_CONFIG_FILE)
 var CouchClient = require('couch-client');
 var db = CouchClient(url);
 
-exports.save_answer = function(question_id, answer_text, rank, callback) {
+exports.save_answer = function(question_id, answer_text, callback) {
   db.save({_id:utils.generateGuid(),
       type:"answer", 
       questionId: question_id, 
       userId: "adsda",//security.currentUser(), 
       answer: answer_text, 
-      rank: rank,
+      rank: 0,
       date:new Date()
       }, function(err, doc) {
         // TODO: error handling

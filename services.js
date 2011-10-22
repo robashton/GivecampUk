@@ -53,7 +53,7 @@ exports.init = function(app) {
     }))
       return;
     
-    dbapi.save_answer(req.body.question_id, req.body.answer_text, req.body.rank, function(doc){
+    dbapi.save_answer(req.body.question_id, req.body.answer_text, function(doc){
       res.send(doc);
       }); 
   });
