@@ -39,14 +39,14 @@
         <div class="clearfix">
             <label for="loginUser">Username</label>
             <div class="input">
-            <input type="text" id="loginUser" name="loginUser" data-bind="value: loginForm.username" />
+            <input type="text" id="loginUser" name="loginUser" data-bind="value: loginForm.username, valueUpdate: 'afterkeydown'" />
             </div>
           </div>
 
         <div class="clearfix">
             <label for="loginPass">Password</label>
             <div class="input">
-            <input type="password" id="loginPass" name="loginPass" data-bind="value: loginForm.password" />
+            <input type="password" id="loginPass" name="loginPass" data-bind="value: loginForm.password, valueUpdate: 'afterkeydown'" />
             </div>
           </div>
 
@@ -54,7 +54,7 @@
 
 
         <div class="actions">
-            <input type="submit" class="btn primary" value="Login" data-bind="click: loginForm.submit">
+            <input type="submit" class="btn primary" value="Login" data-bind="click: loginForm.submit, enable: loginForm.valid">
           </div>
     </form>
 </div>
