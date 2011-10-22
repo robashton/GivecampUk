@@ -1,7 +1,7 @@
 var views = {
     login: loginModel,
     question: questionModel,
-    question: questionsModel
+    questions: questionsModel
 };
 
 var viewModel = {
@@ -9,6 +9,12 @@ var viewModel = {
     username: ko.observable(),
     displayName: ko.observable(),
     currentView: ko.observable('login')
+};
+
+viewModel.logout = function(){
+    viewModel.authenticated(false);
+    viewModel.username(null);
+    viewModel.currentView('login');
 };
 
 viewModel.currentViewModel = ko.dependentObservable(function(){

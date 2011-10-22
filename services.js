@@ -39,6 +39,36 @@ exports.init = function(app) {
       }); 
   });
 
+  app.post('/promote_user', function(req, res){
+
+    db.get(req.body.userId, function(err, doc) {
+      if(err) 
+         res.json({error: err});
+      else
+      {
+        doc.isElevated = true;
+        db.save(doc, function(err, doc){
+          res.send(err, doc);
+        });
+      }
+    });  
+  });
+
+  app.post('/demote_user', function(req, res){
+
+    db.get(req.body.userId, function(err, doc) {
+      if(err) 
+         res.json({error: err});
+      else
+      {
+        doc.isElevated = false;
+        db.save(doc, function(err, doc){
+          res.send(err, doc);
+        });
+      }
+    });  
+  });
+
   app.post('/increment_answer_rank', function(req, res){
 
     db.get(req.body.answerId, function(err, doc) {
