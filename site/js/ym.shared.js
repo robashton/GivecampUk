@@ -60,7 +60,7 @@ $(function(){
         viewModel.authenticated(false);
         viewModel.email(null);
         viewModel.currentView('login');
-        window.location = 'login.html';
+        window.location = 'index.html';
       }
     });
 
