@@ -68,7 +68,37 @@ exports.init = function(app) {
       }
     });  
   });
+
+  app.post('/set_accepted_answer', function(req, res){
+
+    db.get(req.body.answerId, function(err, doc) {
+      if(err) 
+         res.json({error: err});
+      else
+      {
+        doc.isAcceptedAnswer = true;
+        db.save(doc, function(err, doc){
+          res.send(err, doc);
+        });
+      }
+    });  
+  });
   
+  app.post('/reset_accepted_answer', function(req, res){
+
+    db.get(req.body.answerId, function(err, doc) {
+      if(err) 
+         res.json({error: err});
+      else
+      {
+        doc.isAcceptedAnswer = false;
+        db.save(doc, function(err, doc){
+          res.send(err, doc);
+        });
+      }
+    });  
+  });
+
   app.get('/register', function(req, res){
     dbapi.create_user()
     res.json({ success: true}, {}, 200);  
