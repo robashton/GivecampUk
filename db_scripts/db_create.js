@@ -97,6 +97,19 @@ var QA = function (couchdb) {
                 }
             }
         }, function (err, doc) { });
+
+
+      db.save({
+           "_id": "_design/answers",
+           "_rev": "1-88fcc9fc42f1a3da7e6b4f8fe2bf6a77",
+           "language": "javascript",
+           "views": {
+               "by_questionid": {
+                   "map": "function(doc) {\n  if(doc.type === \"answer\")\n  \temit(doc.questionId, doc);\n}"
+               }
+           }
+      }, function(err, doc) {});
+
     }
 
     this.CreateQuestionViews = function () {
