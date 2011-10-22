@@ -92,7 +92,7 @@ exports.init = function(app) {
          res.json({error: err});
       else
       {
-        db.delete(doc, function(err, doc){
+        db.remove(doc, function(err, doc){
           res.json({ err: err, doc: doc});
         });
       }
