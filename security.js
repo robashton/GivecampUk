@@ -16,7 +16,6 @@ exports.signInUser = function(req, res, username, password) {
    cookies.set( "username", username, { httpOnly: false } );
 };
 
-
 exports.signOutUser = function(req, res) {
    var cookies = new Cookies( req, res );
    cookies.set( "username", null, { httpOnly: false } );

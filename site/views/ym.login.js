@@ -18,7 +18,7 @@ var loginModel = {
 
             var form = this().loginForm;
 
-            $.post('login/' +  form.username() + '/' + form.password()).success(function(data){
+            $.post('login', { username: form.username(), password: form.password() }).success(function(data){
                 if(data.success) {
                     alert('Yeah!');
                 }

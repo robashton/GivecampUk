@@ -6,11 +6,12 @@ exports.init = function(app) {
 
   app.configure(function(){
     app.use(express.static(__dirname + '/site'));
+      app.use(express.bodyParser());
   });
 
-  app.post('/login/:username/:password', function(req, res){
-    security.signInUser(req, res, req.params.username, req.params.password);
-    res.json({ success: true}, {}, 200);  
+  app.post('/login', function(req, res){
+    security.signInUser(req, res, req.body.username, req.body.password);
+    res.json({ success: true}, {}, 200);
   });
 
   app.get('/logout', function(req, res){
@@ -27,5 +28,9 @@ exports.init = function(app) {
         res.send('hello world: ' + doc);
       });
   });
+
+
+
+  
 
 };
