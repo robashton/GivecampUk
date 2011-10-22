@@ -17,16 +17,14 @@
             <div style="padding: 5px;">
                 <h2>Admin</h2>
 
-                 <div data-bind="simpleGrid: gridViewModel"> </div>
- 
- 
-<button data-bind="click: sortByName">
-    Sort by name
-</button>
- 
-<button data-bind="click: function() { gridViewModel.currentPageIndex(0) }">
-    Jump to first page  
-</button>
+                <table>
+                <th>
+                <td>Name</td>
+                <td></td>
+                </th>
+<tbody data-bind="template: { name: 'tagRow', foreach: tagadminModel.tagList }"></tbody>
+                </table>
+
                         <div class="input">
                             <select id="questionTag" name="questionTag"
                                    data-bind="options: tagadminModel.tagList, optionsText: 'tagName', value: tagadminModel.tag"/>
