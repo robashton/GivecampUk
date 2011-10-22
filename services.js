@@ -13,6 +13,7 @@ exports.init = function(app) {
 
   app.configure(function(){
     app.use(express.bodyParser());
+    app.use(express.cookieParser());
     app.use(express.static(__dirname + '/site'));
   });
 
@@ -224,7 +225,7 @@ exports.init = function(app) {
   });
 
   app.get('/currentuser', security.validateUser, function(req, res) {
-    res.json({ username: security.currentUser() }, {}, 200);
+    res.json({ username: security.currentUser(req, res) }, {}, 200);
   });
 
   app.get('/createquestion', function(req, res) {

@@ -10,8 +10,6 @@ bcrypt.gen_salt(seed, function(err, salt) {
 };
 
 exports.compare = function(text,hash,salt, callback){
-
-
   bcrypt.encrypt(text, salt, function(err, crypted) {
     callback(crypted === hash);
 })
