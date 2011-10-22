@@ -23,7 +23,7 @@ exports.init = function(app) {
         }
         else
         { 
-          res.json({success: true, session: session_id, name: name},{},200);
+          res.json({success: true},{},200);
         }
     });    
   });
@@ -42,7 +42,7 @@ exports.init = function(app) {
 
   app.get('/get_all_users',function(req,res){
     dbapi.get_all_users(function(err, doc){
-      res.json(err,doc);
+       res.json({ err: err, doc: doc});
     });
   });
 
@@ -171,8 +171,14 @@ exports.init = function(app) {
   });
 
   app.post('/register', function(req, res){
-    dbapi.create_user(req.body.email,req.body.name,req.body.password);
-    res.json({ success: true}, {}, 200);  
+    dbapi.get_user(req.body.email, function(err, userDoc){
+      if(userDoc.error == undefined && userDoc.rows.length > 0){
+         res.json({ success: false, error: 'Email address ' + req.body.email + ' already registered.'}, {}, 200);  
+      }else{
+         dbapi.create_user(req.body.email,req.body.name,req.body.password);
+         res.json({ success: true}, {}, 200);  
+      }
+    });
   });
 
   app.get('/logout', function(req, res){
@@ -209,6 +215,23 @@ exports.init = function(app) {
         });
     });    
   }); 
+
+  app.post('/updateTags', function(req, res) {
+
+      db.save(
+      {
+        _id: "tagList",
+        type:"tags",
+        tags:req.body.tagList
+        }, 
+       function ( err, doc) {
+          res.json({
+            err: err,
+            doc: doc
+          });
+       });    
+  });  
+
   app.post('/createquestion', function(req, res) {
     
       if(!expect(req, res, {

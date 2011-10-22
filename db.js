@@ -57,6 +57,7 @@ exports.get_questions_by_rank = function(callback){
     callback(err, doc);  
   })
 };
+
 exports.get_all_users = function(callback){
   db.view('/youngmindsdb/_design/users/_view/getAllUsers',function(err,doc){
     callback(err, doc);  

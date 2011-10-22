@@ -15,3 +15,7 @@ body {
     background-color: #fff;
     margin-bottom: 40px;
 }
+
+span.error {
+    color: red;
+}

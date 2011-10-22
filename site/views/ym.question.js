@@ -17,13 +17,15 @@ var questionModel = {
     tagList: ko.observableArray([]),
 
     submit : function() {
-        $.post('createquestion', {
-            title: this().title(),
-            description: this().description(),
-            tag: this().tag()
-        }).success(function(data) {
-            $.routes('set', '/question/' + data.doc._id);
-        })
+        if($('#askQuestion').valid()){
+            $.post('createquestion', {
+                title: this().title(),
+                description: this().description(),
+                tag: this().tag()
+            }).success(function(data) {
+                $.routes('set', '/question/' + data.doc._id);
+            })
+        }
     }
 };
 

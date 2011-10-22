@@ -1,0 +1,43 @@
+<div class="container" style="margin-top: 40px">
+    <div class="row">
+
+        <div class="span4 ymcontent">
+            <div style="padding: 5px;">
+                <h2>Menu</h2>
+    <ul>
+                <li class="" data-bind="visible: viewModel.authenticated, click: function() {viewModel.currentView('useradmin'); }, css: { active: viewModel.currentView() == 'useradmin' }"><a href="#/useradmin">Edit Users</a></li>
+
+              </ul>
+           </div>
+        </div>
+
+        <div class="span12 ymcontent">
+            <div style="padding: 5px;">
+                <h2>Admin</h2>
+
+                <table>
+<thead>
+                <th>Name</th>
+                <th>Description</th>
+                <th></th>
+                </thead>
+                <tbody data-bind="template: { name: 'userRow', foreach: useradminModel.users }">
+                <tr>
+                  <td> <div class="input">
+                  <textarea id="username" name="username" class="xlarge" rows="2" data-bind="value: useradminModel.users.name" />
+
+                    </div></td>
+                  <td><div class="input">
+                 <textarea id="email" name="email" class="xlarge" rows="2" data-bind="value: useradminModel.users.email" />
+
+                    </div></td>
+                  <td><button class="small" >Edit User</button></td>
+                </tr></tbody>
+                </table>
+      
+            </div>
+        </div>
+
+    </div>
+</div>
+

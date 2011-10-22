@@ -7,7 +7,9 @@ var views = {
     admin: adminModel,
     tagadmin: tagadminModel,
     admin:adminModel,
-    viewquestion: viewQuestionModel
+    viewquestion: viewQuestionModel,
+    useradmin: useradminModel
+
 };
 
 var viewModel = {
@@ -48,7 +50,11 @@ $(function(){
       "/tagadmin": function() {
         viewModel.currentView('tagadmin');
       },
+    "/useradmin": function() {
+        viewModel.currentView('useradmin');
+      },
       "/logout": function() {
+        $.get('logout');
         viewModel.authenticated(false);
         viewModel.email(null);
         viewModel.currentView('login');
@@ -70,6 +76,14 @@ $(function(){
             });
         }
     };
+
+    jQuery.validator.setDefaults({
+        errorPlacement: function(error, element) {
+            error.insertAfter(element);
+            error.addClass('help-inline');
+        },
+        errorElement: 'span'
+    });
 
     ko.ExternaljQueryTemplateEngine.prototype = new ko.templateEngine();
     ko.externaljQueryTemplateEngine = new ko.ExternaljQueryTemplateEngine();
