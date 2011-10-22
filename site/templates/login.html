@@ -45,6 +45,9 @@
                            data-bind="value: loginModel.registerForm.password"/>
                 </div>
             </div>
+            <div class="alert-message warning" data-bind="visible: loginModel.registerForm.registrationError().length > 0">
+               <p class="error" data-bind="text: loginModel.registerForm.registrationError()"></p>
+            </div>
             <div class="actions">
                 <input type="submit" class="btn primary" value="Register"
                        data-bind="click: loginModel.registerForm.submit">

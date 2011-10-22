@@ -1,5 +1,9 @@
-<div class="answer">
-  <h2><a href="#"><span data-bind="text: value.userid"/></span></a></h2>
-  <p data-bind="text: value.answer"></p>
-  <p>2 days ago</p>   
-</div>
+<tr class="answer">
+  <td>
+    <div class="span9">
+      <h2><a data-bind="text: value.userid"></a></h2>
+      <p data-bind="text: value.answer"></p>
+      <p class="prettydate" data-bind="attr: { title: value.date }"></p>
+    </div>
+  </td>
+</tr>

@@ -5,6 +5,7 @@
         <link rel="stylesheet" type="text/css" href="css/site.css" />
 
         <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="js/jquery.prettydate.js"></script>
         <script type="text/javascript" src="js/jquery.address.js"></script>
         <script type="text/javascript" src="js/jquery.routes.js"></script>
         <script type="text/javascript" src="js/jquery.tmpl.js"></script>
@@ -18,12 +19,13 @@
         <script type="text/javascript" src="views/ym.viewquestion.js"></script>
         <script type="text/javascript" src="views/ym.admin.js"></script>
         <script type="text/javascript" src="views/ym.tagadmin.js"></script>
+        <script type="text/javascript" src="views/ym.useradmin.js"></script>
         <script type="text/javascript" src="js/ym.shared.js"></script>
 
     </head>
     <body>
 
-        <div class="topbar">
+        <div class="topbar" data-bind="visible: viewModel.authenticated">
           <div class="topbar-inner">
             <div class="container">
               <a class="brand" href="#">Young Minds Q&A</a>
