@@ -6,6 +6,15 @@ var url = config(DB_CONFIG_FILE)
 var CouchClient = require('couch-client');
 var db = CouchClient(url);
 
+
+function generateGuid() {
+  var S4 = function() {
+     return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+  };
+  return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
+}
+
+
 exports.init = function(app) {
 
   app.configure(function(){
@@ -63,8 +72,25 @@ exports.init = function(app) {
         tag: "There must be a selected tag"
       }) return;
 
-      var userid = security.currentUser();      
-      
+      var userid = security.currentUser();     
+
+      db.save(
+      {
+        _id: generateGuid(),
+        type:"question",
+        user:userid, 
+        date:new Date(),
+        deleted:0,
+        title: req.params.title, 
+        description: req.params.description,
+        tag: req.params.tag
+        }, 
+       function ( err, doc) {
+          res.json({
+            err: err,
+            doc: doc
+          });
+       });      
   }); 
 
   app.get('/service', security.validateUser, function(req, res){
