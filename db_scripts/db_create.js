@@ -8,7 +8,7 @@ http = require('http'),
 path = require('path'),
 
 fs = require('fs'),
-startup = require('./startup');
+startup = require('../startup');
 
 DB_CONFIG_FILE = "config/db.json"
 
