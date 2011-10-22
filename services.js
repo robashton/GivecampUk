@@ -1,9 +1,13 @@
 var express = require('express');
-db = require('./db');
 var security = require('./security');
 
 var url = config(DB_CONFIG_FILE);
 var utils = require('./utils');
+
+var url = config(DB_CONFIG_FILE)
+var CouchClient = require('couch-client');
+var db = CouchClient(url);
+var dbapi = require('./db');
 
 exports.init = function(app) {
 
@@ -31,12 +35,12 @@ exports.init = function(app) {
 
   app.post('/answer', function(req, res){
     console.log(req.body.loginUser)
-    db.save_answer(req.body.question_id, req.body.answer_test); 
+    dbapi.save_answer(req.body.question_id, req.body.answer_test); 
 res.send('help');
   });
   
   app.get('/register', function(req, res){
-    db.create_user()
+    dbapi.create_user()
     res.json({ success: true}, {}, 200);  
   });
 
@@ -91,6 +95,9 @@ res.send('help');
   }); 
 
   app.get('/question/:id', function(req, res) {
+
+    
+
     var result = {
       question: {
         id: 'id',
@@ -135,7 +142,7 @@ res.send('help');
   });
 
   app.get('/service', security.validateUser, function(req, res){
-      db.get_document("creationix", function (doc) {
+      db.get("creationix", function (doc) {
         res.send('hello world: ' + doc);
       })
 
