@@ -39,6 +39,15 @@ span.error {
   font-size: 90%;
   line-height: 2.4;
   white-space: nowrap;
+  cursor: pointer;
+}
+
+.tag-key:hover {
+  background-color: #3E6D8E;
+  color: #E0EAF1;
+  border-bottom: 1px solid #37607D;
+  border-right: 1px solid #37607D;
+  text-decoration: none;
 }
 
 .tag-value {
