@@ -5,7 +5,9 @@
             <div style="padding: 5px;">
                 <h2>Questions</h2>
 
-                <div id="questions" data-bind="template: { name: 'questionitem', foreach: questionsModel.questions}"></div>
+                <table id="questions" class="zebra-striped">
+                  <tbody data-bind="template: { name: 'questionitem', foreach: questionsModel.questions}"></tbody>
+                </table>
 
             </div>
         </div>

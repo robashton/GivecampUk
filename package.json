@@ -5,6 +5,7 @@
       "express": "2.4.7",
       "couch-client": "",
       "cookies": "",
-      "bcrypt": ""
+      "bcrypt": "",
+      "keygrip": ""
     }
 }

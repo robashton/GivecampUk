@@ -4,6 +4,7 @@ var loginModel = {
         email: ko.observable(''),
         displayName: ko.observable(''),
         password: ko.observable(''),
+        registrationError: ko.observable(''),
 
         submit: function(event){
             var form = this().registerForm;
@@ -11,6 +12,8 @@ var loginModel = {
                if(data.success) {
                   viewModel.authenticated(true);
                   viewModel.doOnAuth();
+              }else{
+                  loginModel.registerForm.registrationError(data.error);
               }
             });
         }
@@ -26,7 +29,6 @@ var loginModel = {
 
             $.post('login', { email: form.email(), password: form.password() }).success(function(data){
                 if(data.success) {
-                  $.cookie('ymindsid', data.session);
                   viewModel.authenticated(true);
                   viewModel.displayName(data.name);
                   viewModel.doOnAuth();

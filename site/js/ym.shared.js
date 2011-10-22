@@ -7,7 +7,9 @@ var views = {
     admin: adminModel,
     tagadmin: tagadminModel,
     admin:adminModel,
-    viewquestion: viewQuestionModel
+    viewquestion: viewQuestionModel,
+    useradmin: useradminModel
+
 };
 
 var viewModel = {
@@ -48,7 +50,11 @@ $(function(){
       "/tagadmin": function() {
         viewModel.currentView('tagadmin');
       },
+    "/useradmin": function() {
+        viewModel.currentView('useradmin');
+      },
       "/logout": function() {
+        $.get('logout');
         viewModel.authenticated(false);
         viewModel.email(null);
         viewModel.currentView('login');
@@ -63,7 +69,11 @@ $(function(){
             viewModel.doOnAuth = function(){
                 callback(params);
             };
-          viewModel.currentView('login');
+            viewModel.currentView('login');
+            $.get('currentuser').success(function(){
+                viewModel.authenticated(true);
+                viewModel.doOnAuth();
+            });
         }
     };
 

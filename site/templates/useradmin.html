@@ -5,7 +5,7 @@
             <div style="padding: 5px;">
                 <h2>Menu</h2>
     <ul>
-                <li class="" data-bind="visible: viewModel.authenticated, click: function() {viewModel.currentView('tagadmin'); }, css: { active: viewModel.currentView() == 'tagadmin' }"><a href="#/tagadmin">Edit Tags</a></li>
+                <li class="" data-bind="visible: viewModel.authenticated, click: function() {viewModel.currentView('useradmin'); }, css: { active: viewModel.currentView() == 'useradmin' }"><a href="#/useradmin">Edit Users</a></li>
 
               </ul>
            </div>
@@ -21,17 +21,17 @@
                 <th>Description</th>
                 <th></th>
                 </thead>
-                <tbody data-bind="template: { name: 'tagRow', foreach: tagadminModel.tagList }">
+                <tbody data-bind="template: { name: 'userRow', foreach: useradminModel.users }">
                 <tr>
                   <td> <div class="input">
-                        <textarea id="tagName" name="tagName" class="xlarge" rows="2" data-bind="value: tagadminModel.Update.tagName" />
+                  <textarea id="username" name="username" class="xlarge" rows="2" data-bind="value: useradminModel.users.name" />
 
                     </div></td>
                   <td><div class="input">
-                        <textarea id="description" name="description" class="xlarge" rows="2" data-bind="value: tagadminModel.Update.description"/>
+                 <textarea id="email" name="email" class="xlarge" rows="2" data-bind="value: useradminModel.users.email" />
 
                     </div></td>
-                  <td><button class="small" data-bind="click: tagadminModel.Update.add">Add New Tag</button></td>
+                  <td><button class="small" >Edit User</button></td>
                 </tr></tbody>
                 </table>
       

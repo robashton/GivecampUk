@@ -1,6 +1,9 @@
 var questionModel = {
 
     init: function() {
+        questionModel.title('');
+        questionModel.description('');
+        questionModel.tag(null);
         $.get('createquestion', function(data) {
             if (!data.error) {
                 questionModel.tagList(data.tags);
