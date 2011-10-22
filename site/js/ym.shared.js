@@ -1,7 +1,10 @@
 var views = {
     login: loginModel,
     question: questionModel,
-    questions: questionsModel
+    questions: questionsModel,
+    viewquestion: viewQuestionModel
+    tags: tagadminModel,
+    admin: adminModel
 };
 
 var viewModel = {
@@ -30,7 +33,15 @@ $(function(){
       },
       "/ask": function() {
           viewModel.currentView('question');
-      },    
+      },
+      "/question/:id": function(params) {
+          var id = params.id;
+          viewQuestionModel.id(id);
+          viewModel.currentView('viewquestion');
+      },
+      "/admin": function() {
+          viewModel.currentView('admin');
+      }, 
       "/logout": function() {
         viewModel.authenticated(false);
         viewModel.username(null);

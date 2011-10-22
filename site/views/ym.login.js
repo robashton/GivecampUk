@@ -7,7 +7,7 @@ var loginModel = {
 
         submit: function(event){
             var form = this().registerForm;
-            $.post('register', {username: form.username, password: form.password }).success(function(data){
+            $.post('register', {email: form.username,name: form.displayName, password: form.password }).success(function(data){
                if(data.success) {
 
                }
