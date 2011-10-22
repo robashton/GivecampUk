@@ -2,7 +2,7 @@ var views = {
     login: loginModel,
     question: questionModel,
     questions: questionsModel,
-    tags: tagadminModel,
+    tagadmin: tagadminModel,
     admin:adminModel
 };
 
@@ -34,8 +34,11 @@ $(function(){
           viewModel.currentView('question');
       },    
       "/admin": function() {
-          viewModel.currentView('admin');
+        viewModel.currentView('admin');
       }, 
+      "/tagadmin": function() {
+        viewModel.currentView('tagadmin');
+      },
       "/logout": function() {
         viewModel.authenticated(false);
         viewModel.username(null);

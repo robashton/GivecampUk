@@ -174,6 +174,17 @@ exports.init = function(app) {
     });    
   }); 
 
+  app.get('/updateTags', function(req, res) {
+    db.get("tagList", function(err, doc) {
+      if(err) 
+         res.json({error: err});
+      else
+        res.json({ 
+          error: null,
+          tags: doc.tags
+        });
+    });    
+  }); 
   app.post('/createquestion', function(req, res) {
     
       if(!expect(req, res, {
