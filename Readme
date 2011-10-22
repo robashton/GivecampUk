@@ -7,6 +7,21 @@ Pages
     - Create user with e-mail address & Password
   - Ask a question
     - Title, Description, Select a tag
+
+    - UI on top of all of this. 
+
+    - Service endpoint - get
+      - createquestion : authenticated
+        - List of possible tags along with description
+            - TagName
+            - TagDescription
+
+    - Service endpoint - post
+      - createquestion  : authenticated
+        - Title
+        - Content
+        - Selected tag : TagName
+    
   - List of questions by time
       - List of tags to filter with
   - View a question page
