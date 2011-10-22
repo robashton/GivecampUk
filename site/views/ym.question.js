@@ -1,7 +1,11 @@
 var questionModel = {
 
     init: function() {
-        
+        $.get('createquestion', function(data){
+            if(!data.error){
+                this.tagList(data.tags);
+            }
+        });
     },
 
     title: ko.observable(''),
