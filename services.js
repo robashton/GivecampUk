@@ -16,6 +16,11 @@ exports.init = function(app) {
     app.use(express.static(__dirname + '/site'));
   });
 
+  app.get('*',function(req,res){
+    //if(security)
+    //console.log("bam");
+  });
+
   app.post('/login', function(req, res){
     security.signInUser(req, res, req.body.email, req.body.password, function(result,session_id,name) {
       if(!result){

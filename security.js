@@ -4,21 +4,15 @@ encryption = require('./encryption');
 
 exports.validateUser = function(req, res, next) {
   var cookies = new Cookies( req, res );
-  var username = cookies.get( "username" );
+  var session_cookie = cookies.get( "ymindsid" );
 
-  if(!username) {
+  if(!session_cookie) {
    res.json({ success: false}, {}, 401); 
   }
-  else next();
-};
-
-exports.currentUser = function(req, res) {
-  var cookies = new Cookies( req, res );
-  try {
-  var username = cookies.get( "username" );
-  return username;
-  } catch (ex) {
-    return null;  
+  else{
+    //TODO: session db validation
+    console.log(session_cookie);
+    next();
   }
 };
 
