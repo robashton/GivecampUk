@@ -22,10 +22,8 @@ viewModel.currentViewModel = ko.dependentObservable(function(){
 });
 
 viewModel.currentViewModel.subscribe(function() {
-    var vm = viewModel.currentViewModel();
     if(viewModel.currentViewModel() && viewModel.currentViewModel().init){
-        console.log(vm);
-        vm.init();
+        viewModel.currentViewModel().init();
     }
 });
 
