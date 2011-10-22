@@ -22,15 +22,15 @@
             <div class="container">
               <a class="brand" href="#">Young Minds Q&A</a>
               <ul class="nav">
-                <li class="active" data-bind="click: function() { viewModel.currentView('login'); }"><a href="#">Home</a></li>
-                <li class="" data-bind="visible: viewModel.authenticated"><a href="#">Questions</a></li>
-                <li class="" data-bind="visible: viewModel.authenticated, click: function() {viewModel.currentView('question'); }"><a href="#">Ask a question</a></li>
-                <li class="" data-bind="visible: viewModel.authenticated"><a href="#">Logout</a></li>
+                <li class="" data-bind="visible: viewModel.authenticated, click: function() {viewModel.currentView('questions'); }, css: { active: viewModel.currentView() == 'questions' }"><a href="#">Questions</a></li>
+                <li class="" data-bind="visible: viewModel.authenticated, click: function() {viewModel.currentView('question'); }, css: { active: viewModel.currentView() == 'question' }"><a href="#">Ask a question</a></li>
+                <li class="" data-bind="visible: viewModel.authenticated, click: viewModel.logout"><a href="#">Logout</a></li>
               </ul>
             </div>
           </div>
         </div>
 
-        <div class="container" data-bind="template: viewModel.currentView"></div>
+        <div data-bind="template: viewModel.currentView"></div>
+
     </body>
 </html>

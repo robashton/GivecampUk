@@ -35,9 +35,39 @@ exports.init = function(app) {
   });
 
   app.post('/answer', function(req, res){
-    db.save_answer(req.body.question_id, req.body.answer_text, req.body.rank, function(doc){
+    dbapi.save_answer(req.body.question_id, req.body.answer_text, req.body.rank, function(doc){
       res.send(doc);
       }); 
+  });
+
+  app.post('/promote_user', function(req, res){
+
+    db.get(req.body.userId, function(err, doc) {
+      if(err) 
+         res.json({error: err});
+      else
+      {
+        doc.isElevated = true;
+        db.save(doc, function(err, doc){
+          res.send(err, doc);
+        });
+      }
+    });  
+  });
+
+  app.post('/demote_user', function(req, res){
+
+    db.get(req.body.userId, function(err, doc) {
+      if(err) 
+         res.json({error: err});
+      else
+      {
+        doc.isElevated = false;
+        db.save(doc, function(err, doc){
+          res.send(err, doc);
+        });
+      }
+    });  
   });
 
   app.post('/increment_answer_rank', function(req, res){
@@ -100,6 +130,18 @@ exports.init = function(app) {
     });  
   });
 
+  app.post('/delete_answer', function(req, res){
+
+    // TODO: test that the curret user has elevated permissions
+    var currentUserIsElevated = true;
+    if(currentUserIsElevated)
+    {
+        db.remove(req.body.answerId, function(err, doc){
+          res.send(err, doc);        
+        });
+    }
+  });
+
   app.get('/register', function(req, res){
     dbapi.create_user()
     res.json({ success: true}, {}, 200);  
@@ -121,7 +163,7 @@ exports.init = function(app) {
       else
         res.json({ 
           error: null,
-          tags: doc.Tags
+          tags: doc.tags
         });
     });    
   }); 
@@ -156,50 +198,31 @@ exports.init = function(app) {
   }); 
 
   app.get('/question/:id', function(req, res) {
+    var questionId = req.params.id;
+    var question, answers;
 
-    
+    db.get(questionId, function(err, doc) {
+      if(err) {    
+        res.json({error: err});      
+      }
+      else {
+          question = doc;
+          dbapi.get_question_answers(questionId, function(err, doc) {
+            if(err) {
+                res.json({error: err});    
+            }
+            else {
+              answers = doc;
+              res.json({
+                question: question,
+                answers: answers
+              });
+            }
+          });       
+      }
+    });
 
-    var result = {
-      question: {
-        id: 'id',
-        title: 'some title',
-        author: 'some user',
-        description: 'some description',
-        tag: 'some tag',
-        date: 'some date'
-      },
-      correctAnswer: {
-          id: 'answer 1',
-          author: 'some user',
-          rank: 56,
-          body: 'do it proper',
-          date: ''
-      },
-      answers: [
-        { 
-          id: 'answer 1',
-          author: 'some user',
-          rank: 56,
-          body: 'do it proper',
-          date: ''
-        },
-        { 
-          id: 'answer 2',
-          author: 'some user',
-          rank: 56,
-          body: 'do it proper',
-          date: ''
-        },
-        { 
-          id: 'answer 3',
-          author: 'some user',
-          rank: 56,
-          body: 'do it proper',
-          date: ''
-        },
-      ]
-    };
-    res.json(result);
+
   });
 
   app.get('/service', security.validateUser, function(req, res){

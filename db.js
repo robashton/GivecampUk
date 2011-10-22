@@ -14,7 +14,6 @@ exports.save_answer = function(question_id, answer_text, rank, callback) {
       userId: "adsda",//security.currentUser(), 
       answer: answer_text, 
       rank: rank,
-      deleted: 0,
       date:new Date()
       }, function(err, doc) {
         // TODO: error handling
@@ -28,7 +27,13 @@ exports.get_user = function (email, callback) {
       console.log(doc)
       callback(doc)
   });
-}
+};
+
+exports.get_question_answers = function(questionId, callback) {
+    db.view('/youngmindsdb/_design/answers/_view/by_questionid', {key: questionId}, function(err, doc) {
+      callback(err, doc)
+  });
+};
 
 exports.create_session = function (id,name, callback) {
     var guid =  utils.generateGuid();
@@ -43,7 +48,7 @@ exports.create_user = function () {
   encryption.hash("password", function(hash){
     db.save({questionId: req.param('qId')})
     
-    db.save({_id: "test", name: "Tim Caswell", age: 28, email: "Tim.Caswell@gmail.com", password: hash, type: "user"}, function ( err, doc) {
+    db.save({_id: "test", name: "Tim Caswell", age: 28, email: "Tim.Caswell@gmail.com", password: hash, type: "user", isElevated: false}, function ( err, doc) {
       // You know know if there was an error and have an updated version
       // of the document (with `_id` and `_rev`).
     });

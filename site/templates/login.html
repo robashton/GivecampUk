@@ -1,7 +1,22 @@
+<header class="jumbotron masthead" id="overview">
+      <div class="inner">
+        <div class="container" style="text-align: center;">
+            <img src="css/logo-youngminds.gif" />
+        </div><!-- /container -->
+      </div>
+    </header>
+
+
+
+<div class="container">
+
+
 <div class="row">
 
-    <div class="span8">
-        <h2>Register</h2>
+    <div class="span8 ymcontent">
+        <div class="clearfix" style="padding: 20px;">
+        <h2>Are you new here?</h2>
+        </div>
 
         <form>
 
@@ -37,8 +52,10 @@
             </div>
         </form>
     </div>
-    <div class="span8">
-        <h2>Login</h2>
+    <div class="span8 ymcontent">
+        <div class="clearfix" style="padding: 20px;">
+            <h2>Welcome back...</h2>
+        </div>
 
         <form method="/login" action="post">
 
@@ -65,8 +82,11 @@
             <div class="actions" style="margin-top: 64px;">
                 <input type="submit" class="btn primary" value="Login"
                        data-bind="click: loginModel.loginForm.submit, enable: loginModel.loginForm.valid"/>
+                <input type="submit" class="btn primary" value="Quick Login"
+                       data-bind="click: loginModel.loginForm.submit"/>
             </div>
         </form>
     </div>
 
 </div>
+        </div>
