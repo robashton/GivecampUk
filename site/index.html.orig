@@ -1,139 +1,33 @@
 <!DOCTYPE html>
-<!-- saved from url=(0022)http://localhost:8081/ -->
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" type="text/css" href="./login_files/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="./login_files/site.css">
+<html>
+   <head>
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="css/site.css">
 
-        <script type="text/javascript" src="./login_files/jquery.js"></script>
-        <script type="text/javascript" src="./login_files/jquery.prettydate.js"></script>
-        <script type="text/javascript" src="./login_files/jquery.address.js"></script>
-        <script type="text/javascript" src="./login_files/jquery.routes.js"></script>
-        <script type="text/javascript" src="./login_files/jquery.tmpl.js"></script>
-        <script type="text/javascript" src="./login_files/jquery.cookie.js"></script>
-        <script type="text/javascript" src="./login_files/knockout.js"></script>
-        <script type="text/javascript" src="./login_files/koExternalTemplateEngine.js"></script>
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="js/jquery.prettydate.js"></script>
+        <script type="text/javascript" src="js/jquery.address.js"></script>
+        <script type="text/javascript" src="js/jquery.routes.js"></script>
+        <script type="text/javascript" src="js/jquery.tmpl.js"></script>
+        <script type="text/javascript" src="js/jquery.cookie.js"></script>
+        <script type="text/javascript" src="js/knockout.js"></script>
+        <script type="text/javascript" src="js/koExternalTemplateEngine.js"></script>
         
-        <script type="text/javascript" src="./login_files/ym.login.js"></script>
-        <script type="text/javascript" src="./login_files/ym.question.js"></script>
-        <script type="text/javascript" src="./login_files/ym.questions.js"></script>
-        <script type="text/javascript" src="./login_files/ym.viewquestion.js"></script>
-        <script type="text/javascript" src="./login_files/ym.admin.js"></script>
-        <script type="text/javascript" src="./login_files/ym.tagadmin.js"></script>
-        <script type="text/javascript" src="./login_files/ym.useradmin.js"></script>
-        <script type="text/javascript" src="./login_files/ym.shared.js"></script>
+        <script type="text/javascript" src="views/ym.login.js"></script>
+
+        <script type="text/javascript">
+         $(function(){
+             ko.ExternaljQueryTemplateEngine.prototype = new ko.templateEngine();
+             ko.externaljQueryTemplateEngine = new ko.ExternaljQueryTemplateEngine();
+             ko.externaljQueryTemplateEngine.templateUrl = 'templates';
+             ko.setTemplateEngine(ko.externaljQueryTemplateEngine);
+             ko.applyBindings(loginModel);
+          });
+        </script>
 
     </head>
     <body>
+      <div data-bind="template: 'login'"></div>
+   </body>
+</html>
 
-        <div class="topbar" data-bind="visible: viewModel.authenticated" style="display: none; ">
-          <div class="topbar-inner">
-            <div class="container">
-              <a class="brand" href="http://localhost:8081/#">Young Minds Q&amp;A</a>
-              <ul class="nav">
-                <li class="" data-bind="visible: viewModel.authenticated, css: { active: viewModel.currentView() == &#39;questions&#39; }" style="display: none; "><a href="http://localhost:8081/#/">Questions</a></li>
-                <li class="" data-bind="visible: viewModel.authenticated, css: { active: viewModel.currentView() == &#39;question&#39; }" style="display: none; "><a href="http://localhost:8081/#/ask">Ask a question</a></li>
-                <li class="" data-bind="visible: viewModel.authenticated, css: { active: viewModel.currentView() == &#39;admin&#39; }" style="display: none; "><a href="http://localhost:8081/#/admin">Admin</a></li>
-                <li class="" data-bind="visible: viewModel.authenticated" style="display: none; "><a href="http://localhost:8081/#/logout">Logout</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div data-bind="template: viewModel.currentView"><header class="jumbotron masthead" id="overview">       <div class="inner">         <div class="container" style="text-align: center;">             <img src="./login_files/logo-youngminds.gif">         </div><!-- /container -->       </div>     </header>    <div class="container">   <div class="row">      <div class="span8 ymcontent">         <div class="clearfix" style="padding: 20px;">         <h2>Are you new here?</h2>         </div>          <form>              <div class="clearfix">                 <label for="registerUser">Email</label>                  <div class="input">                     <input type="text" id="registerUser" name="registerUser">                 </div>             </div>              <div class="clearfix">                 <label for="registerName">Display name</label>                  <div class="input">                     <input type="text" id="registerName" name="registerName">                 </div>             </div>             <div class="clearfix">                 <label for="registerPass">Password</label>                  <div class="input">                     <input type="password" id="registerPass" name="registerPass">                 </div>             </div>             <div class="alert-message warning" style="display: none; ">                <p class="error"></p>             </div>             <div class="actions">                 <input type="submit" class="btn primary" value="Register">              </div>         </form>     </div>     <div class="span8 ymcontent">         <div class="clearfix" style="padding: 20px;">             <h2>Welcome back...</h2>         </div>          <form>               <div class="clearfix">                 <label for="loginUser">Email</label>                  <div class="input">                     <input type="text" id="loginUser" name="loginUser">                 </div>             </div>              <div class="clearfix">                 <label for="loginPass">Password</label>                  <div class="input">                     <input type="password" id="loginPass" name="loginPass">                  </div>             </div>              <div class="actions" style="margin-top: 64px;">                 <input type="submit" class="btn primary" value="Login">             </div>         </form>     </div>  </div>         </div></div>
-
-    
-
-<script type="text/html" id="login"><header class="jumbotron masthead" id="overview">
-      <div class="inner">
-        <div class="container" style="text-align: center;">
-            <img src="css/logo-youngminds.gif" />
-        </div><!-- /container -->
-      </div>
-    </header>
-
-
-
-<div class="container">
-
-
-<div class="row">
-
-    <div class="span8 ymcontent">
-        <div class="clearfix" style="padding: 20px;">
-        <h2>Are you new here?</h2>
-        </div>
-
-        <form>
-
-            <div class="clearfix">
-                <label for="registerUser">Email</label>
-
-                <div class="input">
-                    {{ko_code ((function() { return ko.templateRewriting.applyMemoizedBindingsToNextSibling(function() {                     return (function() { return { value: loginModel.registerForm.email, '_ko_property_writers' : { value : function(__ko_value) { loginModel.registerForm.email = __ko_value; } }  } })()                 }) })()) }}<input type="text" id="registerUser" name="registerUser"
-                           />
-                </div>
-            </div>
-
-            <div class="clearfix">
-                <label for="registerName">Display name</label>
-
-                <div class="input">
-                    {{ko_code ((function() { return ko.templateRewriting.applyMemoizedBindingsToNextSibling(function() {                     return (function() { return { value: loginModel.registerForm.displayName, '_ko_property_writers' : { value : function(__ko_value) { loginModel.registerForm.displayName = __ko_value; } }  } })()                 }) })()) }}<input type="text" id="registerName" name="registerName"
-                           />
-                </div>
-            </div>
-            <div class="clearfix">
-                <label for="registerPass">Password</label>
-
-                <div class="input">
-                    {{ko_code ((function() { return ko.templateRewriting.applyMemoizedBindingsToNextSibling(function() {                     return (function() { return { value: loginModel.registerForm.password, '_ko_property_writers' : { value : function(__ko_value) { loginModel.registerForm.password = __ko_value; } }  } })()                 }) })()) }}<input type="password" id="registerPass" name="registerPass"
-                           />
-                </div>
-            </div>
-            {{ko_code ((function() { return ko.templateRewriting.applyMemoizedBindingsToNextSibling(function() {                     return (function() { return { visible: loginModel.registerForm.registrationError().length > 0 } })()                 }) })()) }}<div class="alert-message warning" >
-               {{ko_code ((function() { return ko.templateRewriting.applyMemoizedBindingsToNextSibling(function() {                     return (function() { return { text: loginModel.registerForm.registrationError() } })()                 }) })()) }}<p class="error" ></p>
-            </div>
-            <div class="actions">
-                {{ko_code ((function() { return ko.templateRewriting.applyMemoizedBindingsToNextSibling(function() {                     return (function() { return { click: loginModel.registerForm.submit, '_ko_property_writers' : { click : function(__ko_value) { loginModel.registerForm.submit = __ko_value; } }  } })()                 }) })()) }}<input type="submit" class="btn primary" value="Register"
-                       >
-
-            </div>
-        </form>
-    </div>
-    <div class="span8 ymcontent">
-        <div class="clearfix" style="padding: 20px;">
-            <h2>Welcome back...</h2>
-        </div>
-
-        <form>
-
-
-            <div class="clearfix">
-                <label for="loginUser">Email</label>
-
-                <div class="input">
-                    {{ko_code ((function() { return ko.templateRewriting.applyMemoizedBindingsToNextSibling(function() {                     return (function() { return { value: loginModel.loginForm.email, valueUpdate: 'afterkeydown', '_ko_property_writers' : { value : function(__ko_value) { loginModel.loginForm.email = __ko_value; } }  } })()                 }) })()) }}<input type="text" id="loginUser" name="loginUser"
-                           />
-                </div>
-            </div>
-
-            <div class="clearfix">
-                <label for="loginPass">Password</label>
-
-                <div class="input">
-                    {{ko_code ((function() { return ko.templateRewriting.applyMemoizedBindingsToNextSibling(function() {                     return (function() { return { value: loginModel.loginForm.password, valueUpdate: 'afterkeydown', '_ko_property_writers' : { value : function(__ko_value) { loginModel.loginForm.password = __ko_value; } }  } })()                 }) })()) }}<input type="password" id="loginPass" name="loginPass"
-                           />
-
-                </div>
-            </div>
-
-            <div class="actions" style="margin-top: 64px;">
-                {{ko_code ((function() { return ko.templateRewriting.applyMemoizedBindingsToNextSibling(function() {                     return (function() { return { click: loginModel.loginForm.submit, enable: loginModel.loginForm.valid, '_ko_property_writers' : { click : function(__ko_value) { loginModel.loginForm.submit = __ko_value; }, enable : function(__ko_value) { loginModel.loginForm.valid = __ko_value; } }  } })()                 }) })()) }}<input type="submit" class="btn primary" value="Login"
-                       />
-            </div>
-        </form>
-    </div>
-
-</div>
-        </div>
-</script></body></html>

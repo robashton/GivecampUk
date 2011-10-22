@@ -98,6 +98,8 @@ exports.init = function(app) {
     dbapi.save_answer(req.body.question_id, req.body.answer_text, function(doc){
         res.json(doc);
       }); 
+
+    dbapi.update_answer_count_for_question(req.body.question_id); 
   });
 
   app.post('/promote_user', function(req, res){
@@ -239,7 +241,7 @@ exports.init = function(app) {
 
   app.post('/register', function(req, res){
     dbapi.get_user(req.body.email, function(err, userDoc){
-      if(userDoc.error == undefined && userDoc.rows.length > 0){
+      if(err == undefined && userDoc.rows.length > 0){
          res.json({ success: false, error: 'Email address ' + req.body.email + ' already registered.'}, {}, 200);  
       }else{
          dbapi.create_user(req.body.email,req.body.name,req.body.password);
@@ -307,7 +309,7 @@ exports.init = function(app) {
         tag: "There must be a selected tag"
       })) return;
 
-      var userid = security.currentUser();     
+      var userid = security.currentUser();  
 
       db.save(
       {
@@ -321,6 +323,9 @@ exports.init = function(app) {
         tag: req.body.tag
         }, 
        function ( err, doc) {
+
+          dbapi.update_answer_count_for_question(doc._id); 
+
           res.json({
             err: err,
             doc: doc
@@ -338,6 +343,7 @@ exports.init = function(app) {
       }
       else {
           question = doc;
+          dbapi.update_answer_count_for_question(doc._id);
           dbapi.get_question_answers(questionId, function(err, doc) {
             if(err) {
                 res.json({error: err});    
