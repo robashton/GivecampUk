@@ -2,6 +2,7 @@ var viewQuestionModel = {
       id: ko.observable(''),
       title: ko.observable(''),
       description: ko.observable(''),
+      date: ko.observable(''),
       answers: ko.observableArray([]),
       url: ko.observable(''),
 
@@ -14,6 +15,7 @@ var viewQuestionModel = {
               question_id: viewQuestionModel.id,
               answer_text: form.answer()
             }).success(function(data) {
+                form.answer('');
                 viewQuestionModel.answers.push({ value: data });              
             });
         }
@@ -25,6 +27,7 @@ var viewQuestionModel = {
             if(data.error) console.log(data.error);         
             viewQuestionModel.title(data.question.title);
             viewQuestionModel.description(data.question.description);
+            viewQuestionModel.date(data.question.date);
             viewQuestionModel.answers(data.answers.rows);
         });
       },   
