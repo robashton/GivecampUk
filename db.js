@@ -22,14 +22,16 @@ exports.save_answer = function(question_id, answer_text, callback) {
 }
 
 exports.update_answer_count_for_question = function(questionId) {
-  db.view('/youngmindsdb/_design/questions/_view/by_answercount', { key: questionId, group: true }, function(err, doc) {
-       if(!doc.rows || doc.rows.length == 0) return;
+  setTimeout(function() {
+    db.view('/youngmindsdb/_design/questions/_view/by_answercount', { key: questionId, group: true }, function(err, doc) {
+         if(!doc.rows || doc.rows.length == 0) return;
 
-       db.save({
-          _id: questionId + '_count',
-          count: doc.rows[0].value
-       }); 
-    });
+         db.save({
+            _id: questionId + '_count',
+            count: doc.rows[0].value
+         }); 
+      });
+  }, 1000);
 };
 
 exports.get_user = function (email, callback) {
