@@ -3,7 +3,7 @@ var viewQuestionModel = {
       title: ko.observable(''),
       description: ko.observable(''),
       answers: ko.observableArray([]),
-      url = ko.observable('');
+      url: ko.observable(''),
 
       newAnswerForm: {
         answer: ko.observable(''),
