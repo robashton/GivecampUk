@@ -3,7 +3,8 @@ var views = {
     question: questionModel,
     questions: questionsModel,
     tagadmin: tagadminModel,
-    admin:adminModel
+    admin:adminModel,
+    viewquestion: viewQuestionModel
 };
 
 var viewModel = {
@@ -32,7 +33,12 @@ $(function(){
       },
       "/ask": function() {
           viewModel.currentView('question');
-      },    
+      },
+      "/question/:id": function(params) {
+          var id = params.id;
+          viewQuestionModel.id(id);
+          viewModel.currentView('viewquestion');
+      },
       "/admin": function() {
         viewModel.currentView('admin');
       }, 

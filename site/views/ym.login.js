@@ -7,7 +7,7 @@ var loginModel = {
 
         submit: function(event){
             var form = this().registerForm;
-            $.post('register', {username: form.username, password: form.password }).success(function(data){
+            $.post('register', {email: form.username,name: form.displayName, password: form.password }).success(function(data){
                if(data.success) {
 
                }
@@ -28,14 +28,15 @@ var loginModel = {
             viewModel.displayName('Joe Bloggs');
             viewModel.doOnAuth();
 
-//            $.post('login', { username: form.username(), password: form.password() }).success(function(data){
-//                if(data.success) {
-//                    $.get('currentuser').success(function(data) {
-//                        viewModel.authenticated(true);
-//                        viewModel.username(data.username);
-//                    });
-//                }
-//            });
+            $.post('login', { email: form.username(), password: form.password() }).success(function(data){
+                if(data.success) {
+                    $.get('currentuser').success(function(data) {
+                        //TODO: set cookie
+                        viewModel.authenticated(true);
+                        viewModel.username(data.username);
+                    });
+                }
+            });
         }
     }
 };

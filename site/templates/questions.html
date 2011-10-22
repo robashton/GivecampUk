@@ -5,23 +5,7 @@
             <div style="padding: 5px;">
                 <h2>Questions</h2>
 
-                <div id="questions">
-                    <div class="question">
-                        <h2><a href="#">My son keeps crying in his sleep</a></h2>
-                        <p>For about seven months now, my son has been....</p>
-                        <p>2 days ago</p>
-                    </div>
-                    <div class="question">
-                        <h2><a href="#">My son keeps crying in his sleep</a></h2>
-                        <p>For about seven months now, my son has been....</p>
-                        <p>2 days ago</p>
-                    </div>
-                    <div class="question">
-                        <h2><a href="#">My son keeps crying in his sleep</a></h2>
-                        <p>For about seven months now, my son has been....</p>
-                        <p>2 days ago</p>
-                    </div>
-                </div>
+                <div id="questions" data-bind="template: { name: 'questionitem', foreach: questionsModel.questions}"></div>
 
             </div>
         </div>
