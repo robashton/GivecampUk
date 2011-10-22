@@ -6,7 +6,13 @@ var tagadminModel = {
             }
         });
     },
-  tagList: ko.observableArray()
+  tagList: ko.observableArray(),
+  
+  remove: function(event) {
+    var id = $(event.currentTarget).parent().siblings().first().text();      
+    alert(id);
+   
+  }
 };
 
 /*
