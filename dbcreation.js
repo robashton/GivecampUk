@@ -87,7 +87,7 @@ var views = [
        "language": "javascript",
        "views": {
            "by_tag": {
-               "map": "function(doc) {\n  if(doc.type === \"question\")\n  \temit(doc.tag, doc);\n}"
+               "map": "function(doc) {\n  if(doc.type === \"question\")\n  \temit(doc.tag.tagName, doc);\n}"
            }
        }
 },
