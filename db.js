@@ -30,6 +30,15 @@ exports.get_user = function (email, callback) {
   });
 }
 
+exports.create_session = function (id,name, callback) {
+    var guid =  utils.generateGuid();
+    console.log("guid "+guid);
+    db.save({_id: id, session: guid, name: name, type: "session"}, function ( err, doc) {
+      console.log("doc guid "+doc.guid);
+      callback(doc.guid);
+    });
+  }
+
 exports.create_user = function () {
   encryption.hash("password", function(hash){
     db.save({questionId: req.param('qId')})
