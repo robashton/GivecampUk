@@ -1,4 +1,4 @@
-<div class="container" style="margin-top: 40px">
+<div class="container" style="margin-top: 40px; margin-bottom: 40px;">
     <div class="row">
 
         <div class="span12 ymcontent">
@@ -20,12 +20,12 @@
             </div>
 
             <div id="newanswer">
-              <form method="/" action="post" class="form-stacked">
+              <form class="form-stacked" id="newAnswerForm">
                 <div class="clearfix">
                     <label for="questionResponse">Response</label>
 
                     <div class="input">
-                        <textarea id="questionResponse" name="questionResponse" class="xxlarge" rows="10"
+                        <textarea id="questionResponse" name="questionResponse" class="xxlarge required" rows="10"
                                data-bind="value: viewQuestionModel.newAnswerForm.answer, valueUpdate: 'afterkeydown'" />
 
                     </div>

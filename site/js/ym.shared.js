@@ -1,5 +1,4 @@
 var views = {
-    login: loginModel,
     question: questionModel,
     questions: questionsModel,
     viewquestion: viewQuestionModel,
@@ -14,7 +13,6 @@ var views = {
 
 var viewModel = {
     authenticated: ko.observable(false),
-    doOnAuth: null,
     email: ko.observable(),
     displayName: ko.observable(),
     currentView: ko.observable('login')
@@ -31,6 +29,10 @@ viewModel.currentViewModel.subscribe(function() {
 });
 
 $(function(){
+
+    $.get('currentuser').success(function(){
+
+    viewModel.authenticated(true);
 
     $.routes({
       "/": function() {
@@ -58,24 +60,9 @@ $(function(){
         viewModel.authenticated(false);
         viewModel.email(null);
         viewModel.currentView('login');
-        $.routes("set","/");
+        window.location = 'login.html';
       }
     });
-
-    $.routes.dispatcher = function(callback,params,path){
-        if(viewModel.authenticated()) {
-            callback(params);
-        } else {
-            viewModel.doOnAuth = function(){
-                callback(params);
-            };
-            viewModel.currentView('login');
-            $.get('currentuser').success(function(){
-                viewModel.authenticated(true);
-                viewModel.doOnAuth();
-            });
-        }
-    };
 
     jQuery.validator.setDefaults({
         errorPlacement: function(error, element) {
@@ -90,5 +77,7 @@ $(function(){
     ko.externaljQueryTemplateEngine.templateUrl = 'templates';
     ko.setTemplateEngine(ko.externaljQueryTemplateEngine);
     ko.applyBindings(viewModel.currentViewModel);
+
+    });
 });
 
