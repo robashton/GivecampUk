@@ -1,17 +1,30 @@
 var tagadminModel = {
-  //tags: ko.observableArray()
+    init: function() {
+        $.get('updateTags', function(data){
+            if(!data.error){
+                tagadminModel.tagList(data.tags);
+            }
+        });
+    },
+sortByName: function () {
+        this.items.sort(function (a, b) {
+            return a.tagName < b.tagName ? -1 : 1;
+        })
+},
+  tagList: ko.observableArray()
 };
 
-//tagadminModel.init = function(){
-
-//};
+tagadminModel.gridViewModel = new ko.simpleGrid.viewModel({
+    data: tagadminModel.tagList,
+    columns: [
+        { headerText: "tagName", rowText: "Tag Name" },
+        { headerText: "description", rowText: "Description" }
+    ],
+    pageSize: 10
+});
+ 
+ko.applyBindings(tagadminModel);
 /*
-{ id:..., name:.... }
-
-var array = from server...;
-tagadminModel.tags(array);
-
-
 loginModel.loginForm.valid = ko.dependentObservable(function(){
         return this.loginForm.username().length > 0 && this.loginForm.password().length > 0;
 }, loginModel);*/

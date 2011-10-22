@@ -41,6 +41,12 @@ exports.init = function(app) {
   });
 
   app.post('/answer', function(req, res){
+    if(!expect(req, res, {
+      question_id: "There must be a question id!",
+      answer_text: "There must be answer text"
+    }))
+      return;
+    
     dbapi.save_answer(req.body.question_id, req.body.answer_text, req.body.rank, function(doc){
       res.send(doc);
       }); 
@@ -174,6 +180,17 @@ exports.init = function(app) {
     });    
   }); 
 
+  app.get('/updateTags', function(req, res) {
+    db.get("tagList", function(err, doc) {
+      if(err) 
+         res.json({error: err});
+      else
+        res.json({ 
+          error: null,
+          tags: doc.tags
+        });
+    });    
+  }); 
   app.post('/createquestion', function(req, res) {
     
       if(!expect(req, res, {
