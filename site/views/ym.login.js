@@ -15,7 +15,14 @@ var loginModel = {
         password: ko.observable(),
 
         submit: function(event){
-            alert('Hi ' + this().loginForm.username());
+
+            var form = this().loginForm;
+
+            $.post('login', { username: form.username(), password: form.password() }).success(function(data){
+                if(data.success) {
+                    alert('Yeah!');
+                }
+            });
         }
     }
 
