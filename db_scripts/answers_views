@@ -1,10 +1,15 @@
 {
    "_id": "_design/answers",
-   "_rev": "5-2fee789b5bf8ff468f16606b625d7ae7",
+   "_rev": "6-96eec9f4104cbec08e4dc484da10091b",
    "language": "javascript",
    "views": {
        "byQuestion": {
            "map": "function(doc) {\n    var d = new Date(doc.date);\n    if (doc.type && doc.type == \"answer\" &&  \n\t(!doc.deleted || doc.deleted==0)) \n\t{\n        \temit(\n\t\t\t[\n\t\t\t\tdoc.questionId, \n\t\t\t\td.getFullYear(), \n\t\t\t\td.getMonth()+1, \n\t\t\t\td.getDate(), \n\t\t\t\td.getHours(), \n\t\t\t\td.getMinutes(), \n\t\t\t\tdoc._id\n\t\t\t]\n\t\t\t,doc);\n        }\n}"
+       },
+       "countByQuestion": {
+           "map": "function(doc) {\n  if(doc.type==\"answer\")\n  emit([doc.questionId], 1);\n}",
+           "reduce": "function (key, values, rereduce) {\n    return sum(values);\n}"
        }
    }
-} 
+}
+
