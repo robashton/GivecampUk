@@ -46,9 +46,9 @@ exports.get_questions = function(callback) {
   });
 };
 
-exports.create_session = function (id,name, callback) {
+exports.create_session = function (id,email, callback) {
     var guid =  utils.generateGuid();
-    db.save({session: guid, name: name, type: "session"}, function ( err, doc) {
+    db.save({session: guid, email: email, type: "session"}, function ( err, doc) {
       callback(guid);
     });
   }

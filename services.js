@@ -17,13 +17,13 @@ exports.init = function(app) {
   });
 
   app.post('/login', function(req, res){
-    security.signInUser(req, res, req.body.email, req.body.password, function(result,session_id) {
+    security.signInUser(req, res, req.body.email, req.body.password, function(result,session_id,name) {
       if(!result){
           res.json({ success: false}, {}, 401); 
         }
         else
         { 
-          res.json({success: true, session: session_id},{},200);
+          res.json({success: true, session: session_id, name: name},{},200);
         }
     });
     
