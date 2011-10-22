@@ -35,7 +35,7 @@ exports.signInUser = function(req, res, email, password, callback) {
   
    db.get_user(email, function(err,doc){
      if(err === null && doc.rows.length > 0){
-       encryption.compare(password, doc.rows[0].value.password, doc.rows[0].value.salt, function(result) {
+       encryption.compare(password, doc.rows[0].value.password, function(result) {
           if(result) {
             var cookies = new Cookies( req, res , keys);
             cookies.set("ymindsid", email, { signed: true } );
