@@ -34,6 +34,13 @@ exports.get_question_answers = function(questionId, callback) {
   });
 };
 
+exports.get_popular_tags = function(callback) {
+    db.view('/youngmindsdb/_design/tags/_view/by_popularity', 
+        {
+           
+        }, callback);
+};
+
 exports.get_questions_by_tag = function(questionTag, callback) {
     db.view('/youngmindsdb/_design/questions/_view/by_tag', {key: questionTag}, function(err, doc) {
       callback(err, doc)

@@ -35,6 +35,12 @@ exports.init = function(app) {
     })  
   });
 
+  app.get('/get_popular_tags', function(req, res) {
+      dbapi.get_popular_tags(function(err, docs) {
+        res.json({err: err, docs: docs});
+      });
+  });
+
   app.get('/get_questions_by_tag/:tag?', function(req, res) {
       if(!req.params.tag)
         dbapi.get_questions(function(err, doc) {
