@@ -2,21 +2,20 @@ This is the give camp project
 
 Pages
   - Login
-    - Validation Credentials against CouchDB
+    - Validation Credentials against CouchDB            - In progress (Dave/Scott)
   - Registration
-    - Create user with e-mail address & Password
+    - Create user with e-mail address & Password        - There is some code there
   - Ask a question
-    - Title, Description, Select a tag
+    - Title, Description, Select a tag        
+    - UI on top of all of this.                         - Being developed by those dudes over there
 
-    - UI on top of all of this. 
-
-    DONE - Service endpoint - GET
+    DONE - Service endpoint - GET                       - DONE
       - createquestion : authenticated
         - List of possible tags along with description
             - TagName
             - TagDescription
 
-    DONE - Service endpoint - POST
+    DONE - Service endpoint - POST                      - DONE
       - createquestion  : authenticated
         - Title
         - Content
@@ -25,14 +24,14 @@ Pages
   - List of questions by time
       - List of tags to filter with
 
-  - View a question page
-    - Add an answer
-    - Mark an answer as the accepted answer
-    - Vote up/vote down
-    - Delete/modify an answer
-    - Show ALL the answers on the page
-        - Ordered by vote count
-        - Show top answer at the top
+  - View a question page    
+    - Add an answer                                     - DONE
+    - Mark an answer as the accepted answer             - DONE
+    - Vote up/vote down                                 - DONE
+    - Delete/modify an answer                           - NOTHING
+    - Show ALL the answers on the page                  - DONE
+        - Ordered by vote count                         - Client side
+        - Show top answer at the top                    - Client side
   - Managing tags page
     - Manage lists
   - Manage users

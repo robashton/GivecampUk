@@ -12,6 +12,7 @@ startup.check_config_exists(DB_CONFIG_FILE)
 var express = require('express');
 var app = express.createServer();
 require('./services').init(app);
+require('./dbcreation').init(app);
 app.listen(8081);
 
 console.log("Listening on port 8081");
