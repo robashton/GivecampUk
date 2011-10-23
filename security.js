@@ -45,7 +45,9 @@ exports.getCurrentUser = function(req, res, callback) {
   if(!username) { callback(null); return; }
 
   db.get_user(username, function(err, doc) {
-      callback(doc.rows[0].value);
+      if(doc.rows.length === 1)
+        callback(doc.rows[0].value);
+      else callback(null);
   });
 };
 
