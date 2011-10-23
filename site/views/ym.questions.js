@@ -8,12 +8,20 @@ questionsModel.tagSortFunction =  function(a, b) {
     return a.value.count > b.value.count ? -1 : 1;  
 };
 
+
 questionsModel.questionSortFunction =  function(a, b) {
     return new Date(a.value.question.date) > new Date(b.value.question.date) ? -1 : 1;  
 };
 
+questionsModel.chooseTag = function(key) {
+  var key = key.replace(/\//g, '_z_').replace(/ /g, '_');
+  $.routes('set', '/tag/' + key);
+};
+
 questionsModel.updateSearch = function(key) {
-     $.get('get_questions_by_tag/' + key).success(function(data) {
+    key = key.replace(/_z_/g, '/').replace(/_/g, ' ');
+    var url = 'get_questions_by_tag/' + encodeURIComponent(key);
+     $.get(url).success(function(data) {
         questionsModel.tag_filter(key)
         questionsModel.questions(data.doc.rows);
     });

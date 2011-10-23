@@ -3,9 +3,7 @@ var views = {
     questions: questionsModel,
     viewquestion: viewQuestionModel,
     tags: tagadminModel,
-    admin: adminModel,
     tagadmin: tagadminModel,
-    admin:adminModel,
     viewquestion: viewQuestionModel,
     useradmin: useradminModel
 
@@ -38,6 +36,10 @@ $(function(){
         "/": function() {
             viewModel.currentView('questions');
         },
+        "/tag/:tag": function(params) {
+            questionsModel.updateSearch(params.tag);
+            viewModel.currentView('questions');
+        },
         "/ask": function() {
             viewModel.currentView('question');
         },
@@ -46,13 +48,10 @@ $(function(){
             viewQuestionModel.id(id);
             viewModel.currentView('viewquestion');
         },
-        "/admin": function() {
-          viewModel.currentView('admin');
-        }, 
         "/tagadmin": function() {
           viewModel.currentView('tagadmin');
         },
-      "/useradmin": function() {
+        "/useradmin": function() {
           viewModel.currentView('useradmin');
         },
         "/logout": function() {

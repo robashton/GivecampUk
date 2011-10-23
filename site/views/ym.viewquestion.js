@@ -26,6 +26,22 @@ var viewQuestionModel = {
         }
       },
       
+      up: function(event, answerId) {
+        
+        $.post('/increment_answer_rank', {
+            answerId: answerId
+        }).success(function(data) {
+
+        })
+  },
+      down: function(event, answerId) {
+        
+        $.post('/decrement_answer_rank', {
+            answerId: answerId
+        }).success(function(data) {
+
+        })
+  },
 
       init: function() {
         $.getJSON('/question/' + viewQuestionModel.id(), function(data) {   
