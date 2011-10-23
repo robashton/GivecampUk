@@ -78,7 +78,7 @@ $(function(){
       ko.applyBindings(viewModel.currentViewModel);
 
     }).error(function(){ 
-      document.location.href = '/index.html';
+      document.location.href = '/login.html';
     });;
 });
 
