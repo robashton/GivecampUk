@@ -32,17 +32,27 @@ var viewQuestionModel = {
         }).success(function(data) {
           $(event.currentTarget).parent().children(':button').hide();
           $(event.currentTarget).parent().children().last().show();
+          viewQuestionModel.pingItemInArray(answer);
         })
-  },
+      },
       down: function(event, answer) {
         
         $.post('/decrement_answer_rank', {
             answerId: answer._id
         }).success(function(data) {
-            $(event.currentTarget).parent().children(':button').hide()
-            $(event.currentTarget).parent().children().last().show()
-        })
-  },
+            $(event.currentTarget).parent().children(':button').hide();
+            $(event.currentTarget).parent().children().last().show();
+            viewQuestionModel.pingItemInArray(answer);
+        });
+      },
+      pingItemInArray: function(answer) {
+          for(var i = viewQuestionModel.answers.length-1; i >= 0; i--){  
+            if(viewQuestionModel.answers[i] === answer){              
+                viewQuestionModel.answers.splice(i,1); 
+                viewQuestionModel.answers.push(answer);               
+            }
+        }
+      },
 
       init: function() {
         $.getJSON('/question/' + viewQuestionModel.id(), function(data) {   
@@ -59,7 +69,6 @@ var viewQuestionModel = {
 };
 
 viewQuestionModel.answersSortFunction =  function(a, b) {
-console.log(a)
     return a.value.rank > b.value.rank ? -1 : 1;  
 };
 
