@@ -69,6 +69,8 @@ function createQuestions(){
    "questionId": "testquestion1",
    "userId": "testuser2",
    "displayname": "Nick",
+   "upvotes": [],
+   "downvotes": [],
    "answer": "sport has got a massive capacity to improve the lives of people suffering from mental health problems because physical activity is good for mental health, whether you have a mental health problem or not. Sport provides a forum for social interaction",
    "rank": 0,
    "date": "2011-10-23T09:59:10.118Z"

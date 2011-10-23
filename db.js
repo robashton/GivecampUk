@@ -16,6 +16,8 @@ exports.save_answer = function(req, res, question_id, answer_text, callback) {
         displayname: user.name, 
         answer: answer_text, 
         rank: 0,
+        upvotes: new Array(),
+        downvotes: new Array(),
         date:new Date()
         }, function(err, doc) {
           // TODO: error handling
