@@ -25,8 +25,8 @@ var useradminModel = {
     },
     users: ko.observableArray([]),
     remove:function(event){
-       $.post('remove_user', { userId: event });
-       refresh();
+       $.post('remove_user', { userId: event }, refresh());
+       
     }
 
   
