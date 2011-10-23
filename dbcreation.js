@@ -45,6 +45,7 @@ function createUsers() {
     db.save({_id: "testuser1", name: "Tim Caswell", age: 28, email: "tim.caswell@gmail.com", password: hash, type: "user", isElevated: false}, function ( err, doc) {});
 
     db.save({_id: "testuser2", name: "Nick", age: 28, email: "test@nick.com", password: hash, type: "user", isElevated: false}, function ( err, doc) {});
+    db.save({_id: "testadmin1", name: "Admin", age: 28, email: "admin", password: hash, type: "user", isElevated: true}, function ( err, doc) {});
   })
 };
 
