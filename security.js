@@ -37,14 +37,18 @@ exports.currentUser = function(req, res) {
   }
 };
 
+exports.setCookieForUser = function(req, res, email) {
+    var cookies = new Cookies( req, res , keys);
+    cookies.set("ymindsid", email, { signed: true } );
+};
+
 exports.signInUser = function(req, res, email, password, callback) {
   
    db.get_user(email, function(err,doc){
      if(err === null && doc.rows.length > 0){
        encryption.compare(password, doc.rows[0].value.password, function(result) {
           if(result) {
-            var cookies = new Cookies( req, res , keys);
-            cookies.set("ymindsid", email, { signed: true } );
+            exports.setCookieForUser(req, res, email);
             callback(true);
           }
         else{ callback(false); }
