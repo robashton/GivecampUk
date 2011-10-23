@@ -25,7 +25,7 @@
 
                     <div class="input">
                         <input type="text" id="registerUser" name="registerUser"
-                               data-bind="value: loginModel.registerForm.email"/>
+                               data-bind="value: loginModel.registerForm.email, valueUpdate: 'afterkeydown'"/>
                     </div>
                 </div>
 
@@ -34,7 +34,7 @@
 
                     <div class="input">
                         <input type="text" id="registerName" name="registerName"
-                               data-bind="value: loginModel.registerForm.displayName"/>
+                               data-bind="value: loginModel.registerForm.displayName, valueUpdate: 'afterkeydown'"/>
                     </div>
                 </div>
                 <div class="clearfix">
@@ -42,7 +42,7 @@
 
                     <div class="input">
                         <input type="password" id="registerPass" name="registerPass"
-                               data-bind="value: loginModel.registerForm.password"/>
+                               data-bind="value: loginModel.registerForm.password, valueUpdate: 'afterkeydown'"/>
                     </div>
                 </div>
                 <div class="alert-message warning"
@@ -51,7 +51,7 @@
                 </div>
                 <div class="actions">
                     <input type="submit" class="btn primary" value="Register"
-                           data-bind="click: loginModel.registerForm.submit">
+                           data-bind="click: loginModel.registerForm.submit, enable: loginModel.registerForm.valid"/>
 
                 </div>
             </form>

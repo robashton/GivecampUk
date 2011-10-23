@@ -15,11 +15,7 @@ var viewModel = {
     email: ko.observable(),
     displayName: ko.observable(),
     currentUser: ko.observable(),
-    currentView: ko.observable('login'),
-
-    isUserElevated: function() {
-      return true;
-    }
+    currentView: ko.observable('login')
 };
 
 viewModel.currentViewModel = ko.dependentObservable(function(){
@@ -36,7 +32,9 @@ $(function(){
 
     $.get('currentuser').success(function(currentUser){
       viewModel.authenticated(true);
-      viewModel.currentUser = currentUser;
+      viewModel.currentUser(currentUser);
+      viewModel.isElevated(currentUser.isElevated);
+      viewModel.displayName(currentUser.displayName);
 
       $.routes({
         "/": function() {
@@ -55,10 +53,12 @@ $(function(){
             viewModel.currentView('viewquestion');
         },
         "/tagadmin": function() {
-          viewModel.currentView('tagadmin');
+          if(viewModel.isElevated())
+            viewModel.currentView('tagadmin');
         },
         "/useradmin": function() {
-          viewModel.currentView('useradmin');
+          if(viewModel.isElevated())
+             viewModel.currentView('useradmin');
         },
         "/logout": function() {
           $.get('logout');
@@ -84,7 +84,7 @@ $(function(){
       ko.applyBindings(viewModel.currentViewModel);
 
     }).error(function(){ 
-      document.location.href = '/index.html';
+      document.location.href = '/login.html';
     });;
 });
 

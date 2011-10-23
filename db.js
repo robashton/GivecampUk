@@ -8,14 +8,12 @@ var CouchClient = require('couch-client');
 var db = CouchClient(url);
 
 exports.save_answer = function(req, res, question_id, answer_text, callback) {
-  var userid = security.currentUser(req, res);  
-  
-  security.usersDisplayName(userid, function(displayname){
+  security.getCurrentUser(req, res, function(user){
     db.save({_id:utils.generateGuid(),
         type:"answer", 
         questionId: question_id, 
-        userId: userid,
-        displayname: displayname, 
+        userId: user._id,
+        displayname: user.name, 
         answer: answer_text, 
         rank: 0,
         date:new Date()

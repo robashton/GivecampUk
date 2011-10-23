@@ -29,25 +29,25 @@ exports.init = function(app) {
     });    
   });
 
-  app.get('/get_questions_by_rank',function(req,res){
+  app.get('/get_questions_by_rank',security.validateUser,function(req,res){
     dbapi.get_questions_by_rank(function(err, doc){
       res.json(err,doc);
     })  
   });
 
-  app.get('/get_popular_tags', function(req, res) {
+  app.get('/get_popular_tags',security.validateUser, function(req, res) {
       dbapi.get_popular_tags(function(err, docs) {
         res.json({err: err, rows: docs.rows});
       });
   });
 
-  app.get('/get_all_users',function(req,res){
+  app.get('/get_all_users', security.validateElevatedUser, function(req,res){
     dbapi.get_all_users(function(err, doc){
        res.json({ err: err, doc: doc});
     });
   });
 
-  app.get('/get_questions_by_tag/:tag?', function(req, res) {
+  app.get('/get_questions_by_tag/:tag?',security.validateUser, function(req, res) {
       if(!req.params.tag || req.params.tag == "All")
         dbapi.get_questions(function(err, doc) {
           res.json({ err: err, doc: doc});
@@ -58,7 +58,7 @@ exports.init = function(app) {
         });
   });
 
-  app.post('/answer', function(req, res){
+  app.post('/answer',security.validateUser, function(req, res){
     if(!expect(req, res, {
       question_id: "There must be a question id!",
       answer_text: "There must be answer text"
@@ -71,7 +71,7 @@ exports.init = function(app) {
     dbapi.update_answer_count_for_question(req.body.question_id); 
   });
 
-  app.post('/promote_user', function(req, res){
+  app.post('/promote_user', security.validateElevatedUser,  function(req, res){
 
     db.get(req.body.userId, function(err, doc) {
       if(err) 
@@ -86,7 +86,7 @@ exports.init = function(app) {
     });  
   });
 
-  app.post('/remove_user', function(req, res){
+  app.post('/remove_user',security.validateElevatedUser,  function(req, res){
 
     db.get(req.body.userId, function(err, doc) {
       if(err) 
@@ -101,7 +101,7 @@ exports.init = function(app) {
   });
 
 
-  app.post('/demote_user', function(req, res){
+  app.post('/demote_user',security.validateElevatedUser,  function(req, res){
 
     db.get(req.body.userId, function(err, doc) {
       if(err) 
@@ -115,7 +115,7 @@ exports.init = function(app) {
       }
     });  
   });
-  app.post('/removeTag', function(req, res){
+  app.post('/removeTag',security.validateElevatedUser,  function(req, res){
        db.get("tagList", function(err, doc) {
         if(err) 
            res.json({error: err});
@@ -164,7 +164,7 @@ exports.init = function(app) {
     });  
   });
 
-  app.post('/set_accepted_answer', function(req, res){
+  app.post('/set_accepted_answer',security.validateElevatedUser,  function(req, res){
 
     db.get(req.body.answerId, function(err, doc) {
       if(err) 
@@ -179,7 +179,7 @@ exports.init = function(app) {
     });  
   });
   
-  app.post('/reset_accepted_answer', function(req, res){
+  app.post('/reset_accepted_answer',security.validateElevatedUser,  function(req, res){
 
     db.get(req.body.answerId, function(err, doc) {
       if(err) 
@@ -194,16 +194,10 @@ exports.init = function(app) {
     });  
   });
 
-  app.post('/delete_answer', function(req, res){
-
-    // TODO: test that the current user has elevated permissions
-    var currentUserIsElevated = true;
-    if(currentUserIsElevated)
-    {
-        db.remove(req.body.answerId, function(err, doc){
-          res.send({ err: err, doc: doc});        
-        });
-    }
+  app.post('/delete_answer', security.validateElevatedUser,  function(req, res){
+      db.remove(req.body.answerId, function(err, doc){
+        res.send({ err: err, doc: doc});        
+      });
   });
 
   app.post('/register', function(req, res){
@@ -218,16 +212,21 @@ exports.init = function(app) {
     });
   });
 
-  app.get('/logout', function(req, res){
+  app.get('/logout', security.validateUser,  function(req, res){
     security.signOutUser(req, res);
     res.json({ success: true}, {}, 200);  
   });
 
   app.get('/currentuser', security.validateUser, function(req, res) {
-    res.json({ username: security.currentUser(req, res) }, {}, 200);
+    security.getCurrentUser(req, res, function(user) {
+      res.json({
+         isElevated: user.isElevated,
+         displayName: user.name      
+      }, {}, 200);
+    });
   });
   
-  app.get('/createquestion', function(req, res) {
+  app.get('/createquestion', security.validateUser, function(req, res) {
     db.get("tagList", function(err, doc) {
       if(err) 
          res.json({error: err});
@@ -239,7 +238,7 @@ exports.init = function(app) {
     });    
   }); 
 
-  app.get('/updateTags', function(req, res) {
+  app.get('/updateTags', security.validateElevatedUser,  function(req, res) {
     db.get("tagList", function(err, doc) {
       if(err) 
          res.json({error: err});
@@ -251,7 +250,7 @@ exports.init = function(app) {
     });    
   }); 
 
-  app.post('/updateTags', function(req, res) {
+  app.post('/updateTags',security.validateElevatedUser,  function(req, res) {
 
       db.save(
       {
@@ -267,23 +266,21 @@ exports.init = function(app) {
        });    
   });  
 
-  app.post('/createquestion', function(req, res) {
+  app.post('/createquestion',security.validateUser,  function(req, res) {
     
       if(!expect(req, res, {
         title: "There must be a title",
         description: "There must be a description",
         tag: "There must be a selected tag"
       })) return;
-
-      var userid = security.currentUser(req, res);  
-      
-      security.usersDisplayName(userid, function(displayname ){
+     
+      security.getCurrentUser(req, res, function(user ){
           db.save(
           {
             _id: utils.generateGuid(),
             type:"question",
-            user:userid, 
-            displayname: displayname,
+            user: user._id, 
+            displayname: user.name,
             date:new Date(),
             deleted:0,
             title: req.body.title, 
@@ -302,7 +299,7 @@ exports.init = function(app) {
       })
   }); 
 
-  app.get('/question/:id', function(req, res) {
+  app.get('/question/:id',security.validateUser,  function(req, res) {
     var questionId = req.params.id;
     var question, answers;
 
@@ -331,21 +328,15 @@ exports.init = function(app) {
 
   });
 
-  app.get('/service', security.validateUser, function(req, res){
-      db.get("creationix", function (doc) {
-        res.send('hello world: ' + doc);
-      })
-});
-
-expect = function(req, res, keys) {
- for (i in keys) {
-    var value = req.body[i];
-    if(!value) { 
-      res.json({ error: keys[i]});
-      return false;
+  expect = function(req, res, keys) {
+   for (i in keys) {
+      var value = req.body[i];
+      if(!value) { 
+        res.json({ error: keys[i]});
+        return false;
+      }
     }
+    return true;
   }
-  return true;
-}
 
 }
