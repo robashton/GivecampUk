@@ -59,13 +59,24 @@ exports.get_popular_tags = function(callback) {
 };
 
 exports.get_questions_by_tag = function(questionTag, callback) {
-    db.view('/youngmindsdb/_design/questions/_view/by_tag', { key: questionTag, include_docs: true} ,function(err, doc) {
+  var query = '/youngmindsdb/_design/questions/_view/by_tag';
+
+  query += '?startkey=["' + encodeURIComponent(questionTag) + '",0]';
+  query += '&endkey=["' + encodeURIComponent(questionTag) + '",999999999999999]';
+  query += "&include_docs=true";
+
+  console.log(query);
+
+  db.view(query,  function(err, doc) {
       callback(err, doc)
   });
 };
-
+/*
+youngmindsdb/_design/questions/_view/by_tag?startkey=[0,%22Depressed%22]&endkey=[9999999999999,%22Depressed%22]&include_docs=true
+youngmindsdb/_design/questions/_view/by_tag?startkey=[0,"Depressed"]&endkey=[9999999999999,"Depressed"]&include_docs=true&descending=true
+*/
 exports.get_questions = function(callback) {
-    db.view('/youngmindsdb/_design/questions/_view/by_tag', { include_docs: true },  function(err, doc) {
+    db.view('/youngmindsdb/_design/questions/_view/by_tag', { include_docs: true, descending: true },  function(err, doc) {
       callback(err, doc)
   });
 };
