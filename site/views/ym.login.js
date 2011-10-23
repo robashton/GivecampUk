@@ -14,7 +14,7 @@ var loginModel = {
                if(data.success) {
                   //window.location = 'index.html';
                   setTimeout(function(){
-                     loginModel.doLogin(form.email(), form.password());
+                     loginModel.doLogin(form);
                   }, 1500);
                   window.location = '/';
               }else{
@@ -47,23 +47,31 @@ var loginModel = {
 
         submit: function(event){
             var form = loginModel.loginForm;
-            loginModel.doLogin(form.email(), form.password());
+            loginModel.doLogin(form);
         }
     },
 
-    doLogin: function(emailAddress, password){
-        $.post('login', { email: emailAddress, password: password }).success(function(data){
+    //badness warning: this relies on loginForm and registerForm having same named members!
+    doLogin: function(authForm){
+        $.post('login', { email: authForm.email(), password: authForm.password() }).success(function(data){
             if(data.success) {
               window.location = '/';
+            }else{
+               authForm.validationMessage('Login failed. Please check username and password');
             }
+        })
+         .fail(function(){
+               authForm.validationMessage('Login failed. Please check username and password');
         });
     },
-
-    //we are overloading 'validation' here - covers auth/auth errors too
 };
 
    loginModel.loginForm.valid = ko.dependentObservable(function(){
       return loginModel.loginForm.email().length > 0 && loginModel.loginForm.password().length > 0;
+   }, loginModel);
+
+   loginModel.registerForm.valid = ko.dependentObservable(function(){
+      return loginModel.registerForm.email().length > 0 && loginModel.registerForm.password().length > 0 && loginModel.registerForm.displayName().length > 0;
    }, loginModel);
 
    loginModel.registerForm.hasValidationIssue = ko.dependentObservable(function() {
