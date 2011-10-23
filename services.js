@@ -129,7 +129,7 @@ exports.init = function(app) {
                   }
                 }          
           db.save(doc, function(err, doc){
-              res.json(err, doc);
+              res.json({ err: err, doc: doc});
         });
           }
       });    

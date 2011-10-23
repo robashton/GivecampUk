@@ -38,6 +38,10 @@ $(function(){
         "/": function() {
             viewModel.currentView('questions');
         },
+        "/tag/:tag": function(params) {
+            questionsModel.updateSearch(params.tag);
+            viewModel.currentView('questions');
+        },
         "/ask": function() {
             viewModel.currentView('question');
         },
@@ -52,7 +56,7 @@ $(function(){
         "/tagadmin": function() {
           viewModel.currentView('tagadmin');
         },
-      "/useradmin": function() {
+        "/useradmin": function() {
           viewModel.currentView('useradmin');
         },
         "/logout": function() {
