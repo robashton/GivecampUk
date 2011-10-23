@@ -64,12 +64,14 @@ var loginModel = {
                authForm.validationMessage('Login failed. Please check username and password');
         });
     },
-
-    //we are overloading 'validation' here - covers auth/auth errors too
 };
 
    loginModel.loginForm.valid = ko.dependentObservable(function(){
       return loginModel.loginForm.email().length > 0 && loginModel.loginForm.password().length > 0;
+   }, loginModel);
+
+   loginModel.registerForm.valid = ko.dependentObservable(function(){
+      return loginModel.registerForm.email().length > 0 && loginModel.registerForm.password().length > 0 && loginModel.registerForm.displayName().length > 0;
    }, loginModel);
 
    loginModel.registerForm.hasValidationIssue = ko.dependentObservable(function() {
