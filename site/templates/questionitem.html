@@ -1,13 +1,20 @@
 <tr class="question">
   <td>
-    <div class="span2" style="margin-top: 15px">
+    <div class="span1" style="width: 50px; margin: 15px 5px 0px 5px;">
       <p style="text-align: center;"><span style="font-size: 35px; text-align: center" data-bind="text: questionsModel.getAnswerCount(doc)"></span> <br/>answers</p>
     </div>
-    <div class="span9">
-      <h2><a data-bind="text: value.question.title, attr: { href: '#/question/' + id }"></a></h2>
-      <p data-bind="text: value.question.description"></p>
-      <p data-bind="text: value.question.displayname"></p>
-      <p class="prettydate" data-bind="attr: { title: value.question.date }"></p>
+    <div class="span10" style="width: 570px;">
+        <div style="margin-bottom: 20px">
+            <h1 style="border-bottom: 1px solid #404040; padding-bottom: 5px; margin-bottom: 3px;">
+                <a href="#" data-bind="attr: { href: '#/question/' + id }"><span
+                        data-bind="text: value.question.title"></span></a></h1>
+
+            <p>
+                asked by <span data-bind="text: value.question.displayname"></span>,
+                <span class="prettydate" data-bind="attr: { title: value.question.date }"></span>
+            </p>
+        </div>
+      <p style="max-height: 155px; overflow: hidden;" data-bind="text: value.question.description"></p>
     </div>
   </td>
 </tr>

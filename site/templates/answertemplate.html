@@ -3,13 +3,12 @@
      <div class="span9">
         <h2><a data-bind="text: value.userid"></a></h2>
         <p data-bind="text: value.answer"></p>
-        <p data-bind="text: value.displayname"></p>
-        <p class="prettydate" data-bind="attr: { title: value.date }"></p>
+        <p>by <span data-bind="text: value.displayname"></span>, <span class="prettydate" data-bind="attr: { title: value.date }"></span></p>
       </div>
-      <div>
-        <button data-bind="visible: viewModel.isElevated, click: function(event) {  viewQuestionModel.up(event, value) }">Up</button>
-        <br/>
-        <button data-bind="visible: viewModel.isElevated, click: function(event) { viewQuestionModel.down(event, value) }">Down</button>
+      <div style="text-align: right; line-height: 8px;">
+        <button class="btn success" style="width: 92px;" data-bind="visible: viewModel.isElevated, click: function(event) { viewQuestionModel.up(event, value) }">Vote up</button>
+        <br/><br />
+        <button class="btn danger" style="width: 92px;" data-bind="visible: viewModel.isElevated, click: function(event) { viewQuestionModel.down(event, value) }">Vote down</button>
         <span style="display:none;">Thank you for your vote</span>
       </div>
   </td>
