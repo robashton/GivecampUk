@@ -6,6 +6,10 @@ body {
     padding-top: 40px;
 }
 
+.topbar div > ul a, .nav a {
+    outline: none;
+}
+
 .ymcontent {
     background-color: #fff;
     border-radius: 7px;
