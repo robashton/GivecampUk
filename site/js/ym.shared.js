@@ -3,9 +3,7 @@ var views = {
     questions: questionsModel,
     viewquestion: viewQuestionModel,
     tags: tagadminModel,
-    admin: adminModel,
     tagadmin: tagadminModel,
-    admin:adminModel,
     viewquestion: viewQuestionModel,
     useradmin: useradminModel
 
@@ -46,9 +44,6 @@ $(function(){
             viewQuestionModel.id(id);
             viewModel.currentView('viewquestion');
         },
-        "/admin": function() {
-          viewModel.currentView('admin');
-        }, 
         "/tagadmin": function() {
           viewModel.currentView('tagadmin');
         },
