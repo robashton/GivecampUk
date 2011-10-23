@@ -1,7 +1,7 @@
 <div class="container" style="margin-top: 40px; margin-bottom: 40px;">
     <div class="row">
 
-        <div class="span12 ymcontent">
+        <div class="span16 ymcontent">
             <div style="padding: 5px;">
                  <div class="question">
                     <div style="border-bottom: 1px solid #404040; margin-bottom: 20px">
@@ -9,6 +9,9 @@
                     </div>
                     <p data-bind="text: viewQuestionModel.description"></p>
                     <p data-bind="text: viewQuestionModel.displayname"></p>
+                    <p data-bind="text: viewQuestionModel.tag"></p>
+                    <p data-bind="text: viewQuestionModel.tagdescription"></p>
+                    
                     <p class="prettydate" data-bind="attr: { title: viewQuestionModel.date }"></p>
                 </div>
                 <hr/>
@@ -39,12 +42,6 @@
 
             </div>                
 
-            </div>
-        </div>
-
-        <div class="span4 ymcontent">
-            <div style="padding: 5px;">
-                <h2>Tags</h2>
             </div>
         </div>
     </div>

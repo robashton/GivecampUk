@@ -3,6 +3,8 @@ var viewQuestionModel = {
       title: ko.observable(''),
       description: ko.observable(''),
       displayname: ko.observable(''),
+      tag: ko.observable(''),
+      tagdescription: ko.observable(''),
       date: ko.observable(''),
       answers: ko.observableArray([]),
       url: ko.observable(''),
@@ -31,6 +33,8 @@ var viewQuestionModel = {
             viewQuestionModel.title(data.question.title);
             viewQuestionModel.displayname(data.question.displayname);
             viewQuestionModel.description(data.question.description);
+            viewQuestionModel.tag(data.question.tag.tagName);
+            viewQuestionModel.tagdescription(data.question.tag.description);
             viewQuestionModel.date(data.question.date);
             viewQuestionModel.answers(data.answers.rows);
         });
