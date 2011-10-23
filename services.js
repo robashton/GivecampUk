@@ -224,7 +224,12 @@ exports.init = function(app) {
   });
 
   app.get('/currentuser', security.validateUser, function(req, res) {
-    res.json({ username: security.currentUser(req, res) }, {}, 200);
+    security.getCurrentUser(req, res, function(user) {
+      res.json({
+         isElevated: user.isElevated,
+         displayName: user.name      
+      }, {}, 200);
+    });
   });
   
   app.get('/createquestion', function(req, res) {
