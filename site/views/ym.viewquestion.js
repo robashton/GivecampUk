@@ -66,7 +66,7 @@ var viewQuestionModel = {
             viewQuestionModel.date(data.question.date);
             viewQuestionModel.answers(data.answers.rows);
         });
-      },   
+      }
 };
 
 viewQuestionModel.answersSortFunction =  function(a, b) {
