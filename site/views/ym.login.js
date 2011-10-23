@@ -20,6 +20,9 @@ var loginModel = {
               }else{
                   loginModel.registerForm.validationMessage(data.error);
               }
+            })
+            .fail(function(data){
+               loginModel.registerForm.validationMessage('Unexpected error from server. Please try again later.');
             });
         },
 
