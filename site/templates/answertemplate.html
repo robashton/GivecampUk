@@ -6,8 +6,11 @@
         <p data-bind="text: value.displayname"></p>
         <p class="prettydate" data-bind="attr: { title: value.date }"></p>
       </div>
-      <button data-bind="click: function(event) { viewQuestionModel.up(event, value._id) }">Up</button>
-      <br/>
-      <button data-bind="click: function(event) { viewQuestionModel.down(event, value._id) }">Down</button>
+      <div>
+        <button data-bind="click: function(event) { viewQuestionModel.up(event, value._id) }">Up</button>
+        <br/>
+        <button data-bind="click: function(event) { viewQuestionModel.down(event, value._id) }">Down</button>
+        <span style="display:none;">Thank you for your vote</span>
+      </div>
   </td>
 </tr>
