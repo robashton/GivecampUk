@@ -212,7 +212,7 @@ exports.init = function(app) {
          res.json({ success: false, error: 'Email address ' + req.body.email + ' already registered.'}, {}, 200);  
       }else{
          dbapi.create_user(req.body.email,req.body.name,req.body.password);
-         security.setCookieForUser(req, res, req.body.name);
+         security.setCookieForUser(req, res, req.body.email);
          res.json({ success: true}, {}, 200);  
       }
     });
