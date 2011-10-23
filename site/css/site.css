@@ -6,7 +6,7 @@ body {
     padding-top: 40px;
 }
 
-.topbar div > ul a, .nav a {
+.topbar div > ul a, .nav a, .topbar .brand {
     outline: none;
 }
 
