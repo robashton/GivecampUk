@@ -41,7 +41,8 @@ var loginModel = {
     }
 };
 
-loginModel.loginForm.valid = ko.dependentObservable(function(){
- return true;        
-//return this.loginForm.email().length > 0 && this.loginForm.password().length > 0;
-}, loginModel);
+$(function(){
+   loginModel.loginForm.valid = ko.dependentObservable(function(){
+   return loginModel.loginForm.email().length > 0 && loginModel.loginForm.password().length > 0;
+   }, loginModel);
+});
