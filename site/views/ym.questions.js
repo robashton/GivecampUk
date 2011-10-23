@@ -9,12 +9,12 @@ questionsModel.tagSortFunction =  function(a, b) {
 };
 
 questionsModel.chooseTag = function(key) {
-  var key = key.replace('/', '__').replace(' ', '_');
+  var key = key.replace(/\//g, '_z_').replace(/ /g, '_');
   $.routes('set', '/tag/' + key);
 };
 
 questionsModel.updateSearch = function(key) {
-    key = key.replace('__', '/').replace('_', ' ');
+    key = key.replace(/_z_/g, '/').replace(/_/g, ' ');
     var url = 'get_questions_by_tag/' + encodeURIComponent(key);
      $.get(url).success(function(data) {
         questionsModel.tag_filter(key)
