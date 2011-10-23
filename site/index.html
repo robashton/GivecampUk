@@ -30,7 +30,7 @@
               <ul class="nav">
                 <li class="" data-bind="visible: viewModel.authenticated, css: { active: viewModel.currentView() == 'questions' }"><a href="#/">Questions</a></li>
                 <li class="" data-bind="visible: viewModel.authenticated, css: { active: viewModel.currentView() == 'question' }"><a href="#/ask">Ask a question</a></li>
-                <li class="" data-bind="visible: viewModel.authenticated && viewModel.isElevated, css: { active: viewModel.currentView() == 'admin' }"><a href="#/useradmin">Admin</a></li>
+                <li style="display:none" class="" data-bind="visible: viewModel.authenticated && viewModel.isElevated, css: { active: viewModel.currentView() == 'admin' }"><a href="#/useradmin">Admin</a></li>
                 <li class="" data-bind="visible: viewModel.authenticated"><a href="#/logout">Logout</a></li>
               </ul>
             </div>
