@@ -26,20 +26,18 @@ var viewQuestionModel = {
         }
       },
       
-      up: function(event, answerId) {
-        
+      up: function(event, answer) {
         $.post('/increment_answer_rank', {
-            answerId: answerId
+            answerId: answer._id
         }).success(function(data) {
           $(event.currentTarget).parent().children(':button').hide();
           $(event.currentTarget).parent().children().last().show();
-
         })
   },
-      down: function(event, answerId) {
+      down: function(event, answer) {
         
         $.post('/decrement_answer_rank', {
-            answerId: answerId
+            answerId: answer._id
         }).success(function(data) {
             $(event.currentTarget).parent().children(':button').hide()
             $(event.currentTarget).parent().children().last().show()
