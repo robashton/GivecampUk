@@ -86,8 +86,6 @@ exports.init = function(app) {
     });  
   });
 
-
-
   app.post('/remove_user', function(req, res){
 
     db.get(req.body.userId, function(err, doc) {
@@ -198,7 +196,7 @@ exports.init = function(app) {
 
   app.post('/delete_answer', function(req, res){
 
-    // TODO: test that the curret user has elevated permissions
+    // TODO: test that the current user has elevated permissions
     var currentUserIsElevated = true;
     if(currentUserIsElevated)
     {
@@ -214,6 +212,7 @@ exports.init = function(app) {
          res.json({ success: false, error: 'Email address ' + req.body.email + ' already registered.'}, {}, 200);  
       }else{
          dbapi.create_user(req.body.email,req.body.name,req.body.password);
+         security.setCookieForUser(req, res, req.body.name);
          res.json({ success: true}, {}, 200);  
       }
     });
