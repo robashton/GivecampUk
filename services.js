@@ -18,9 +18,9 @@ exports.init = function(app) {
   });
 
   app.post('/login', function(req, res){
-    security.signInUser(req, res, req.body.email, req.body.password, function(result,session_id,name) {
+    security.signInUser(req, res, req.body.email, req.body.password, function(result,reason) {
       if(!result){
-          res.json({ success: false}, {}, 401); 
+          res.json({ success: false, reason: reason}, {}, 401); 
         }
         else
         { 
