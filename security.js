@@ -19,15 +19,30 @@ exports.validateUser = function(req, res, next) {
   }
 };
 
+exports.validateElevatedUser = function(req, res, next) {
+  exports.getCurrentUser(req, res, function(user) {
+    if(!user || !user.isElevated) {
+        res.json({ success: false}, {}, 401); 
+        return;
+    }
+    next();
+    
+  });
+};
+
 exports.usersDisplayName = function(email, callback) {
   db.get_user(email, function(err, doc) {
-      callback(doc.rows[0]['value'].name);
+      if(doc.rows && doc.rows.length > 1) {
+          callback(doc.rows[0]['value'].name);
+      } else callback(null);
   });
 }
 
 exports.getCurrentUser = function(req, res, callback) {
   var cookies = new Cookies( req, res , keys);
   var username = cookies.get( "ymindsid" );
+
+  if(!username) { callback(null); return; }
 
   db.get_user(username, function(err, doc) {
       callback(doc.rows[0].value);
