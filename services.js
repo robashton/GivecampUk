@@ -136,31 +136,38 @@ exports.init = function(app) {
     });
   app.post('/increment_answer_rank',security.validateElevatedUser, function(req, res){
 
-    db.get(req.body.answerId, function(err, doc) {
-      if(err) 
-         res.json({error: err});
-      else
-      {
-        doc.rank++;
-        db.save(doc, function(err, doc){
+    security.getCurrentUser(req, res, function(user) {
+      db.get(req.body.answerId, function(err, doc) {
+        if(err) 
+          res.json({error: err});
+        else
+        {
+          doc.rank++;
+          doc.upvotes.push(user._id);
+          db.save(doc, function(err, doc){
           res.json({ err: err, doc: doc});
-        });
+          });
+        }
       }
-    });  
+    );  
+  });
   });
 
   app.post('/decrement_answer_rank',security.validateElevatedUser, function(req, res){
 
+    security.getCurrentUser(req, res, function(user) {
     db.get(req.body.answerId, function(err, doc) {
       if(err) 
          res.json({error: err});
       else
       {
         doc.rank--;
+        doc.downvotes.push(user._id);
         db.save(doc, function(err, doc){
           res.send({ err: err, doc: doc});
         });
       }
+    });  
     });  
   });
 
@@ -303,12 +310,14 @@ exports.init = function(app) {
     var questionId = req.params.id;
     var question, answers;
 
+      security.getCurrentUser(req, res, function(user ){
     db.get(questionId, function(err, doc) {
       if(err) {    
         res.json({error: err});      
       }
       else {
           question = doc;
+          delete question.user;
           dbapi.update_answer_count_for_question(doc._id);
           dbapi.get_question_answers(questionId, function(err, doc) {
             if(err) {
@@ -316,6 +325,10 @@ exports.init = function(app) {
             }
             else {
               answers = doc;
+              /*for(i =0; i<answers.length; i++){
+                delete answers[i].upvotes;
+                delete answers[i].downvotes;
+              }*/
               res.json({
                 question: question,
                 answers: answers
@@ -324,7 +337,7 @@ exports.init = function(app) {
           });       
       }
     });
-
+    });
 
   });
 

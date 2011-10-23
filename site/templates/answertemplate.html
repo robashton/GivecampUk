@@ -5,10 +5,9 @@
         <p data-bind="text: value.answer"></p>
         <p>by <span data-bind="text: value.displayname"></span>, <span class="prettydate" data-bind="attr: { title: value.date }"></span></p>
       </div>
-      <div style="text-align: right; line-height: 8px;">
-        <button class="btn success" style="width: 92px;" data-bind="visible: viewModel.isElevated, click: function(event) { viewQuestionModel.up(event, value) }">Vote up</button>
-        <br/><br />
-        <button class="btn danger" style="width: 92px;" data-bind="visible: viewModel.isElevated, click: function(event) { viewQuestionModel.down(event, value) }">Vote down</button>
+      <div style="float: right; line-height: 8px;">
+        <button class="btn success" style="display: block;margin-top:5px;width: 92px;" data-bind="visible: viewModel.isElevated, click: function(event) { viewQuestionModel.up(event, value) }">Vote up</button>
+        <button class="btn danger" style="display: block;margin-top:5px;width: 92px;" data-bind="visible: viewModel.isElevated, click: function(event) { viewQuestionModel.down(event, value) }">Vote down</button>
         <span style="display:none;">Thank you for your vote</span>
       </div>
   </td>

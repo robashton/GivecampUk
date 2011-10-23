@@ -45,6 +45,7 @@ function createUsers() {
     db.save({_id: "testuser1", name: "Tim Caswell", age: 28, email: "tim.caswell@gmail.com", password: hash, type: "user", isElevated: false}, function ( err, doc) {});
 
     db.save({_id: "testuser2", name: "Nick", age: 28, email: "test@nick.com", password: hash, type: "user", isElevated: false}, function ( err, doc) {});
+    db.save({_id: "testadmin1", name: "Admin", age: 28, email: "admin", password: hash, type: "user", isElevated: true}, function ( err, doc) {});
   })
 };
 
@@ -69,6 +70,8 @@ function createQuestions(){
    "questionId": "testquestion1",
    "userId": "testuser2",
    "displayname": "Nick",
+   "upvotes": [],
+   "downvotes": [],
    "answer": "sport has got a massive capacity to improve the lives of people suffering from mental health problems because physical activity is good for mental health, whether you have a mental health problem or not. Sport provides a forum for social interaction",
    "rank": 0,
    "date": "2011-10-23T09:59:10.118Z"
