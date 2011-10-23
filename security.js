@@ -25,16 +25,13 @@ exports.usersDisplayName = function(email, callback) {
   });
 }
 
-exports.currentUser = function(req, res) {
+exports.getCurrentUser = function(req, res, callback) {
   var cookies = new Cookies( req, res , keys);
-  var session_cookie = cookies.get( "ymindsid" );
+  var username = cookies.get( "ymindsid" );
 
-  if(!session_cookie) {
-   return null
-  }
-  else{
-    return session_cookie
-  }
+  db.get_user(username, function(err, doc) {
+      callback(doc.rows[0].value);
+  });
 };
 
 exports.setCookieForUser = function(req, res, email) {
