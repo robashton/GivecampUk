@@ -79,19 +79,20 @@ var views = [
          }
          }
       },
-        {
-           "_id": "_design/questions",
-           "language": "javascript",
-           "views": {
-               "by_tag": {
-                   "map": "function(doc) {\n  if(doc.type === \"question\")\n     emit(doc.tag.tagName, { _id: doc._id + \"_count\",  question: doc });\n}"
-               },
-               "by_answercount": {
-                   "map": "function(doc) {\n  if( doc.type !== 'answer' ) return;\n  emit(doc.questionId, 1);\n}",
-                   "reduce": "function (key, values, rereduce) {\n    return sum(values)\n}"
-               }
-           }
-        },
+      {
+         "_id": "_design/questions",
+         "_rev": "28-484c2322d6bc484a574043524d97cfcd",
+         "language": "javascript",
+         "views": {
+             "by_tag": {
+                 "map": "function(doc) {\n  if(doc.type === \"question\") {\n\t\n     emit([doc.tag.tagName, Date.parse(doc.date)],\n\t { \n\t   _id: doc._id + \"_count\",  \n\t   question: doc \n\t}); \n   }\n}"
+             },
+             "by_answercount": {
+                 "map": "function(doc) {\n  if( doc.type !== 'answer' ) return;\n  emit(doc.questionId, 1);\n}",
+                 "reduce": "function (key, values, rereduce) {\n    return sum(values)\n}"
+             }
+         }
+      },
         {
          "_id": "_design/Answers",
          "language": "javascript",
