@@ -48,7 +48,7 @@ exports.init = function(app) {
   });
 
   app.get('/get_questions_by_tag/:tag?', function(req, res) {
-      if(!req.params.tag)
+      if(!req.params.tag || req.params.tag == "All")
         dbapi.get_questions(function(err, doc) {
           res.json({ err: err, doc: doc});
         });
