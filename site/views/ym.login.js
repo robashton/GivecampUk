@@ -16,7 +16,7 @@ var loginModel = {
                   setTimeout(function(){
                      loginModel.doLogin(form);
                   }, 1500);
-                  window.location = 'app.html';
+                  window.location = '/';
               }else{
                   loginModel.registerForm.validationMessage(data.error);
               }
@@ -58,7 +58,7 @@ var loginModel = {
     doLogin: function(authForm){
         $.post('login', { email: authForm.email(), password: authForm.password() }).success(function(data){
             if(data.success) {
-               window.location = 'app.html';
+              window.location = '/';
             }else{
                authForm.validationMessage('Login failed. Please check username and password');
             }

@@ -1,29 +1,43 @@
 <!DOCTYPE html>
 <html>
-   <head>
-        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="css/site.css">
+    <head>
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="css/site.css" />
 
         <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="js/jquery.prettydate.js"></script>
+        <script type="text/javascript" src="js/jquery.address.js"></script>
+        <script type="text/javascript" src="js/jquery.routes.js"></script>
         <script type="text/javascript" src="js/jquery.tmpl.js"></script>
         <script type="text/javascript" src="js/jquery.cookie.js"></script>
+        <script type="text/javascript" src="js/jquery.validate.js"></script>
         <script type="text/javascript" src="js/knockout.js"></script>
         <script type="text/javascript" src="js/koExternalTemplateEngine.js"></script>
-        
-        <script type="text/javascript" src="views/ym.login.js"></script>
-
-        <script type="text/javascript">
-         $(function(){
-             ko.ExternaljQueryTemplateEngine.prototype = new ko.templateEngine();
-             ko.externaljQueryTemplateEngine = new ko.ExternaljQueryTemplateEngine();
-             ko.externaljQueryTemplateEngine.templateUrl = 'templates';
-             ko.setTemplateEngine(ko.externaljQueryTemplateEngine);
-             ko.applyBindings(loginModel);
-          });
-        </script>
+        <script type="text/javascript" src="views/ym.question.js"></script>
+        <script type="text/javascript" src="views/ym.questions.js"></script>
+        <script type="text/javascript" src="views/ym.viewquestion.js"></script>
+        <script type="text/javascript" src="views/ym.tagadmin.js"></script>
+        <script type="text/javascript" src="views/ym.useradmin.js"></script>
+        <script type="text/javascript" src="js/ym.shared.js"></script>
         <title>YoungMinds Q&A</title>
     </head>
     <body>
-      <div data-bind="template: 'login'"></div>
-   </body>
+
+        <div class="topbar" data-bind="visible: viewModel.authenticated">
+          <div class="topbar-inner">
+            <div class="container">
+              <a class="brand" href="#">Young Minds Q&A</a>
+              <ul class="nav">
+                <li class="" data-bind="visible: viewModel.authenticated, css: { active: viewModel.currentView() == 'questions' }"><a href="#/">Questions</a></li>
+                <li class="" data-bind="visible: viewModel.authenticated, css: { active: viewModel.currentView() == 'question' }"><a href="#/ask">Ask a question</a></li>
+                <li class="" data-bind="visible: viewModel.authenticated && viewModel.isElevated, css: { active: viewModel.currentView() == 'admin' }"><a href="#/useradmin">Admin</a></li>
+                <li class="" data-bind="visible: viewModel.authenticated"><a href="#/logout">Logout</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div data-bind="template: viewModel.currentView"></div>
+
+    </body>
 </html>
