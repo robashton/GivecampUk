@@ -2,45 +2,53 @@
     <div class="row">
 
         <div class="span16 ymcontent">
-            <div style="padding: 5px;">
-                 <div class="question">
-                    <div style="border-bottom: 1px solid #404040; margin-bottom: 20px">
-                      <h1><a href="#"><span data-bind="text: viewQuestionModel.title"></span></a></h1>
+            <div style="padding: 10px;">
+                <div class="question">
+                    <div style="margin-bottom: 20px">
+                        <h1 style="border-bottom: 1px solid #404040; padding-bottom: 5px; margin-bottom: 3px;">
+                            <a href="#" data-bind="attr: { href: '#/question/' + viewQuestionModel.id }"><span
+                                    data-bind="text: viewQuestionModel.title"></span></a></h1>
+
+                        <p>
+                            asked by <span data-bind="text: viewQuestionModel.displayname"></span>,
+                            <span class="prettydate" data-bind="attr: { title: viewQuestionModel.date }"></span>
+                        </p>
                     </div>
                     <p data-bind="text: viewQuestionModel.description"></p>
-                    <p data-bind="text: viewQuestionModel.displayname"></p>
-                    <p data-bind="text: viewQuestionModel.tag"></p>
-                    <p data-bind="text: viewQuestionModel.tagdescription"></p>
-                    
-                    <p class="prettydate" data-bind="attr: { title: viewQuestionModel.date }"></p>
+                    <p style="text-align: right;">tagged as
+                        <span class="action">
+                            <span class="tag-key" data-bind="text: viewQuestionModel.tag, click: function(){ questionsModel.chooseTag(viewQuestionModel.tag());}"></span>
+                        </span>
+                    </p>
+
                 </div>
                 <hr/>
                 <div class="answers">
                   <h3>Responses</h3>
                   <table id="answers" class="zebra-striped">
-                    <tbody data-bind='template: { name: "answertemplate", foreach: viewQuestionModel.answers}'></tbody>
+                    <tbody data-bind='template: { name: "answertemplate", foreach: viewQuestionModel.sortedAnswers}'></tbody>
                   </table>
                 </div>
             </div>
 
             <div id="newanswer">
-              <form class="form-stacked" id="newAnswerForm">
-                <div class="clearfix">
-                    <label for="questionResponse">Response</label>
+                <form class="form-stacked" id="newAnswerForm">
+                    <div class="clearfix">
+                        <label for="questionResponse">Response</label>
 
-                    <div class="input">
-                        <textarea id="questionResponse" name="questionResponse" class="xxlarge required" rows="10"
-                               data-bind="value: viewQuestionModel.newAnswerForm.answer, valueUpdate: 'afterkeydown'" />
+                        <div class="input">
+                            <textarea id="questionResponse" name="questionResponse" class="xxlarge required" rows="10"
+                                      data-bind="value: viewQuestionModel.newAnswerForm.answer, valueUpdate: 'afterkeydown'"/>
+
+                        </div>
+                    </div>
+
+                    <div class="actions">
+
+                        <input type="submit" class="btn primary" value="Submit"
+                               data-bind="click: viewQuestionModel.newAnswerForm.submit">
 
                     </div>
-                </div>
-
-            <div class="actions">
-
-                <input type="submit" class="btn primary" value="Submit"
-                       data-bind="click: viewQuestionModel.newAnswerForm.submit">
-
-            </div>                
 
             </div>
         </div>

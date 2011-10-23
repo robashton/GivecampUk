@@ -31,8 +31,9 @@ var viewQuestionModel = {
         $.post('/increment_answer_rank', {
             answerId: answerId
         }).success(function(data) {
-          $(event.currentTarget).parent().children(':button').hide()
-          $(event.currentTarget).parent().children().last().show()
+          $(event.currentTarget).parent().children(':button').hide();
+          $(event.currentTarget).parent().children().last().show();
+
         })
   },
       down: function(event, answerId) {
@@ -58,3 +59,13 @@ var viewQuestionModel = {
         });
       },   
 };
+
+viewQuestionModel.answersSortFunction =  function(a, b) {
+console.log(a)
+    return a.value.rank > b.value.rank ? -1 : 1;  
+};
+
+viewQuestionModel.sortedAnswers = ko.dependentObservable(function() {
+  return viewQuestionModel.answers.slice().sort(viewQuestionModel.answersSortFunction);
+}, viewQuestionModel.answers);
+
