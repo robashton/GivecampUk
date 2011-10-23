@@ -82,7 +82,10 @@
 
                     </div>
                 </div>
-
+                <div class="alert-message error"
+                     data-bind="visible: loginModel.loginForm.hasValidationIssue()">
+                    <p class="error" data-bind="text: loginModel.loginForm.validationMessage()"></p>
+                </div>
                 <div class="actions" style="margin-top: 64px;">
                     <input type="submit" class="btn primary" value="Login"
                            data-bind="click: loginModel.loginForm.submit, enable: loginModel.loginForm.valid"/>
