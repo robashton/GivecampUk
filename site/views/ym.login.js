@@ -16,7 +16,7 @@ var loginModel = {
                   setTimeout(function(){
                      loginModel.doLogin(form.email(), form.password());
                   }, 1500);
-                  window.location = 'index.html';
+                  window.location = '/';
               }else{
                   loginModel.registerForm.validationMessage(data.error);
               }
@@ -54,7 +54,7 @@ var loginModel = {
     doLogin: function(emailAddress, password){
         $.post('login', { email: emailAddress, password: password }).success(function(data){
             if(data.success) {
-              window.location = 'index.html';
+              window.location = '/';
             }
         });
     },
