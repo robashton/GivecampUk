@@ -53,10 +53,12 @@ $(function(){
             viewModel.currentView('viewquestion');
         },
         "/tagadmin": function() {
-          viewModel.currentView('tagadmin');
+          if(viewModel.isElevated())
+            viewModel.currentView('tagadmin');
         },
         "/useradmin": function() {
-          viewModel.currentView('useradmin');
+          if(viewModel.isElevated())
+             viewModel.currentView('useradmin');
         },
         "/logout": function() {
           $.get('logout');
@@ -82,7 +84,7 @@ $(function(){
       ko.applyBindings(viewModel.currentViewModel);
 
     }).error(function(){ 
-      document.location.href = '/index.html';
+      document.location.href = '/login.html';
     });;
 });
 
