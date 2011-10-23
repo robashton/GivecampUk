@@ -46,12 +46,13 @@ var viewQuestionModel = {
         });
       },
       pingItemInArray: function(answer) {
-          for(var i = viewQuestionModel.answers.length-1; i >= 0; i--){  
-            if(viewQuestionModel.answers[i] === answer){              
+    /*      for(var i = viewQuestionModel.answers().length-1; i >= 0; i--){ 
+            var item =  viewQuestionModel.answers()[i];
+            if(item.value._id === answer._id){              
                 viewQuestionModel.answers.splice(i,1); 
-                viewQuestionModel.answers.push(answer);               
+                viewQuestionModel.answers.push(item);  
             }
-        }
+        } */ // This would work if we had the ability to hide the buttons 
       },
 
       init: function() {
