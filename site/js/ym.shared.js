@@ -38,6 +38,7 @@ $(function(){
 
       $.routes({
         "/": function() {
+            questionsModel.updateSearch('');
             viewModel.currentView('questions');
         },
         "/tag/:tag": function(params) {
