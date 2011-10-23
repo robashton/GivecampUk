@@ -28,6 +28,7 @@ function createDatabase(){
 function createData() {
   createTags();
   createUsers();
+  createQuestions();
 };
 
 function createViews() {
@@ -42,12 +43,29 @@ function createViews() {
 function createUsers() {
     encryption.hash("password", function(hash){
 
-    db.save({_id: "test", name: "Tim Caswell", age: 28, email: "Tim.Caswell@gmail.com", password: hash, type: "user", isElevated: false}, function ( err, doc) {
+    db.save({_id: "testuser1", name: "Tim Caswell", age: 28, email: "tim.caswell@gmail.com", password: hash, type: "user", isElevated: false}, function ( err, doc) {
       // You know know if there was an error and have an updated version
       // of the document (with `_id` and `_rev`).
     });
   })
 };
+
+function createQuestions(){
+  db.save({
+   "_id": "testquestion1",
+   "type": "question",
+   "user": "Tim.Caswell@gmail.com",
+   "displayname": "Tim Caswell",
+   "date": "2011-10-23T08:34:59.924Z",
+   "deleted": 0,
+   "title": "Does sport help depression?",
+   "description": "Hi,\n\nmy son suffers from clinical depression, would sport help him feel better?\n\nThanks",
+   "tag": {
+       "tagName": "Depression",
+       "description": "the GP says she is depressed and needs to take medication. I dont want her on take anti-depressants."
+   }
+});
+}
 
 function createTags() {
   db.save({
@@ -79,19 +97,20 @@ var views = [
          }
          }
       },
-        {
-           "_id": "_design/questions",
-           "language": "javascript",
-           "views": {
-               "by_tag": {
-                   "map": "function(doc) {\n  if(doc.type === \"question\")\n     emit(doc.tag.tagName, { _id: doc._id + \"_count\",  question: doc });\n}"
-               },
-               "by_answercount": {
-                   "map": "function(doc) {\n  if( doc.type !== 'answer' ) return;\n  emit(doc.questionId, 1);\n}",
-                   "reduce": "function (key, values, rereduce) {\n    return sum(values)\n}"
-               }
-           }
-        },
+      {
+         "_id": "_design/questions",
+         "_rev": "28-484c2322d6bc484a574043524d97cfcd",
+         "language": "javascript",
+         "views": {
+             "by_tag": {
+                 "map": "function(doc) {\n  if(doc.type === \"question\") {\n\t\n     emit([doc.tag.tagName, Date.parse(doc.date)],\n\t { \n\t   _id: doc._id + \"_count\",  \n\t   question: doc \n\t}); \n   }\n}"
+             },
+             "by_answercount": {
+                 "map": "function(doc) {\n  if( doc.type !== 'answer' ) return;\n  emit(doc.questionId, 1);\n}",
+                 "reduce": "function (key, values, rereduce) {\n    return sum(values)\n}"
+             }
+         }
+      },
         {
          "_id": "_design/Answers",
          "language": "javascript",

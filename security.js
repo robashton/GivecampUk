@@ -49,12 +49,12 @@ exports.signInUser = function(req, res, email, password, callback) {
        encryption.compare(password, doc.rows[0].value.password, function(result) {
           if(result) {
             exports.setCookieForUser(req, res, email);
-            callback(true);
+            callback(true,undefined);
           }
-        else{ callback(false); }
+        else{ callback(false,"Bad Password"); }
        }); 
      }
-     else { callback(false); }
+     else { callback(false,"User Not Found"); }
    });
 };
 

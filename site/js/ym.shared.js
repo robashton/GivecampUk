@@ -14,7 +14,12 @@ var viewModel = {
     isElevated: ko.observable(false),
     email: ko.observable(),
     displayName: ko.observable(),
-    currentView: ko.observable('login')
+    currentUser: ko.observable(),
+    currentView: ko.observable('login'),
+
+    isUserElevated: function() {
+      return true;
+    }
 };
 
 viewModel.currentViewModel = ko.dependentObservable(function(){
@@ -29,8 +34,9 @@ viewModel.currentViewModel.subscribe(function() {
 
 $(function(){
 
-    $.get('currentuser').success(function(){
+    $.get('currentuser').success(function(currentUser){
       viewModel.authenticated(true);
+      viewModel.currentUser = currentUser;
 
       $.routes({
         "/": function() {
