@@ -31,7 +31,8 @@ var viewQuestionModel = {
         $.post('/increment_answer_rank', {
             answerId: answerId
         }).success(function(data) {
-
+          $(event.currentTarget).parent().children(':button').hide()
+          $(event.currentTarget).parent().children().last().show()
         })
   },
       down: function(event, answerId) {
@@ -39,7 +40,8 @@ var viewQuestionModel = {
         $.post('/decrement_answer_rank', {
             answerId: answerId
         }).success(function(data) {
-
+            $(event.currentTarget).parent().children(':button').hide()
+            $(event.currentTarget).parent().children().last().show()
         })
   },
 
