@@ -37,3 +37,5 @@ Pages
   - Manage users
     - Promotion/moderation
 
+  - Tags
+    - Description shouldn't be stored on a question, so we can change it
