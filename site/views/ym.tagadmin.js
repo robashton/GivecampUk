@@ -6,15 +6,12 @@ var tagadminModel = {
             }
         });
     },
-  tagList: ko.observableArray(),
+  tagList: ko.observableArray([]),
 
   remove: function(event) {
         var id = $(event.currentTarget).parent().siblings().first().text(); 
-        $.post('removeTag', {
-            idtoremove: id
-        }).success(function(data) {
-           $.routes('set', '/tagadmin'); 
-        })
+        $.post('removeTag', {  idtoremove: id}, tagadminModel.refresh); 
+        
   },
 Update: {
         tagName: ko.observable(''),
@@ -23,12 +20,15 @@ Update: {
             if($('#newTag').valid() ){
                 var update = this().Update;
                 this().tagList().push({tagName: update.tagName, description: update.description });
-                $.post('updateTags', {
-                    tagList: this().tagList()
-                }).success(function(data) {
-                   $.routes('set', '/tagadmin');
-                })
+                $.post('updateTags', {  tagList: this().tagList()}, tagadminModel.refresh); 
             }
         }
+    },
+refresh: function() {
+        $.get('updateTags', function(data) {
+            if (!data.error) {
+             tagadminModel.tagList(data.tags);
+            }
+        });
     }
 };
