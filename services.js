@@ -129,8 +129,6 @@ exports.init = function(app) {
                   }
                 }          
           db.save(doc, function(err, doc){
-              //res.json(err, doc);
-               console.log("removeTag");
               res.json({ err: err, doc: doc});
         });
           }
@@ -262,7 +260,6 @@ exports.init = function(app) {
         tags:req.body.tagList
         }, 
        function ( err, doc) {
-        console.log("updateTags");
           res.json({
             err: err,
             doc: doc
