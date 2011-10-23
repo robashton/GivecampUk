@@ -134,7 +134,7 @@ exports.init = function(app) {
           }
       });    
     });
-  app.post('/increment_answer_rank', function(req, res){
+  app.post('/increment_answer_rank',security.validateElevatedUser, function(req, res){
 
     db.get(req.body.answerId, function(err, doc) {
       if(err) 
@@ -149,7 +149,7 @@ exports.init = function(app) {
     });  
   });
 
-  app.post('/decrement_answer_rank', function(req, res){
+  app.post('/decrement_answer_rank',security.validateElevatedUser, function(req, res){
 
     db.get(req.body.answerId, function(err, doc) {
       if(err) 
