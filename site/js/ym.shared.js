@@ -13,6 +13,7 @@ var views = {
 
 var viewModel = {
     authenticated: ko.observable(false),
+    isElevated: ko.observable(false),
     email: ko.observable(),
     displayName: ko.observable(),
     currentView: ko.observable('login')
