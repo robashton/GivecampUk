@@ -34,7 +34,6 @@ var useradminModel = {
 
 function refresh(){
  $.get('get_all_users', function(data){
-           
             if(!data.error){
 
                 var users = data.doc.rows;
