@@ -33,7 +33,7 @@ $(function(){
     $.get('currentuser').success(function(currentUser){
       viewModel.authenticated(true);
       viewModel.currentUser(currentUser);
-      viewModel.isElevated(true); //currentUser.isElevated);
+      viewModel.isElevated(currentUser.isElevated);
       viewModel.displayName(currentUser.displayName);
 
       $.routes({
