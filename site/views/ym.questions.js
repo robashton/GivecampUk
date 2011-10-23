@@ -1,5 +1,6 @@
 var questionsModel = {
     questions: ko.observableArray(),
+    tag_filter: ko.observable(''),
     tags: ko.observableArray()
 };
 
@@ -9,6 +10,7 @@ questionsModel.tagSortFunction =  function(a, b) {
 
 questionsModel.updateSearch = function(key) {
      $.get('get_questions_by_tag/' + key).success(function(data) {
+        questionsModel.tag_filter(key)
         questionsModel.questions(data.doc.rows);
     });
 };

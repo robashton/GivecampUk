@@ -3,7 +3,7 @@
 
         <div class="span12 ymcontent">
             <div style="padding: 5px;">
-                <h2 class="headline">Questions</h2>
+                <h2 class="headline"><span data-bind="text: questionsModel.tag_filter"></span> Questions</h2>
 
                 <table id="questions" class="zebra-striped">
                   <tbody data-bind="template: { name: 'questionitem', foreach: questionsModel.questions}"></tbody>
