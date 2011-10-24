@@ -1,34 +1,35 @@
-var questionModel = {
+function questionModel() {
 
-    init: function() {
-        questionModel.title('');
-        questionModel.description('');
-        questionModel.tag(null);
-        $.get('createquestion', function(data) {
-            if (!data.error) {
-                questionModel.tagList(data.tags);
-            }
-        });
-    },
+    var $this = this;
 
-    title: ko.observable(''),
-    description: ko.observable(''),
-    tag: ko.observable(''),
-    tagList: ko.observableArray([]),
+    $this.template = 'question';
+    $this.title = ko.observable('');
+    $this.description = ko.observable('');
+    $this.tag = ko.observable('');
+    $this.tagList = ko.observableArray([]);
 
-    submit : function() {
-        if($('#askQuestion').valid()){
+    $this.submit = function() {
+        if ($('#askQuestion').valid()) {
             $.post('createquestion', {
-                title: this().title(),
-                description: this().description(),
-                tag: this().tag()
+                title: $this.title(),
+                description: $this.description(),
+                tag: $this.tag()
             }).success(function(data) {
-                $.routes('set', '/question/' + data.doc._id);
-            })
+                    $.routes('set', '/question/' + data.doc._id);
+                })
         }
-    }
-};
+    };
 
-questionModel.valid = ko.dependentObservable(function(){
-        return this.title().length > 0 && this.description().length > 0;
-}, questionModel);
+    $this.valid = ko.dependentObservable(function() {
+        return $this.title().length > 0 && $this.description().length > 0;
+    }, $this);
+
+
+    $.get('createquestion', function(data) {
+        if (!data.error) {
+            $this.tagList(data.tags);
+        }
+    });
+
+}
+;

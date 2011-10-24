@@ -1,29 +1,118 @@
 <!DOCTYPE html>
 <html>
-   <head>
-        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="css/site.css">
+<head>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/site.css">
 
-        <script type="text/javascript" src="js/jquery.js"></script>
-        <script type="text/javascript" src="js/jquery.tmpl.js"></script>
-        <script type="text/javascript" src="js/jquery.cookie.js"></script>
-        <script type="text/javascript" src="js/knockout.js"></script>
-        <script type="text/javascript" src="js/koExternalTemplateEngine.js"></script>
-        
-        <script type="text/javascript" src="views/ym.login.js"></script>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery.tmpl.js"></script>
+    <script type="text/javascript" src="js/knockout.js"></script>
+    <script type="text/javascript" src="views/ym.login.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            ko.applyBindings(loginModel);
+        });
+    </script>
+    <title>YoungMinds Q&A</title>
+</head>
+<body>
+<header class="jumbotron masthead" id="overview">
+    <div class="inner">
+        <div class="container" style="text-align: center;">
+            <img src="css/logo-youngminds.gif"/>
+        </div>
+        <!-- /container -->
+    </div>
+</header>
 
-        <script type="text/javascript">
-         $(function(){
-             ko.ExternaljQueryTemplateEngine.prototype = new ko.templateEngine();
-             ko.externaljQueryTemplateEngine = new ko.ExternaljQueryTemplateEngine();
-             ko.externaljQueryTemplateEngine.templateUrl = 'templates';
-             ko.setTemplateEngine(ko.externaljQueryTemplateEngine);
-             ko.applyBindings(loginModel);
-          });
-        </script>
-        <title>YoungMinds Q&A</title>
-    </head>
-    <body>
-      <div data-bind="template: 'login'"></div>
-   </body>
+
+<div class="container">
+
+
+    <div class="row">
+
+        <div class="span8 ymcontent">
+            <div class="clearfix" style="padding: 20px;">
+                <h2>Are you new here?</h2>
+            </div>
+
+            <form>
+
+                <div class="clearfix">
+                    <label for="registerUser">Email</label>
+
+                    <div class="input">
+                        <input type="text" id="registerUser" name="registerUser"
+                               data-bind="value: loginModel.registerForm.email, valueUpdate: 'afterkeydown'"/>
+                    </div>
+                </div>
+
+                <div class="clearfix">
+                    <label for="registerName">Display name</label>
+
+                    <div class="input">
+                        <input type="text" id="registerName" name="registerName"
+                               data-bind="value: loginModel.registerForm.displayName, valueUpdate: 'afterkeydown'"/>
+                    </div>
+                </div>
+                <div class="clearfix">
+                    <label for="registerPass">Password</label>
+
+                    <div class="input">
+                        <input type="password" id="registerPass" name="registerPass"
+                               data-bind="value: loginModel.registerForm.password, valueUpdate: 'afterkeydown'"/>
+                    </div>
+                </div>
+                <div class="alert-message warning"
+                     data-bind="visible: loginModel.registerForm.hasValidationIssue()">
+                    <p class="error" data-bind="text: loginModel.registerForm.validationMessage()"></p>
+                </div>
+                <div class="actions">
+                    <input type="submit" class="btn primary" value="Register"
+                           data-bind="click: loginModel.registerForm.submit, enable: loginModel.registerForm.valid"/>
+
+                </div>
+            </form>
+        </div>
+        <div class="span8 ymcontent">
+            <div class="clearfix" style="padding: 20px;">
+                <h2>Welcome back...</h2>
+            </div>
+
+            <form>
+
+
+                <div class="clearfix">
+                    <label for="loginUser">Email</label>
+
+                    <div class="input">
+                        <input type="text" id="loginUser" name="loginUser"
+                               data-bind="value: loginModel.loginForm.email, valueUpdate: 'afterkeydown'"/>
+                    </div>
+                </div>
+
+                <div class="clearfix">
+                    <label for="loginPass">Password</label>
+
+                    <div class="input">
+                        <input type="password" id="loginPass" name="loginPass"
+                               data-bind="value: loginModel.loginForm.password, valueUpdate: 'afterkeydown'"/>
+
+                    </div>
+                </div>
+                <div class="alert-message error"
+                     data-bind="visible: loginModel.loginForm.hasValidationIssue()">
+                    <p class="error" data-bind="text: loginModel.loginForm.validationMessage()"></p>
+                </div>
+                <div class="actions" style="margin-top: 64px;">
+                    <input type="submit" class="btn primary" value="Login"
+                           data-bind="click: loginModel.loginForm.submit, enable: loginModel.loginForm.valid"/>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+</body>
 </html>

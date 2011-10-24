@@ -6,28 +6,30 @@
                 <div class="question">
                     <div style="margin-bottom: 20px">
                         <h1 style="border-bottom: 1px solid #404040; padding-bottom: 5px; margin-bottom: 3px;">
-                            <a href="#" data-bind="attr: { href: '#/question/' + viewQuestionModel.id }"><span
-                                    data-bind="text: viewQuestionModel.title"></span></a></h1>
+                            <a href="#" data-bind="attr: { href: '#/question/' + id }"><span
+                                    data-bind="text: title"></span></a></h1>
 
                         <p>
-                            asked by <span data-bind="text: viewQuestionModel.displayname"></span>,
-                            <span class="prettydate" data-bind="attr: { title: viewQuestionModel.date }"></span>
+                            asked by <span data-bind="text: displayname"></span>,
+                            <span class="prettydate" data-bind="attr: { title: date }"></span>
                         </p>
                     </div>
                     <p data-bind="text: viewQuestionModel.description"></p>
+
                     <p style="text-align: right;">tagged as
                         <span class="action">
-                            <span class="tag-key" data-bind="text: viewQuestionModel.tag, click: function(){ questionsModel.chooseTag(viewQuestionModel.tag());}"></span>
+                            <span class="tag-key"
+                                  data-bind="text: tag, click: function(){ viewModel.currentView().chooseTag(tag);}"></span>
                         </span>
                     </p>
 
                 </div>
                 <hr/>
                 <div class="answers">
-                  <h3>Responses</h3>
-                  <table id="answers" class="zebra-striped">
-                    <tbody data-bind='template: { name: "answertemplate", foreach: viewQuestionModel.sortedAnswers}'></tbody>
-                  </table>
+                    <h3>Responses</h3>
+                    <table id="answers" class="zebra-striped">
+                        <tbody data-bind='template: { name: "answertemplate", foreach: sortedAnswers}'></tbody>
+                    </table>
                 </div>
             </div>
 
@@ -38,7 +40,7 @@
 
                         <div class="input">
                             <textarea id="questionResponse" name="questionResponse" class="xxlarge required" rows="10"
-                                      data-bind="value: viewQuestionModel.newAnswerForm.answer, valueUpdate: 'afterkeydown'"/>
+                                      data-bind="value: newAnswerForm.answer, valueUpdate: 'afterkeydown'"/>
 
                         </div>
                     </div>
@@ -46,7 +48,7 @@
                     <div class="actions">
 
                         <input type="submit" class="btn primary" value="Submit"
-                               data-bind="click: viewQuestionModel.newAnswerForm.submit">
+                               data-bind="click: newAnswerForm.submit">
 
                     </div>
 

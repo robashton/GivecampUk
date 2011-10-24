@@ -25,36 +25,36 @@ span.error {
 }
 
 .headline {
-  padding: 10px;
+    padding: 10px;
 }
 
 #tags {
-  list-style-type: none;
-  padding: 0;
+    list-style-type: none;
+    padding: 0;
 }
 
 .tag-key {
-  background-color: #E0EAF1;
-  border-bottom: 1px solid #3E6D8E;
-  border-right: 1px solid #7F9FB6;
-  padding: 3px 4px 3px 4px;
-  margin: 2px 2px 2px 0;
-  text-decoration: none;
-  font-size: 90%;
-  line-height: 2.4;
-  white-space: nowrap;
-  cursor: pointer;
+    background-color: #E0EAF1;
+    border-bottom: 1px solid #3E6D8E;
+    border-right: 1px solid #7F9FB6;
+    padding: 3px 4px 3px 4px;
+    margin: 2px 2px 2px 0;
+    text-decoration: none;
+    font-size: 90%;
+    line-height: 2.4;
+    white-space: nowrap;
+    cursor: pointer;
 }
 
 .tag-key:hover {
-  background-color: #3E6D8E;
-  color: #E0EAF1;
-  border-bottom: 1px solid #37607D;
-  border-right: 1px solid #37607D;
-  text-decoration: none;
+    background-color: #3E6D8E;
+    color: #E0EAF1;
+    border-bottom: 1px solid #37607D;
+    border-right: 1px solid #37607D;
+    text-decoration: none;
 }
 
 .tag-value {
-  font-weight: bolder;
-  font-size: 14px;
+    font-weight: bolder;
+    font-size: 14px;
 }

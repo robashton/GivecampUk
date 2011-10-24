@@ -5,9 +5,8 @@
             <div style="padding: 5px;">
                 <h2>Admin Menu</h2>
                 <ul>
-                <li class="" data-bind="visible: viewModel.authenticated && viewModel.isElevated, click: function() {viewModel.currentView('useradmin'); }, css: { active: viewModel.currentView() == 'useradmin' }"><a href="#/useradmin">User Admin</a></li>
-                <li class="" data-bind="visible: viewModel.authenticated && viewModel.isElevated, click: function() {viewModel.currentView('tagadmin'); }, css: { active: viewModel.currentView() == 'tagadmin' }"><a href="#/tagadmin">Edit Tags</a></li>
-
+                    <li><a href="#/useradmin">User Admin</a></li>
+                    <li><a href="#/tagadmin">Edit Tags</a></li>
                 </ul>
             </div>
         </div>
@@ -28,12 +27,13 @@
 
                 <form id="newTag">
                     <h3>Add new tag</h3>
+
                     <div class="clearfix">
                         <label for="tagName">Name</label>
 
                         <div class="input">
                             <input type="text" id="tagName" name="tagName" class="xlarge required"
-                                      data-bind="value: tagadminModel.Update.tagName"/>
+                                   data-bind="value: tagadminModel.Update.tagName"/>
                         </div>
                     </div>
 

@@ -1,6 +1,7 @@
 <li>
-  <span class="action" data-bind="click: function() { questionsModel.chooseTag(key); }">
-    <span class="tag-key" data-bind="text: key"/></span> x <span class="tag-value" data-bind="text: value.count-1"/></span>
-  </span>
+  <span class="action" data-bind="click: function() { viewModel.currentView().chooseTag(key); }">
+    <span class="tag-key" data-bind="text: key"/></span> x <span class="tag-value"
+                                                                 data-bind="text: value.count-1"/></span>
+    </span>
 </li>
 

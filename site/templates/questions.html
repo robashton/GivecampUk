@@ -3,10 +3,10 @@
 
         <div class="span12 ymcontent">
             <div style="padding: 5px;">
-                <h2 class="headline"><span data-bind="text: questionsModel.tag_filter"></span> Questions</h2>
+                <h2 class="headline"><span data-bind="text: tag_filter"></span> Questions</h2>
 
                 <table id="questions" class="zebra-striped">
-                  <tbody data-bind="template: { name: 'questionitem', foreach: questionsModel.sortedQuestions}"></tbody>
+                    <tbody data-bind="template: { name: 'questionitem', foreach: sortedQuestions }"></tbody>
                 </table>
 
             </div>
@@ -15,8 +15,9 @@
         <div class="span4 ymcontent">
             <div style="padding: 5px;">
                 <h2 class="headline">Tags</h2>
-                
-                <ul id="tags" style="margin-left: 10px;" data-bind="template: { name: 'tagitem', foreach: questionsModel.sortedTags}"></ul>
+
+                <ul id="tags" style="margin-left: 10px;"
+                    data-bind="template: { name: 'tagitem', foreach: sortedTags }"></ul>
             </div>
         </div>
 

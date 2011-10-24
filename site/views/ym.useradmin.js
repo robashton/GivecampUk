@@ -1,5 +1,9 @@
-var useradminModel = {
-    refresh: function() {
+function useradminModel() {
+
+    var $this = this;
+    $this.template = 'useradmin';
+
+    $this.refresh = function() {
         $.get('get_all_users', function(data) {
 
             if (!data.error) {
@@ -18,15 +22,17 @@ var useradminModel = {
 
                 });
 
-                useradminModel.users(users);
+                $this.users(users);
             }
         });
-    },
-    init: function() {
-        useradminModel.refresh();
-    },
-    users: ko.observableArray([]),
-    remove:function(event) {
-        $.post('remove_user', { userId: event }, useradminModel.refresh);
-    }
-};
+    };
+
+    $this.users = ko.observableArray([]);
+
+    $this.remove = function(event) {
+        $.post('remove_user', { userId: event }, $this.refresh);
+    };
+
+    $this.refresh();
+}
+;

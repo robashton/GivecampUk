@@ -1,5 +1,7 @@
 <tr>
-  <td data-bind="text: tagName"></td>
-  <td data-bind="text: description"></td>
-  <td><button data-bind="click: tagadminModel.remove">Delete</button></td>
+    <td data-bind="text: tagName"></td>
+    <td data-bind="text: description"></td>
+    <td>
+        <button data-bind="click: viewModel.currentView().remove">Delete</button>
+    </td>
 </tr>
