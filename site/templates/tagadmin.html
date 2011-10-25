@@ -21,7 +21,7 @@
                     <th>Description</th>
                     <th></th>
                     </thead>
-                    <tbody data-bind="template: { name: 'tagRow', foreach: tagadminModel.tagList }">
+                    <tbody data-bind="template: { name: 'tagRow', foreach: tagList }">
                     </tbody>
                 </table>
 
@@ -33,7 +33,7 @@
 
                         <div class="input">
                             <input type="text" id="tagName" name="tagName" class="xlarge required"
-                                   data-bind="value: tagadminModel.Update.tagName"/>
+                                   data-bind="value: Update.tagName"/>
                         </div>
                     </div>
 
@@ -42,10 +42,10 @@
 
                         <div class="input">
                             <textarea id="description" name="description" class="xlarge required" rows="2"
-                                      data-bind="value: tagadminModel.Update.description"/>
+                                      data-bind="value: Update.description"/>
                         </div>
                     </div>
-                    <button class="btn primary" data-bind="click: tagadminModel.Update.add">Add New Tag</button>
+                    <button class="btn primary" data-bind="click: Update.add">Add New Tag</button>
                 </form>
             </div>
         </div>

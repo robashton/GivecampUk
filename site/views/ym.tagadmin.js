@@ -16,7 +16,7 @@ function tagadminModel() {
         description: ko.observable(''),
         add: function(event) {
             if ($('#newTag').valid()) {
-                var update = this().Update;
+                var update = $this.Update;
                 $this.tagList().push({tagName: update.tagName, description: update.description });
                 $.post('updateTags', {  tagList: $this.tagList()}, $this.refresh);
             }
