@@ -221,7 +221,7 @@ exports.init = function(app) {
 
   app.get('/logout', security.validateUser,  function(req, res){
     security.signOutUser(req, res);
-    res.json({ success: true}, {}, 200);  
+    res.redirect('/login.html');
   });
 
   app.get('/currentuser', security.validateUser, function(req, res) {

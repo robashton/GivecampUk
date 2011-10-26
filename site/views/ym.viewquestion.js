@@ -1,4 +1,4 @@
-function viewQuestionModel(id) {
+function ViewQuestionModel(id) {
 
     var $this = this;
 
@@ -39,6 +39,7 @@ function viewQuestionModel(id) {
                 $this.pingItemInArray(answer);
             })
     };
+    
     $this.down = function(event, answer) {
 
         $.post('/decrement_answer_rank', {
@@ -49,6 +50,7 @@ function viewQuestionModel(id) {
                 $this.pingItemInArray(answer);
             });
     };
+
     $this.pingItemInArray = function(answer) {
         /*      for(var i = viewQuestionModel.answers().length-1; i >= 0; i--){
          var item =  viewQuestionModel.answers()[i];
@@ -64,7 +66,7 @@ function viewQuestionModel(id) {
     };
 
     $this.sortedAnswers = ko.dependentObservable(function() {
-        return $this.answers.slice().sort(this.answersSortFunction);
+        return $this.answers.slice().sort($this.answersSortFunction);
     }, $this.answers);
 
     $.getJSON('/question/' + $this.id(), function(data) {
@@ -77,5 +79,4 @@ function viewQuestionModel(id) {
         $this.date(data.question.date);
         $this.answers(data.answers.rows);
     });
-}
-;
+};

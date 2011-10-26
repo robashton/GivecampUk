@@ -66,7 +66,7 @@ var loginModel = {
             .fail(function() {
                 authForm.validationMessage('Login failed. Please check username and password');
             });
-    },
+    }
 };
 
 loginModel.loginForm.valid = ko.dependentObservable(function() {

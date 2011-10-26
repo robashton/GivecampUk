@@ -11,8 +11,8 @@
     <script type="text/javascript" src="js/jquery.tmpl.js"></script>
     <script type="text/javascript" src="js/jquery.validate.js"></script>
     <script type="text/javascript" src="js/knockout.js"></script>
-    <script type="text/javascript" src="views/ym.question.js"></script>
-    <script type="text/javascript" src="views/ym.questions.js"></script>
+    <script type="text/javascript" src="views/ym.askquestion.js"></script>
+    <script type="text/javascript" src="views/ym.viewquestions.js"></script>
     <script type="text/javascript" src="views/ym.viewquestion.js"></script>
     <script type="text/javascript" src="views/ym.tagadmin.js"></script>
     <script type="text/javascript" src="views/ym.useradmin.js"></script>
@@ -35,7 +35,7 @@
                 <li style="display:none" class=""
                     data-bind="visible: viewModel.authenticated && viewModel.isElevated">
                     <a href="#/useradmin">Admin</a></li>
-                <li class="" data-bind="visible: viewModel.authenticated"><a href="#/logout">Logout</a></li>
+                <li class="" data-bind="visible: viewModel.authenticated"><a href="/logout">Logout</a></li>
             </ul>
         </div>
     </div>

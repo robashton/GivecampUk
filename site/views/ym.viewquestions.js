@@ -1,5 +1,4 @@
-function questionsModel(tag) {
-    //TODO use tag parameter
+function ViewQuestionsModel(tag) {
     var $this = this;
 
     $this.template = 'questions';
@@ -10,7 +9,6 @@ function questionsModel(tag) {
     $this.tagSortFunction = function(a, b) {
         return a.value.count > b.value.count ? -1 : 1;
     };
-
 
     $this.questionSortFunction = function(a, b) {
         return new Date(a.value.question.date) > new Date(b.value.question.date) ? -1 : 1;
@@ -53,6 +51,5 @@ function questionsModel(tag) {
     });
 
     $this.updateSearch(tag || '');
-}
-;
+};
 

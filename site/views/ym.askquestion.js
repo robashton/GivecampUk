@@ -1,4 +1,4 @@
-function questionModel() {
+function AskQuestionModel() {
 
     var $this = this;
 
@@ -31,5 +31,4 @@ function questionModel() {
         }
     });
 
-}
-;
+};

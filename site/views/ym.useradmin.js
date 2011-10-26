@@ -1,7 +1,8 @@
-function useradminModel() {
+function UserAdminModel() {
 
     var $this = this;
     $this.template = 'useradmin';
+    $this.users = ko.observableArray([]);
 
     $this.refresh = function() {
         $.get('get_all_users', function(data) {
@@ -27,12 +28,9 @@ function useradminModel() {
         });
     };
 
-    $this.users = ko.observableArray([]);
-
     $this.remove = function(event) {
         $.post('remove_user', { userId: event }, $this.refresh);
     };
 
     $this.refresh();
-}
-;
+};

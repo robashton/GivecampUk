@@ -65,31 +65,24 @@ $(function() {
 
             $.routes({
                 "/": function() {
-                    viewModel.currentView(new questionsModel());
+                    viewModel.currentView(new ViewQuestionsModel());
                 },
                 "/tag/:tag": function(params) {
-                    viewModel.currentView(new questionsModel(params.tag));
+                    viewModel.currentView(new ViewQuestionsModel(params.tag));
                 },
                 "/ask": function() {
-                    viewModel.currentView(new questionModel());
+                    viewModel.currentView(new AskQuestionModel());
                 },
                 "/question/:id": function(params) {
-                    viewModel.currentView(new viewQuestionModel(params.id));
+                    viewModel.currentView(new ViewQuestionModel(params.id));
                 },
                 "/tagadmin": function() {
                     if (viewModel.isElevated())
-                        viewModel.currentView(new tagadminModel());
+                        viewModel.currentView(new TagAdminModel());
                 },
                 "/useradmin": function() {
                     if (viewModel.isElevated())
-                        viewModel.currentView(new useradminModel());
-                },
-                "/logout": function() {
-                    $.get('logout');
-                    viewModel.authenticated(false);
-                    viewModel.email(null);
-                    viewModel.currentView('login');
-                    window.location = 'index.html';
+                        viewModel.currentView(new UserAdminModel());
                 }
             });
 

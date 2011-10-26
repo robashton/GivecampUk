@@ -1,4 +1,4 @@
-function tagadminModel() {
+function TagAdminModel() {
 
     var $this = this;
     $this.template = 'tagadmin';
@@ -11,12 +11,12 @@ function tagadminModel() {
 
     };
 
-    $this.Update = {
+    $this.update = {
         tagName: ko.observable(''),
         description: ko.observable(''),
         add: function(event) {
             if ($('#newTag').valid()) {
-                var update = $this.Update;
+                var update = $this.update;
                 $this.tagList().push({tagName: update.tagName, description: update.description });
                 $.post('updateTags', {  tagList: $this.tagList()}, $this.refresh);
             }
@@ -36,5 +36,4 @@ function tagadminModel() {
             $this.tagList(data.tags);
         }
     });
-}
-;
+};
