@@ -27,7 +27,7 @@ function ViewQuestionsModel(tag) {
 
             var rows = data.doc.rows;
             $.each(rows, function(index, item) {
-                item.value.answerCount = item.doc.count || 0;
+                item.value.answerCount = item.doc ? item.doc.count : 0;
             });
             $this.questions(rows);
         });
