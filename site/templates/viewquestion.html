@@ -14,12 +14,12 @@
                             <span class="prettydate" data-bind="attr: { title: date }"></span>
                         </p>
                     </div>
-                    <p data-bind="text: viewQuestionModel.description"></p>
+                    <p data-bind="text: description"></p>
 
                     <p style="text-align: right;">tagged as
                         <span class="action">
                             <span class="tag-key"
-                                  data-bind="text: tag, click: function(){ viewModel.currentView().chooseTag(tag);}"></span>
+                                  data-bind="text: tag, click: function(){ chooseTag(tag);}"></span>
                         </span>
                     </p>
 
